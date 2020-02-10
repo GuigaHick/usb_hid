@@ -1,0 +1,45 @@
+E:\Doutorado\Curso_Visual C#\Exercícios Visual Studio 2017\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.exe.config
+E:\Doutorado\Curso_Visual C#\Exercícios Visual Studio 2017\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.exe
+E:\Doutorado\Curso_Visual C#\Exercícios Visual Studio 2017\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.pdb
+E:\Doutorado\Curso_Visual C#\Exercícios Visual Studio 2017\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csprojAssemblyReference.cache
+E:\Doutorado\Curso_Visual C#\Exercícios Visual Studio 2017\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos_de_tela_teste.Form1.resources
+E:\Doutorado\Curso_Visual C#\Exercícios Visual Studio 2017\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos_de_tela_teste.Properties.Resources.resources
+E:\Doutorado\Curso_Visual C#\Exercícios Visual Studio 2017\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.GenerateResource.cache
+E:\Doutorado\Curso_Visual C#\Exercícios Visual Studio 2017\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.CoreCompileInputs.cache
+E:\Doutorado\Curso_Visual C#\Exercícios Visual Studio 2017\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.exe
+E:\Doutorado\Curso_Visual C#\Exercícios Visual Studio 2017\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.pdb
+E:\Doutorado\Curso_Visual C#\Exercícios Visual Studio 2017\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\UsbLibrary.dll
+E:\Doutorado\Curso_Visual C#\Exercícios Visual Studio 2017\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.CopyComplete
+E:\Doutorado\Arquivos do MCA\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.exe.config
+E:\Doutorado\Arquivos do MCA\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.exe
+E:\Doutorado\Arquivos do MCA\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.pdb
+E:\Doutorado\Arquivos do MCA\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csprojAssemblyReference.cache
+E:\Doutorado\Arquivos do MCA\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos_de_tela_teste.Form1.resources
+E:\Doutorado\Arquivos do MCA\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos_de_tela_teste.Properties.Resources.resources
+E:\Doutorado\Arquivos do MCA\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.GenerateResource.cache
+E:\Doutorado\Arquivos do MCA\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.CoreCompileInputs.cache
+E:\Doutorado\Arquivos do MCA\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.CopyComplete
+E:\Doutorado\Arquivos do MCA\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.exe
+E:\Doutorado\Arquivos do MCA\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.pdb
+C:\Users\guiga\Downloads\Objetos de tela_teste\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.exe.config
+C:\Users\guiga\Downloads\Objetos de tela_teste\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.exe
+C:\Users\guiga\Downloads\Objetos de tela_teste\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.pdb
+C:\Users\guiga\Downloads\Objetos de tela_teste\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csprojAssemblyReference.cache
+C:\Users\guiga\Downloads\Objetos de tela_teste\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos_de_tela_teste.Form1.resources
+C:\Users\guiga\Downloads\Objetos de tela_teste\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos_de_tela_teste.Properties.Resources.resources
+C:\Users\guiga\Downloads\Objetos de tela_teste\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.GenerateResource.cache
+C:\Users\guiga\Downloads\Objetos de tela_teste\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.CoreCompileInputs.cache
+C:\Users\guiga\Downloads\Objetos de tela_teste\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.CopyComplete
+C:\Users\guiga\Downloads\Objetos de tela_teste\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.exe
+C:\Users\guiga\Downloads\Objetos de tela_teste\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.pdb
+C:\Users\guiga\Desktop\Repositorio\usb_hid\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.exe.config
+C:\Users\guiga\Desktop\Repositorio\usb_hid\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.exe
+C:\Users\guiga\Desktop\Repositorio\usb_hid\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.pdb
+C:\Users\guiga\Desktop\Repositorio\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csprojAssemblyReference.cache
+C:\Users\guiga\Desktop\Repositorio\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos_de_tela_teste.MainScreen.resources
+C:\Users\guiga\Desktop\Repositorio\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos_de_tela_teste.Properties.Resources.resources
+C:\Users\guiga\Desktop\Repositorio\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.GenerateResource.cache
+C:\Users\guiga\Desktop\Repositorio\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.CoreCompileInputs.cache
+C:\Users\guiga\Desktop\Repositorio\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.CopyComplete
+C:\Users\guiga\Desktop\Repositorio\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.exe
+C:\Users\guiga\Desktop\Repositorio\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.pdb

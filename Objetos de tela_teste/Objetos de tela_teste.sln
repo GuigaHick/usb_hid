@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Objetos de tela_teste", "Objetos de tela_teste\Objetos de tela_teste.csproj", "{B6F9A597-8C85-4F10-B9E9-B210C0ADCC28}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6F9A597-8C85-4F10-B9E9-B210C0ADCC28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6F9A597-8C85-4F10-B9E9-B210C0ADCC28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6F9A597-8C85-4F10-B9E9-B210C0ADCC28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6F9A597-8C85-4F10-B9E9-B210C0ADCC28}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C63FF17-851E-4DE1-8B07-606432C5293C}
+	EndGlobalSection
+EndGlobal
