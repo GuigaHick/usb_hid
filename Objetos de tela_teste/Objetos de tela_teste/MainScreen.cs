@@ -75,24 +75,24 @@ namespace Objetos_de_tela_teste
 
         public void Recebe_usb(string a)
         {
-            label7.Text = a;
-            string[] txtSplit;
-            int adc0, adc4, v1;
-            txtSplit = a.Split(' ');
-            adc0 = (int)Convert.ToInt32(txtSplit[2]) << 8;
-            adc0 += (int)Convert.ToInt32(txtSplit[3]);
-            adc4 = (int)Convert.ToInt32(txtSplit[4]);
-            v1 = (adc0 * 2048) / 1023;
-            txtlist = "   " + string.Format("{0:00}", adc4) + "          "+ string.Format("{0:00}", laser[3]) + "         " + string.Format("{0:0000}", v1);
-            TempList.Add(txtlist);
-            qtde_data++;
+            //label7.Text = a;
+            //string[] txtSplit;
+            //int adc0, adc4, v1;
+            //txtSplit = a.Split(' ');
+            //adc0 = (int)Convert.ToInt32(txtSplit[2]) << 8;
+            //adc0 += (int)Convert.ToInt32(txtSplit[3]);
+            //adc4 = (int)Convert.ToInt32(txtSplit[4]);
+            //v1 = (adc0 * 2048) / 1023;
+            //txtlist = "   " + string.Format("{0:00}", adc4) + "          "+ string.Format("{0:00}", laser[3]) + "         " + string.Format("{0:0000}", v1);
+            //TempList.Add(txtlist);
+            //qtde_data++;
 
-            if (q<j)
-            {
-                q++;
-                laser[3] = Convert.ToByte(laser[3] + laser[5]);
-                Envia_USB();
-            }
+            //if (q<j)
+            //{
+            //    q++;
+            //    laser[3] = Convert.ToByte(laser[3] + laser[5]);
+            //    Envia_USB();
+            //}
         }
 
         private void conectarToolStripMenuItem_Click(object sender, EventArgs e)
