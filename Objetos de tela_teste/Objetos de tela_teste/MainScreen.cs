@@ -76,7 +76,7 @@ namespace Objetos_de_tela_teste
             report.Parse(bfRecebe);
 
             laserInfo1.reports.Add(report);
-            if(laserInfo1.DesiredCurrent < report.Current)
+            if(laserInfo1.DesiredCurrent > report.Current)
             {
                 LaserConfigRequest updateRequest = new LaserConfigRequest();
 
@@ -279,8 +279,8 @@ namespace Objetos_de_tela_teste
                 //j = (laser[4] - laser[3]) / laser[5];
 
                 //for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
-
-                SendUSBData(laser1.GetByteArray());             
+                byte[] dataToSend = laser1.GetByteArray();
+                SendUSBData(dataToSend);             
             }
 
             //if (checkLaser2.Checked)
