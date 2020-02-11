@@ -81,7 +81,7 @@ namespace Objetos_de_tela_teste
                 LaserConfigRequest updateRequest = new LaserConfigRequest();
 
                 updateRequest = laserInfo1.InitialRequest;
-                updateRequest.MinPowerCurrent = Convert.ToByte(updateRequest.MinPowerCurrent + updateRequest.Increment);
+                updateRequest.MinPowerCurrent = Convert.ToByte(report.Current + updateRequest.Increment);
                 SendUSBData(updateRequest.GetByteArray());
             }
             else
