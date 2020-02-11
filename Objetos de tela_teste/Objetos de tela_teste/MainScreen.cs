@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Objetos_de_tela_teste.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -25,6 +26,8 @@ namespace Objetos_de_tela_teste
         List<string> TempList = new List<string>();
 
         string txtlist = string.Empty;
+
+        LaserInfo laserInfo1 = new LaserInfo();
 
         public MainScreen()
         {
@@ -56,7 +59,6 @@ namespace Objetos_de_tela_teste
 
         public void USBCom_OnDataReceived(object sender, UsbLibrary.DataRecievedEventArgs args)
         {
-            //throw new NotImplementedException();
             string bfRecebe = "Dados: ";
 
             foreach (byte mydata in args.data)
@@ -70,30 +72,47 @@ namespace Objetos_de_tela_teste
                 bfRecebe += mydata.ToString() + " ";
             }
 
-            this.BeginInvoke(new Fdelegate(Recebe_usb), new object[] { bfRecebe });//Maybe change to single call of method
+            LaserReport report = new LaserReport();
+            report.Parse(bfRecebe);
+
+            laserInfo1.reports.Add(report);
+            if(laserInfo1.DesiredCurrent < report.Current)
+            {
+                LaserConfigRequest updateRequest = new LaserConfigRequest();
+
+                updateRequest = laserInfo1.InitialRequest;
+                updateRequest.MinPowerCurrent = Convert.ToByte(updateRequest.MinPowerCurrent + updateRequest.Increment);
+                SendUSBData(updateRequest.GetByteArray());
+            }
+            else
+            {
+                MessageBox.Show("Finished Test");
+            }
+
+            //this.BeginInvoke(new Fdelegate(Recebe_usb), new object[] { bfRecebe });//Maybe change to single call of method
         }
 
-        public void Recebe_usb(string a)
-        {
-            //label7.Text = a;
-            //string[] txtSplit;
-            //int adc0, adc4, v1;
-            //txtSplit = a.Split(' ');
-            //adc0 = (int)Convert.ToInt32(txtSplit[2]) << 8;
-            //adc0 += (int)Convert.ToInt32(txtSplit[3]);
-            //adc4 = (int)Convert.ToInt32(txtSplit[4]);
-            //v1 = (adc0 * 2048) / 1023;
-            //txtlist = "   " + string.Format("{0:00}", adc4) + "          "+ string.Format("{0:00}", laser[3]) + "         " + string.Format("{0:0000}", v1);
-            //TempList.Add(txtlist);
-            //qtde_data++;
+        //public void Recebe_usb(string a)
+        //{
+        //    //label7.Text = a;
+        //    //string[] txtSplit;
+        //    //int adc0, adc4, v1;
+        //    //txtSplit = a.Split(' ');
+        //    //adc0 = (int)Convert.ToInt32(txtSplit[2]) << 8;
+        //    //adc0 += (int)Convert.ToInt32(txtSplit[3]);
+        //    //adc4 = (int)Convert.ToInt32(txtSplit[4]);
+        //    //v1 = (adc0 * 2048) / 1023;
+        //    //txtlist = "   " + string.Format("{0:00}", adc4) + "          "+ string.Format("{0:00}", laser[3]) + "         " + string.Format("{0:0000}", v1);
+        //    //TempList.Add(txtlist);
+        //    //qtde_data++;
 
-            //if (q<j)
-            //{
-            //    q++;
-            //    laser[3] = Convert.ToByte(laser[3] + laser[5]);
-            //    Envia_USB();
-            //}
-        }
+        //    //if (q<j)
+        //    //{
+        //    //    q++;
+        //    //    laser[3] = Convert.ToByte(laser[3] + laser[5]);
+        //    //    Envia_USB();
+        //    //}
+        //}
 
         private void conectarToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -119,7 +138,7 @@ namespace Objetos_de_tela_teste
             toolStripStatusLabel1.Text = "Dispositivo Conectado...";
         }
 
-        private void Envia_USB()
+        private void SendUSBData(byte[] data)
         {
             try
             {
@@ -234,103 +253,115 @@ namespace Objetos_de_tela_teste
         {
             if (checkLaser1.Checked)
             {
-                laser[0] = 0x00;
-                laser[1] = (byte)'L';
-                laser[2] = (byte)'S';
-                laser[3] = Convert.ToByte(I1min.Text);
-                laser[4] = Convert.ToByte(I1max.Text);
-                laser[5] = Convert.ToByte(Inc1.Text);
-                laser[6] = Convert.ToByte(Temp1.Text);
-                laser[7] = 0x01;
-                laser[8] = 0x01;
+                //laser[0] = 0x00;
+                //laser[1] = (byte)'L';
+                //laser[2] = (byte)'S';
+                //laser[3] = Convert.ToByte(I1min.Text);
+                //laser[4] = Convert.ToByte(I1max.Text);
+                //laser[5] = Convert.ToByte(Inc1.Text);
+                //laser[6] = Convert.ToByte(Temp1.Text);
+                //laser[7] = 0x01;
+                //laser[8] = 0x01;
 
-                q = 0;
-                j = (laser[4] - laser[3]) / laser[5];
-    
-                for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
+                LaserConfigRequest laser1 = new LaserConfigRequest();
+                laser1.ID = 1;
+                laser1.MinPowerCurrent = Convert.ToByte(I1min.Text);
+                laser1.MaxPowerCurrent = Convert.ToByte(I1max.Text);
+                laser1.Increment = Convert.ToByte(Inc1.Text);
+                laser1.DesiredTemperature = Convert.ToByte(Temp1.Text);
 
-                Envia_USB();             
+                laserInfo1.ID = 1;
+                laserInfo1.DesiredCurrent = laser1.MaxPowerCurrent;
+                laserInfo1.DesiredTemperature = laser1.DesiredTemperature;
+                laserInfo1.InitialRequest = laser1;
+
+                //q = 0;
+                //j = (laser[4] - laser[3]) / laser[5];
+
+                //for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
+
+                SendUSBData(laser1.GetByteArray());             
             }
 
-            if (checkLaser2.Checked)
-            {
-                laser[0] = 0x00;
-                laser[1] = (byte)'L';
-                laser[2] = (byte)'S';
-                laser[3] = Convert.ToByte(I2min.Text);
-                laser[4] = Convert.ToByte(I2max.Text);
-                laser[5] = Convert.ToByte(Inc2.Text);
-                laser[6] = Convert.ToByte(Temp2.Text);
-                laser[7] = 0x02;
-                laser[8] = 0x02;
+            //if (checkLaser2.Checked)
+            //{
+            //    laser[0] = 0x00;
+            //    laser[1] = (byte)'L';
+            //    laser[2] = (byte)'S';
+            //    laser[3] = Convert.ToByte(I2min.Text);
+            //    laser[4] = Convert.ToByte(I2max.Text);
+            //    laser[5] = Convert.ToByte(Inc2.Text);
+            //    laser[6] = Convert.ToByte(Temp2.Text);
+            //    laser[7] = 0x02;
+            //    laser[8] = 0x02;
 
-                q = 0;
-                j = (laser[4] - laser[3]) / laser[5];
+            //    q = 0;
+            //    j = (laser[4] - laser[3]) / laser[5];
 
-                for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
+            //    for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
 
-                Envia_USB();
-            }
+            //    Envia_USB();
+            //}
 
-            if (checkLaser3.Checked)
-            {
-                laser[0] = 0x00;
-                laser[1] = (byte)'L';
-                laser[2] = (byte)'S';
-                laser[3] = Convert.ToByte(I3min.Text);
-                laser[4] = Convert.ToByte(I3max.Text);
-                laser[5] = Convert.ToByte(Inc3.Text);
-                laser[6] = Convert.ToByte(Temp3.Text);
-                laser[7] = 0x03;
-                laser[8] = 0x03;
+            //if (checkLaser3.Checked)
+            //{
+            //    laser[0] = 0x00;
+            //    laser[1] = (byte)'L';
+            //    laser[2] = (byte)'S';
+            //    laser[3] = Convert.ToByte(I3min.Text);
+            //    laser[4] = Convert.ToByte(I3max.Text);
+            //    laser[5] = Convert.ToByte(Inc3.Text);
+            //    laser[6] = Convert.ToByte(Temp3.Text);
+            //    laser[7] = 0x03;
+            //    laser[8] = 0x03;
 
-                q = 0;
-                j = (laser[4] - laser[3]) / laser[5];
+            //    q = 0;
+            //    j = (laser[4] - laser[3]) / laser[5];
 
-                for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
+            //    for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
 
-                Envia_USB();
-            }
+            //    Envia_USB();
+            //}
 
-            if (checkLaser4.Checked)
-            {
-                laser[0] = 0x00;
-                laser[1] = (byte)'L';
-                laser[2] = (byte)'S';
-                laser[3] = Convert.ToByte(I4min.Text);
-                laser[4] = Convert.ToByte(I4max.Text);
-                laser[5] = Convert.ToByte(Inc4.Text);
-                laser[6] = Convert.ToByte(Temp4.Text);
-                laser[7] = 0x04;
-                laser[8] = 0x04;
+            //if (checkLaser4.Checked)
+            //{
+            //    laser[0] = 0x00;
+            //    laser[1] = (byte)'L';
+            //    laser[2] = (byte)'S';
+            //    laser[3] = Convert.ToByte(I4min.Text);
+            //    laser[4] = Convert.ToByte(I4max.Text);
+            //    laser[5] = Convert.ToByte(Inc4.Text);
+            //    laser[6] = Convert.ToByte(Temp4.Text);
+            //    laser[7] = 0x04;
+            //    laser[8] = 0x04;
 
-                q = 0;
-                j = (laser[4] - laser[3]) / laser[5];
+            //    q = 0;
+            //    j = (laser[4] - laser[3]) / laser[5];
 
-                for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
+            //    for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
 
-                Envia_USB();
-            }
+            //    Envia_USB();
+            //}
 
-            if (checkLaser5.Checked)
-            {
-                laser[0] = 0x00;
-                laser[1] = (byte)'L';
-                laser[2] = (byte)'S';
-                laser[3] = Convert.ToByte(I5min.Text);
-                laser[4] = Convert.ToByte(I5max.Text);
-                laser[5] = Convert.ToByte(Inc5.Text);
-                laser[6] = Convert.ToByte(Temp5.Text);
-                laser[7] = 0x05;
-                laser[8] = 0x05;
+            //if (checkLaser5.Checked)
+            //{
+            //    laser[0] = 0x00;
+            //    laser[1] = (byte)'L';
+            //    laser[2] = (byte)'S';
+            //    laser[3] = Convert.ToByte(I5min.Text);
+            //    laser[4] = Convert.ToByte(I5max.Text);
+            //    laser[5] = Convert.ToByte(Inc5.Text);
+            //    laser[6] = Convert.ToByte(Temp5.Text);
+            //    laser[7] = 0x05;
+            //    laser[8] = 0x05;
 
-                q = 0;
-                j = (laser[4] - laser[3]) / laser[5];
+            //    q = 0;
+            //    j = (laser[4] - laser[3]) / laser[5];
 
-                for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
+            //    for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
 
-                Envia_USB();
-            }
+            //    Envia_USB();
+            //}
         }
 
         private void SalvarToolStripMenuItem_Click_1(object sender, EventArgs e)

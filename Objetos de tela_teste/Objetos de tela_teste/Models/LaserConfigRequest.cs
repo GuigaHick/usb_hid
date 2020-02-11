@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Objetos_de_tela_teste.Models
 {
-    public class Laser
+    public class LaserConfigRequest
     {
         public int ID { get; set; }
 
