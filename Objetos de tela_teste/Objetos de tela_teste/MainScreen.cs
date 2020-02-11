@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Objetos_de_tela_teste
@@ -144,7 +145,7 @@ namespace Objetos_de_tela_teste
             {
                 if (this.USBCom.SpecifiedDevice != null)
                 {
-                    USBCom.SpecifiedDevice.SendData(laser);
+                    USBCom.SpecifiedDevice.SendData(data);
                 }
             }
 
@@ -280,7 +281,7 @@ namespace Objetos_de_tela_teste
 
                 //for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
                 byte[] dataToSend = laser1.GetByteArray();
-                SendUSBData(dataToSend);             
+                SendUSBData(dataToSend);
             }
 
             //if (checkLaser2.Checked)
