@@ -2,31 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Objetos_de_tela_teste
 {
     public partial class MainScreen : Form
     {
-        string bfRecebe = string.Empty;
-
-        /*Criando o método(função) Fdelegate que vai receber o parâmetro do tipo string 'a'*/
-        public delegate void Fdelegate(string a);
-
-        int qtde_data = 0;
-        int q;
-        int j;
-
-        //Variável para a limpeza dos bytes que não serão utilizados no envio à USB
-        byte clr_buffer;
-
-        //Criação dos vetores com os parâmetros de configuração dos LASERS a serem enviados para o PIC via USB
-        byte[] laser = new byte[32];
-
         List<string> TempList = new List<string>();
-
-        string txtlist = string.Empty;
 
         LaserInfo laserInfo1 = new LaserInfo();
 
@@ -89,31 +71,7 @@ namespace Objetos_de_tela_teste
             {
                 MessageBox.Show("Finished Test");
             }
-
-            //this.BeginInvoke(new Fdelegate(Recebe_usb), new object[] { bfRecebe });//Maybe change to single call of method
         }
-
-        //public void Recebe_usb(string a)
-        //{
-        //    //label7.Text = a;
-        //    //string[] txtSplit;
-        //    //int adc0, adc4, v1;
-        //    //txtSplit = a.Split(' ');
-        //    //adc0 = (int)Convert.ToInt32(txtSplit[2]) << 8;
-        //    //adc0 += (int)Convert.ToInt32(txtSplit[3]);
-        //    //adc4 = (int)Convert.ToInt32(txtSplit[4]);
-        //    //v1 = (adc0 * 2048) / 1023;
-        //    //txtlist = "   " + string.Format("{0:00}", adc4) + "          "+ string.Format("{0:00}", laser[3]) + "         " + string.Format("{0:0000}", v1);
-        //    //TempList.Add(txtlist);
-        //    //qtde_data++;
-
-        //    //if (q<j)
-        //    //{
-        //    //    q++;
-        //    //    laser[3] = Convert.ToByte(laser[3] + laser[5]);
-        //    //    Envia_USB();
-        //    //}
-        //}
 
         private void conectarToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -254,16 +212,6 @@ namespace Objetos_de_tela_teste
         {
             if (checkLaser1.Checked)
             {
-                //laser[0] = 0x00;
-                //laser[1] = (byte)'L';
-                //laser[2] = (byte)'S';
-                //laser[3] = Convert.ToByte(I1min.Text);
-                //laser[4] = Convert.ToByte(I1max.Text);
-                //laser[5] = Convert.ToByte(Inc1.Text);
-                //laser[6] = Convert.ToByte(Temp1.Text);
-                //laser[7] = 0x01;
-                //laser[8] = 0x01;
-
                 LaserConfigRequest laser1 = new LaserConfigRequest();
                 laser1.ID = 1;
                 laser1.MinPowerCurrent = Convert.ToByte(I1min.Text);
@@ -276,93 +224,9 @@ namespace Objetos_de_tela_teste
                 laserInfo1.DesiredTemperature = laser1.DesiredTemperature;
                 laserInfo1.InitialRequest = laser1;
 
-                //q = 0;
-                //j = (laser[4] - laser[3]) / laser[5];
-
-                //for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
                 byte[] dataToSend = laser1.GetByteArray();
                 SendUSBData(dataToSend);
             }
-
-            //if (checkLaser2.Checked)
-            //{
-            //    laser[0] = 0x00;
-            //    laser[1] = (byte)'L';
-            //    laser[2] = (byte)'S';
-            //    laser[3] = Convert.ToByte(I2min.Text);
-            //    laser[4] = Convert.ToByte(I2max.Text);
-            //    laser[5] = Convert.ToByte(Inc2.Text);
-            //    laser[6] = Convert.ToByte(Temp2.Text);
-            //    laser[7] = 0x02;
-            //    laser[8] = 0x02;
-
-            //    q = 0;
-            //    j = (laser[4] - laser[3]) / laser[5];
-
-            //    for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
-
-            //    Envia_USB();
-            //}
-
-            //if (checkLaser3.Checked)
-            //{
-            //    laser[0] = 0x00;
-            //    laser[1] = (byte)'L';
-            //    laser[2] = (byte)'S';
-            //    laser[3] = Convert.ToByte(I3min.Text);
-            //    laser[4] = Convert.ToByte(I3max.Text);
-            //    laser[5] = Convert.ToByte(Inc3.Text);
-            //    laser[6] = Convert.ToByte(Temp3.Text);
-            //    laser[7] = 0x03;
-            //    laser[8] = 0x03;
-
-            //    q = 0;
-            //    j = (laser[4] - laser[3]) / laser[5];
-
-            //    for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
-
-            //    Envia_USB();
-            //}
-
-            //if (checkLaser4.Checked)
-            //{
-            //    laser[0] = 0x00;
-            //    laser[1] = (byte)'L';
-            //    laser[2] = (byte)'S';
-            //    laser[3] = Convert.ToByte(I4min.Text);
-            //    laser[4] = Convert.ToByte(I4max.Text);
-            //    laser[5] = Convert.ToByte(Inc4.Text);
-            //    laser[6] = Convert.ToByte(Temp4.Text);
-            //    laser[7] = 0x04;
-            //    laser[8] = 0x04;
-
-            //    q = 0;
-            //    j = (laser[4] - laser[3]) / laser[5];
-
-            //    for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
-
-            //    Envia_USB();
-            //}
-
-            //if (checkLaser5.Checked)
-            //{
-            //    laser[0] = 0x00;
-            //    laser[1] = (byte)'L';
-            //    laser[2] = (byte)'S';
-            //    laser[3] = Convert.ToByte(I5min.Text);
-            //    laser[4] = Convert.ToByte(I5max.Text);
-            //    laser[5] = Convert.ToByte(Inc5.Text);
-            //    laser[6] = Convert.ToByte(Temp5.Text);
-            //    laser[7] = 0x05;
-            //    laser[8] = 0x05;
-
-            //    q = 0;
-            //    j = (laser[4] - laser[3]) / laser[5];
-
-            //    for (clr_buffer = 9; clr_buffer < 32; clr_buffer++) laser[clr_buffer] = 0;
-
-            //    Envia_USB();
-            //}
         }
 
         private void SalvarToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -379,7 +243,7 @@ namespace Objetos_de_tela_teste
                     Arq.WriteLine("Temp.(ºC)   " + "Corr.(mA)   " + "Sinal (mV)");
                     Arq.WriteLine();
 
-                    for (int i = 0; i < qtde_data; i++)
+                    for (int i = 0; i < TempList.Count; i++)
                         Arq.WriteLine(TempList[i]);
 
                     Arq.Close();
@@ -391,6 +255,7 @@ namespace Objetos_de_tela_teste
                 MessageBox.Show(erro.ToString());
             }
         }
+
         private void SairToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             Close();

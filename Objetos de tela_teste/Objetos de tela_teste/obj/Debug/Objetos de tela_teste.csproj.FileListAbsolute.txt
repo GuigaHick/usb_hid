@@ -43,3 +43,14 @@ C:\Users\guiga\Desktop\Repositorio\usb_hid\Objetos de tela_teste\Objetos de tela
 C:\Users\guiga\Desktop\Repositorio\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.CopyComplete
 C:\Users\guiga\Desktop\Repositorio\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.exe
 C:\Users\guiga\Desktop\Repositorio\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.pdb
+C:\Users\ghss\Desktop\Repositório Pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.exe.config
+C:\Users\ghss\Desktop\Repositório Pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.exe
+C:\Users\ghss\Desktop\Repositório Pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.pdb
+C:\Users\ghss\Desktop\Repositório Pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csprojAssemblyReference.cache
+C:\Users\ghss\Desktop\Repositório Pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos_de_tela_teste.MainScreen.resources
+C:\Users\ghss\Desktop\Repositório Pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos_de_tela_teste.Properties.Resources.resources
+C:\Users\ghss\Desktop\Repositório Pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.GenerateResource.cache
+C:\Users\ghss\Desktop\Repositório Pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.CoreCompileInputs.cache
+C:\Users\ghss\Desktop\Repositório Pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.CopyComplete
+C:\Users\ghss\Desktop\Repositório Pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.exe
+C:\Users\ghss\Desktop\Repositório Pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.pdb
