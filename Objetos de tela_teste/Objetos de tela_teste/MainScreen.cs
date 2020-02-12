@@ -59,12 +59,13 @@ namespace Objetos_de_tela_teste
             report.Parse(bfRecebe);
 
             laserInfo1.reports.Add(report);
-            if(laserInfo1.DesiredCurrent > report.Current)
+            if(laserInfo1.Current < laserInfo1.DesiredCurrent)
             {
                 LaserConfigRequest updateRequest = new LaserConfigRequest();
 
                 updateRequest = laserInfo1.InitialRequest;
-                updateRequest.MinPowerCurrent = Convert.ToByte(report.Current + updateRequest.Increment);
+                updateRequest.MinPowerCurrent = Convert.ToByte(laserInfo1.Current + laserInfo1.InitialRequest.Increment);
+                laserInfo1.Current += laserInfo1.InitialRequest.Increment;
                 SendUSBData(updateRequest.GetByteArray());
             }
             else
@@ -212,19 +213,19 @@ namespace Objetos_de_tela_teste
         {
             if (checkLaser1.Checked)
             {
-                LaserConfigRequest laser1 = new LaserConfigRequest();
-                laser1.ID = 1;
-                laser1.MinPowerCurrent = Convert.ToByte(I1min.Text);
-                laser1.MaxPowerCurrent = Convert.ToByte(I1max.Text);
-                laser1.Increment = Convert.ToByte(Inc1.Text);
-                laser1.DesiredTemperature = Convert.ToByte(Temp1.Text);
+                LaserConfigRequest laser1ConfigRequest = new LaserConfigRequest();
+                laser1ConfigRequest.ID = 1;
+                laser1ConfigRequest.MinPowerCurrent = Convert.ToByte(I1min.Text);
+                laser1ConfigRequest.MaxPowerCurrent = Convert.ToByte(I1max.Text);
+                laser1ConfigRequest.Increment = Convert.ToByte(Inc1.Text);
+                laser1ConfigRequest.DesiredTemperature = Convert.ToByte(Temp1.Text);
 
                 laserInfo1.ID = 1;
-                laserInfo1.DesiredCurrent = laser1.MaxPowerCurrent;
-                laserInfo1.DesiredTemperature = laser1.DesiredTemperature;
-                laserInfo1.InitialRequest = laser1;
+                laserInfo1.DesiredCurrent = laser1ConfigRequest.MaxPowerCurrent;
+                laserInfo1.DesiredTemperature = laser1ConfigRequest.DesiredTemperature;
+                laserInfo1.InitialRequest = laser1ConfigRequest;
 
-                byte[] dataToSend = laser1.GetByteArray();
+                byte[] dataToSend = laser1ConfigRequest.GetByteArray();
                 SendUSBData(dataToSend);
             }
         }
