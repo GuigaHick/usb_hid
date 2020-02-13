@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Objetos_de_tela_teste
@@ -11,6 +13,8 @@ namespace Objetos_de_tela_teste
         List<string> TempList = new List<string>();
 
         LaserInfo laserInfo1 = new LaserInfo();
+
+        AutoResetEvent processFinishedEvent = new AutoResetEvent(false);
 
         public MainScreen()
         {
@@ -55,23 +59,7 @@ namespace Objetos_de_tela_teste
                 bfRecebe += mydata.ToString() + " ";
             }
 
-            LaserReport report = new LaserReport();
-            report.Parse(bfRecebe);
-
-            laserInfo1.reports.Add(report);
-            if(laserInfo1.Current < laserInfo1.DesiredCurrent)
-            {
-                LaserConfigRequest updateRequest = new LaserConfigRequest();
-
-                updateRequest = laserInfo1.InitialRequest;
-                updateRequest.MinPowerCurrent = Convert.ToByte(laserInfo1.Current + laserInfo1.InitialRequest.Increment);
-                laserInfo1.Current += laserInfo1.InitialRequest.Increment;
-                SendUSBData(updateRequest.GetByteArray());
-            }
-            else
-            {
-                MessageBox.Show("Finished Test");
-            }
+            OnLaserReportReceived(bfRecebe);
         }
 
         private void conectarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -211,6 +199,11 @@ namespace Objetos_de_tela_teste
 
         private void Iniciar_Click(object sender, EventArgs e)
         {
+            Task.Factory.StartNew(SendDataToLaser);
+        }
+
+        private void SendDataToLaser()
+        {
             if (checkLaser1.Checked)
             {
                 LaserConfigRequest laser1ConfigRequest = new LaserConfigRequest();
@@ -221,12 +214,36 @@ namespace Objetos_de_tela_teste
                 laser1ConfigRequest.DesiredTemperature = Convert.ToByte(Temp1.Text);
 
                 laserInfo1.ID = 1;
+                laserInfo1.Current = laser1ConfigRequest.MinPowerCurrent;
                 laserInfo1.DesiredCurrent = laser1ConfigRequest.MaxPowerCurrent;
                 laserInfo1.DesiredTemperature = laser1ConfigRequest.DesiredTemperature;
                 laserInfo1.InitialRequest = laser1ConfigRequest;
 
                 byte[] dataToSend = laser1ConfigRequest.GetByteArray();
                 SendUSBData(dataToSend);
+            }
+            processFinishedEvent.WaitOne();
+        }
+
+        private void OnLaserReportReceived(string data)
+        {
+            LaserReport report = new LaserReport();
+            //report.Parse(data);
+
+            laserInfo1.reports.Add(report);
+            if (laserInfo1.Current < laserInfo1.DesiredCurrent)
+            {
+                LaserConfigRequest updateRequest = new LaserConfigRequest();
+
+                updateRequest = laserInfo1.InitialRequest;
+                updateRequest.MinPowerCurrent = Convert.ToByte(laserInfo1.Current + laserInfo1.InitialRequest.Increment);
+                laserInfo1.Current += laserInfo1.InitialRequest.Increment;
+                SendUSBData(updateRequest.GetByteArray());
+            }
+            else
+            {
+                MessageBox.Show("Finished Test");
+                processFinishedEvent.Set();
             }
         }
 
@@ -260,6 +277,11 @@ namespace Objetos_de_tela_teste
         private void SairToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnIncrement_Click(object sender, EventArgs e)
+        {
+            OnLaserReportReceived("");
         }
     }
 }

@@ -83,6 +83,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnIncrement = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -112,31 +113,31 @@
             // conectarToolStripMenuItem
             // 
             this.conectarToolStripMenuItem.Name = "conectarToolStripMenuItem";
-            this.conectarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.conectarToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.conectarToolStripMenuItem.Text = "Conectar";
             this.conectarToolStripMenuItem.Click += new System.EventHandler(this.conectarToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(119, 6);
             // 
             // SalvarToolStripMenuItem
             // 
             this.SalvarToolStripMenuItem.Name = "SalvarToolStripMenuItem";
-            this.SalvarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SalvarToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.SalvarToolStripMenuItem.Text = "Salvar";
             this.SalvarToolStripMenuItem.Click += new System.EventHandler(this.SalvarToolStripMenuItem_Click_1);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(119, 6);
             // 
             // SairToolStripMenuItem
             // 
             this.SairToolStripMenuItem.Name = "SairToolStripMenuItem";
-            this.SairToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SairToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.SairToolStripMenuItem.Text = "Sair";
             this.SairToolStripMenuItem.Click += new System.EventHandler(this.SairToolStripMenuItem_Click_1);
             // 
@@ -632,11 +633,22 @@
             this.label7.TabIndex = 69;
             this.label7.Text = "Dados: 000 000 000 000 000";
             // 
-            // Form1
+            // btnIncrement
+            // 
+            this.btnIncrement.Location = new System.Drawing.Point(545, 271);
+            this.btnIncrement.Name = "btnIncrement";
+            this.btnIncrement.Size = new System.Drawing.Size(75, 23);
+            this.btnIncrement.TabIndex = 70;
+            this.btnIncrement.Text = "Increment";
+            this.btnIncrement.UseVisualStyleBackColor = true;
+            this.btnIncrement.Click += new System.EventHandler(this.btnIncrement_Click);
+            // 
+            // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(632, 538);
+            this.Controls.Add(this.btnIncrement);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.progressBar1);
@@ -683,7 +695,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "MainScreen";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "MCA Administrador";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -754,6 +766,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnIncrement;
     }
 }
 
