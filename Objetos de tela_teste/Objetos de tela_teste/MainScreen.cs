@@ -11,7 +11,7 @@ namespace Objetos_de_tela_teste
     {
         List<string> TempList = new List<string>();
 
-        Experiment experiment = new Experiment();
+        Experiment experiment = new Experiment(5);
 
         private int currentLaser = 0;
 
@@ -198,13 +198,13 @@ namespace Objetos_de_tela_teste
 
         private void Iniciar_Click(object sender, EventArgs e)
         {
-            Task.Factory.StartNew(SendDataToLaser);
+            Task.Factory.StartNew(SendDataToAllLasers);
             Iniciar.Enabled = false;
             Parar.Enabled = true;
             btnIncrement.Enabled = true;
         }
 
-        private void SendDataToLaser()
+        private void SendDataToAllLasers()
         {
             if (checkLaser1.Checked)
             {
@@ -247,6 +247,69 @@ namespace Objetos_de_tela_teste
             }
 
             experiment.lasers[1].ProcessFinishedEvent.WaitOne();
+
+            if (checkLaser3.Checked)
+            {
+                LaserConfigRequest laser3ConfigRequest = new LaserConfigRequest();
+                laser3ConfigRequest.ID = 3;
+                laser3ConfigRequest.MinPowerCurrent = Convert.ToByte(I3min.Text);
+                laser3ConfigRequest.MaxPowerCurrent = Convert.ToByte(I3max.Text);
+                laser3ConfigRequest.Increment = Convert.ToByte(Inc3.Text);
+                laser3ConfigRequest.DesiredTemperature = Convert.ToByte(Temp3.Text);
+
+                experiment.lasers[2].ID = 3;
+                experiment.lasers[2].Current = laser3ConfigRequest.MinPowerCurrent;
+                experiment.lasers[2].DesiredCurrent = laser3ConfigRequest.MaxPowerCurrent;
+                experiment.lasers[2].DesiredTemperature = laser3ConfigRequest.DesiredTemperature;
+                experiment.lasers[2].InitialRequest = laser3ConfigRequest;
+
+                byte[] dataToSend = laser3ConfigRequest.GetByteArray();
+                SendUSBData(dataToSend);
+            }
+
+            experiment.lasers[2].ProcessFinishedEvent.WaitOne();
+
+            if (checkLaser4.Checked)
+            {
+                LaserConfigRequest laser4ConfigRequest = new LaserConfigRequest();
+                laser4ConfigRequest.ID = 4;
+                laser4ConfigRequest.MinPowerCurrent = Convert.ToByte(I4min.Text);
+                laser4ConfigRequest.MaxPowerCurrent = Convert.ToByte(I4max.Text);
+                laser4ConfigRequest.Increment = Convert.ToByte(Inc4.Text);
+                laser4ConfigRequest.DesiredTemperature = Convert.ToByte(Temp4.Text);
+
+                experiment.lasers[3].ID = 4;
+                experiment.lasers[3].Current = laser4ConfigRequest.MinPowerCurrent;
+                experiment.lasers[3].DesiredCurrent = laser4ConfigRequest.MaxPowerCurrent;
+                experiment.lasers[3].DesiredTemperature = laser4ConfigRequest.DesiredTemperature;
+                experiment.lasers[3].InitialRequest = laser4ConfigRequest;
+
+                byte[] dataToSend = laser4ConfigRequest.GetByteArray();
+                SendUSBData(dataToSend);
+            }
+
+            experiment.lasers[3].ProcessFinishedEvent.WaitOne();
+
+            if (checkLaser5.Checked)
+            {
+                LaserConfigRequest laser5ConfigRequest = new LaserConfigRequest();
+                laser5ConfigRequest.ID = 5;
+                laser5ConfigRequest.MinPowerCurrent = Convert.ToByte(I5min.Text);
+                laser5ConfigRequest.MaxPowerCurrent = Convert.ToByte(I5max.Text);
+                laser5ConfigRequest.Increment = Convert.ToByte(Inc5.Text);
+                laser5ConfigRequest.DesiredTemperature = Convert.ToByte(Temp5.Text);
+
+                experiment.lasers[4].ID = 5;
+                experiment.lasers[4].Current = laser5ConfigRequest.MinPowerCurrent;
+                experiment.lasers[4].DesiredCurrent = laser5ConfigRequest.MaxPowerCurrent;
+                experiment.lasers[4].DesiredTemperature = laser5ConfigRequest.DesiredTemperature;
+                experiment.lasers[4].InitialRequest = laser5ConfigRequest;
+
+                byte[] dataToSend = laser5ConfigRequest.GetByteArray();
+                SendUSBData(dataToSend);
+            }
+
+            experiment.lasers[4].ProcessFinishedEvent.WaitOne();
         }
 
         private void OnLaserReportReceived(string data)

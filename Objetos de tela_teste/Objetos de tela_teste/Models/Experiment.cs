@@ -10,11 +10,13 @@ namespace Objetos_de_tela_teste.Models
     {
         public List<LaserInfo> lasers { get; set; }
 
-        public Experiment()
+        public Experiment(int numOfLasers)
         {
             lasers = new List<LaserInfo>();
-            lasers.Add(new LaserInfo());// Laser 1
-            lasers.Add(new LaserInfo());// Laser 2
+            for(int i = 0; i < numOfLasers; i++)
+            {
+                lasers.Add(new LaserInfo());
+            }
         }
     }
 }
