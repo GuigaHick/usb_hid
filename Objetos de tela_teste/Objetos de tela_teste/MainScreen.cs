@@ -14,8 +14,6 @@ namespace Objetos_de_tela_teste
 
         LaserInfo laserInfo1 = new LaserInfo();
 
-        AutoResetEvent processFinishedEvent = new AutoResetEvent(false);
-
         public MainScreen()
         {
             InitializeComponent();
@@ -200,6 +198,9 @@ namespace Objetos_de_tela_teste
         private void Iniciar_Click(object sender, EventArgs e)
         {
             Task.Factory.StartNew(SendDataToLaser);
+            Iniciar.Enabled = false;
+            Parar.Enabled = true;
+            btnIncrement.Enabled = true;
         }
 
         private void SendDataToLaser()
@@ -222,7 +223,8 @@ namespace Objetos_de_tela_teste
                 byte[] dataToSend = laser1ConfigRequest.GetByteArray();
                 SendUSBData(dataToSend);
             }
-            processFinishedEvent.WaitOne();
+
+            laserInfo1.ProcessFinishedEvent.WaitOne();
         }
 
         private void OnLaserReportReceived(string data)
@@ -243,7 +245,10 @@ namespace Objetos_de_tela_teste
             else
             {
                 MessageBox.Show("Finished Test");
-                processFinishedEvent.Set();
+                laserInfo1.ProcessFinishedEvent.Set();
+                Iniciar.Enabled = true;
+                Parar.Enabled = false;
+                btnIncrement.Enabled = false;
             }
         }
 

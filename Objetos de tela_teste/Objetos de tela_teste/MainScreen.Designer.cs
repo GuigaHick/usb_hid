@@ -582,6 +582,7 @@
             // 
             // Parar
             // 
+            this.Parar.Enabled = false;
             this.Parar.Location = new System.Drawing.Point(545, 216);
             this.Parar.Name = "Parar";
             this.Parar.Size = new System.Drawing.Size(75, 23);
