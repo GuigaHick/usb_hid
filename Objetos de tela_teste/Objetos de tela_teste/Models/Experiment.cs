@@ -14,6 +14,7 @@ namespace Objetos_de_tela_teste.Models
         {
             lasers = new List<LaserInfo>();
             lasers.Add(new LaserInfo());// Laser 1
+            lasers.Add(new LaserInfo());// Laser 2
         }
     }
 }
