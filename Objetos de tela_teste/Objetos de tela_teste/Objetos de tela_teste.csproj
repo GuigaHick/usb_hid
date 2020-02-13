@@ -55,6 +55,7 @@
     <Compile Include="MainScreen.Designer.cs">
       <DependentUpon>MainScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Experiment.cs" />
     <Compile Include="Models\LaserConfigRequest.cs" />
     <Compile Include="Models\LaserInfo.cs" />
     <Compile Include="Models\LaserReport.cs" />
