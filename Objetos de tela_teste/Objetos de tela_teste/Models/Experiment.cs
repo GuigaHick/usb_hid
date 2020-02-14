@@ -18,5 +18,13 @@ namespace Objetos_de_tela_teste.Models
                 lasers.Add(new LaserInfo());
             }
         }
+
+        public void EraseData()
+        {
+            foreach (var laser in lasers)
+            {
+                laser.reports.Clear();
+            }
+        }
     }
 }

@@ -4,11 +4,11 @@ namespace Objetos_de_tela_teste.Models
 {
     public class LaserReport
     {
-        public int Temperature { get; private set; }
+        public int Temperature { get;  set; }
 
-        public int Signal { get; private set; }
+        public int Signal { get;  set; }
 
-        public int Current { get; private set; }
+        public int Current { get;  set; }
 
         public void Parse(string data)
         {

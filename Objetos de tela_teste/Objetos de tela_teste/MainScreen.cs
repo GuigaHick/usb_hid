@@ -316,8 +316,17 @@ namespace Objetos_de_tela_teste
         {
             LaserReport report = new LaserReport();
 
+            //Just to Check, if you are using the real hardware, please comment the following 3 lines
+            report.Current = experiment.lasers[currentLaser].Current;
+            report.Temperature = experiment.lasers[currentLaser].DesiredTemperature;
+            report.Signal = 0;
+
+            //Uncomment this line if you are using the real hardware
+            //report.Parse(data);
+
             experiment.lasers[currentLaser].Current += experiment.lasers[currentLaser].InitialRequest.Increment;
             experiment.lasers[currentLaser].reports.Add(report);
+
             if (experiment.lasers[currentLaser].Current < experiment.lasers[currentLaser].DesiredCurrent)
             {
                 LaserConfigRequest updateRequest = new LaserConfigRequest();
@@ -328,7 +337,6 @@ namespace Objetos_de_tela_teste
             }
             else
             {
-                MessageBox.Show("Finished Test with Laser:" + (currentLaser + 1));
                 experiment.lasers[currentLaser].ProcessFinishedEvent.Set();
                 currentLaser++;
                 if(currentLaser >= experiment.lasers.Count)
@@ -353,15 +361,22 @@ namespace Objetos_de_tela_teste
                     Arq = File.AppendText(saveFileDialog1.FileName);
                     Arq.WriteLine(DateTime.Now);
                     Arq.WriteLine();
-                    Arq.WriteLine("Temp.(ºC)   " + "Corr.(mA)   " + "Sinal (mV)");
+                    Arq.WriteLine("Laser ID    Temp.(ºC)   " + "Corr.(mA)   " + "Sinal (mV)");
                     Arq.WriteLine();
 
-                    for (int i = 0; i < TempList.Count; i++)
-                        Arq.WriteLine(TempList[i]);
+                    foreach (var laser in experiment.lasers)
+                    {
+                        foreach(var report in laser.reports)
+                        {
+                            Arq.WriteLine(laser.ID + "              " + report.Temperature + "         " + report.Current + "           " + report.Signal);
+                        }
+                        Arq.WriteLine("------------------------------------------------------");
+                    }
 
                     Arq.Close();
                 }
-                MessageBox.Show("Cadastro realizado com sucesso!");
+                MessageBox.Show("Dados Salvos com sucesso!");
+                experiment.EraseData(); //Erase Previus Data
             }
             catch (Exception erro)
             {
