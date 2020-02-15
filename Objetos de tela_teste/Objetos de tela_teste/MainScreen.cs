@@ -203,6 +203,7 @@ namespace Objetos_de_tela_teste
 
         private void SendDataToAllLasers()
         {
+            experiment.EraseData();
             if (checkLaser1.Checked)
             {
                 currentLaser = 0;
