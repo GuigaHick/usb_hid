@@ -8,9 +8,9 @@ namespace Objetos_de_tela_teste.Models
 {
     public class Experiment
     {
-        public List<LaserInfo> lasers { get; set; }
+        public List<LaserInfo> lasers { get; set; }// all lasers
 
-        public Experiment(int numOfLasers)
+        public Experiment(int numOfLasers)//Create n lasers
         {
             lasers = new List<LaserInfo>();
             for(int i = 0; i < numOfLasers; i++)
@@ -19,7 +19,7 @@ namespace Objetos_de_tela_teste.Models
             }
         }
 
-        public void EraseData()
+        public void EraseData()//Erase Data
         {
             foreach (var laser in lasers)
             {

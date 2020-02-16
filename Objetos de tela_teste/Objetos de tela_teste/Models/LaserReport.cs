@@ -10,7 +10,7 @@ namespace Objetos_de_tela_teste.Models
 
         public int Current { get;  set; }
 
-        public void Parse(string data)
+        public void Parse(string data)//It will be fixed as soon as we define how inbound data will be described
         {
             string[] txtSplit;
             int adc0, adc4, v1;

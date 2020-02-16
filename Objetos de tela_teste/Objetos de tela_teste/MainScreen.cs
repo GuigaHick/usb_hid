@@ -8,7 +8,7 @@ namespace Objetos_de_tela_teste
 {
     public partial class MainScreen : Form
     {
-        Experiment experiment = new Experiment(5);
+        Experiment experiment = new Experiment(5);//it represents a experiment
 
         private int currentLaser = -1; //means no active laser
 
@@ -203,7 +203,7 @@ namespace Objetos_de_tela_teste
 
         private void SendDataToAllLasers()
         {
-            experiment.EraseData();
+            experiment.EraseData();// Erase Data of last experiment
             if (checkLaser1.Checked)
             {
                 currentLaser = 0;
@@ -214,15 +214,15 @@ namespace Objetos_de_tela_teste
                 laser1ConfigRequest.Increment = Convert.ToByte(Inc1.Text);
                 laser1ConfigRequest.DesiredTemperature = Convert.ToByte(Temp1.Text);
 
-                experiment.lasers[0].ID = 1;
-                experiment.lasers[0].Current = laser1ConfigRequest.MinPowerCurrent;
-                experiment.lasers[0].DesiredCurrent = laser1ConfigRequest.MaxPowerCurrent;
-                experiment.lasers[0].DesiredTemperature = laser1ConfigRequest.DesiredTemperature;
-                experiment.lasers[0].InitialRequest = laser1ConfigRequest;
+                experiment.lasers[0].ID = 1; //It is the laser ID
+                experiment.lasers[0].Current = laser1ConfigRequest.MinPowerCurrent; //min value of current
+                experiment.lasers[0].DesiredCurrent = laser1ConfigRequest.MaxPowerCurrent;//max value of current
+                experiment.lasers[0].DesiredTemperature = laser1ConfigRequest.DesiredTemperature; //target temperature
+                experiment.lasers[0].InitialRequest = laser1ConfigRequest;//Saving first request to storage on specified laser
 
-                byte[] dataToSend = laser1ConfigRequest.GetByteArray();
-                SendUSBData(dataToSend);
-                experiment.lasers[0].ProcessFinishedEvent.WaitOne();
+                byte[] dataToSend = laser1ConfigRequest.GetByteArray();//Get byte array that represents config request that will be sent to laser
+                SendUSBData(dataToSend);//Sending data to laser1
+                experiment.lasers[0].ProcessFinishedEvent.WaitOne();//Lock program and wait for "singal" to continue
             }
 
             if (checkLaser2.Checked)
@@ -339,24 +339,24 @@ namespace Objetos_de_tela_teste
             report.Signal = 0;
 
             //Uncomment this line if you are using the real hardware
-            //report.Parse(data);
+            //report.Parse(data);//fill the properties with received data from USB
 
-            if(currentLaser >= 0 && currentLaser < experiment.lasers.Count)
+            if(currentLaser >= 0 && currentLaser < experiment.lasers.Count)//Check if it is a valid laser
             {
-                experiment.lasers[currentLaser].Current += experiment.lasers[currentLaser].InitialRequest.Increment;
-                experiment.lasers[currentLaser].reports.Add(report);
+                experiment.lasers[currentLaser].Current += experiment.lasers[currentLaser].InitialRequest.Increment;//increment original value
+                experiment.lasers[currentLaser].reports.Add(report);//Save 
 
-                if (experiment.lasers[currentLaser].Current <= experiment.lasers[currentLaser].DesiredCurrent)
+                if (experiment.lasers[currentLaser].Current <= experiment.lasers[currentLaser].DesiredCurrent)//check if the program needs resent a new config with incremented value of current
                 {
-                    LaserConfigRequest updateRequest = new LaserConfigRequest();
+                    LaserConfigRequest updateRequest = new LaserConfigRequest();// new config that will be 
 
-                    updateRequest = experiment.lasers[currentLaser].InitialRequest;
-                    updateRequest.MinPowerCurrent = Convert.ToByte(experiment.lasers[currentLaser].Current);
-                    SendUSBData(updateRequest.GetByteArray());
+                    updateRequest = experiment.lasers[currentLaser].InitialRequest;//get all informations from first request
+                    updateRequest.MinPowerCurrent = Convert.ToByte(experiment.lasers[currentLaser].Current);//update just the min value
+                    SendUSBData(updateRequest.GetByteArray());// sending updated config
                 }
                 else
                 {
-                    experiment.lasers[currentLaser].ProcessFinishedEvent.Set();
+                    experiment.lasers[currentLaser].ProcessFinishedEvent.Set();// Unlock the current laser process
                 }
             }
         }
@@ -375,9 +375,9 @@ namespace Objetos_de_tela_teste
                     Arq.WriteLine("Laser ID    Temp.(ºC)   " + "Corr.(mA)   " + "Sinal (mV)");
                     Arq.WriteLine();
 
-                    foreach (var laser in experiment.lasers)
+                    foreach (var laser in experiment.lasers)//getting all lasers
                     {
-                        foreach(var report in laser.reports)
+                        foreach(var report in laser.reports)//getting all reports for each laser
                         {
                             Arq.WriteLine(laser.ID + "              " + report.Temperature + "         " + report.Current + "           " + report.Signal);
                         }
@@ -402,7 +402,7 @@ namespace Objetos_de_tela_teste
 
         private void btnIncrement_Click(object sender, EventArgs e)
         {
-            OnLaserReportReceived("");
+            OnLaserReportReceived("");//Just to test
         }
     }
 }

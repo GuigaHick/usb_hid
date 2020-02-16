@@ -30,10 +30,5 @@ namespace Objetos_de_tela_teste.Models
             this.ProcessFinishedEvent = new AutoResetEvent(false);
             this.reports = new List<LaserReport>();
         }
-
-        public void ErasyData()
-        {
-            this.reports.Clear();
-        }
     }
 }
