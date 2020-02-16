@@ -346,7 +346,7 @@ namespace Objetos_de_tela_teste
                 experiment.lasers[currentLaser].Current += experiment.lasers[currentLaser].InitialRequest.Increment;
                 experiment.lasers[currentLaser].reports.Add(report);
 
-                if (experiment.lasers[currentLaser].Current < experiment.lasers[currentLaser].DesiredCurrent)
+                if (experiment.lasers[currentLaser].Current <= experiment.lasers[currentLaser].DesiredCurrent)
                 {
                     LaserConfigRequest updateRequest = new LaserConfigRequest();
 
