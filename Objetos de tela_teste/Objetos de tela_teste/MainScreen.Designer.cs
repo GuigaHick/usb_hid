@@ -642,6 +642,7 @@
             this.btnIncrement.TabIndex = 70;
             this.btnIncrement.Text = "Increment";
             this.btnIncrement.UseVisualStyleBackColor = true;
+            this.btnIncrement.Visible = false;
             this.btnIncrement.Click += new System.EventHandler(this.btnIncrement_Click);
             // 
             // MainScreen

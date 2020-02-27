@@ -42,20 +42,7 @@ namespace Objetos_de_tela_teste
 
         public void USBCom_OnDataReceived(object sender, UsbLibrary.DataRecievedEventArgs args)
         {
-            string bfRecebe = "Dados: ";
-
-            foreach (byte mydata in args.data)
-            {
-                if (mydata.ToString().Length == 1)
-                    bfRecebe += "00";
-
-                if (mydata.ToString().Length == 2)
-                    bfRecebe += "0";
-
-                bfRecebe += mydata.ToString() + " ";
-            }
-
-            OnLaserReportReceived(bfRecebe);
+            OnLaserReportReceived(args.data);
         }
 
         private void conectarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -329,28 +316,29 @@ namespace Objetos_de_tela_teste
             MessageBox.Show("Finished All tests");
         }
 
-        private void OnLaserReportReceived(string data)
+        private void OnLaserReportReceived(byte[] data)
         {
             LaserReport report = new LaserReport();
 
             //Just to Check, if you are using the real hardware, please comment the following 3 lines
-            report.Current = experiment.lasers[currentLaser].Current;
-            report.Temperature = experiment.lasers[currentLaser].DesiredTemperature;
-            report.Signal = 0;
+            //report.Current = experiment.lasers[currentLaser].Current;
+            //report.Temperature = experiment.lasers[currentLaser].DesiredTemperature;
+            //report.Signal = 0;
 
             //Uncomment this line if you are using the real hardware
-            //report.Parse(data);//fill the properties with received data from USB
+            report.Parse(data);//fill the properties with received data from USB
 
             if(currentLaser >= 0 && currentLaser < experiment.lasers.Count)//Check if it is a valid laser
             {
-                experiment.lasers[currentLaser].Current += experiment.lasers[currentLaser].InitialRequest.Increment;//increment original value
                 experiment.lasers[currentLaser].reports.Add(report);//Save 
+                experiment.lasers[currentLaser].Current = report.Current + experiment.lasers[currentLaser].InitialRequest.Increment;//set current using last report + increment
 
                 if (experiment.lasers[currentLaser].Current <= experiment.lasers[currentLaser].DesiredCurrent)//check if the program needs resent a new config with incremented value of current
                 {
                     LaserConfigRequest updateRequest = new LaserConfigRequest();// new config that will be 
 
                     updateRequest = experiment.lasers[currentLaser].InitialRequest;//get all informations from first request
+                    //updateRequest.MinPowerCurrent = Convert.ToByte(experiment.lasers[currentLaser].Current);//update just the min value
                     updateRequest.MinPowerCurrent = Convert.ToByte(experiment.lasers[currentLaser].Current);//update just the min value
                     SendUSBData(updateRequest.GetByteArray());// sending updated config
                 }
@@ -402,7 +390,7 @@ namespace Objetos_de_tela_teste
 
         private void btnIncrement_Click(object sender, EventArgs e)
         {
-            OnLaserReportReceived("");//Just to test
+            OnLaserReportReceived(new byte[] {0x00, 0x00, 0x00, 0x18, 0x00, 0x3a, 0x00, 0x00, 0x00});//Just to test
         }
     }
 }

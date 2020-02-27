@@ -10,19 +10,15 @@ namespace Objetos_de_tela_teste.Models
 
         public int Current { get;  set; }
 
-        public void Parse(string data)//It will be fixed as soon as we define how inbound data will be described
+        public void Parse(byte[] data)//It will be fixed as soon as we define how inbound data will be described
         {
-            string[] txtSplit;
-            int adc0, adc4, v1;
-            txtSplit = data.Split(' ');
-            adc0 = (int)Convert.ToInt32(txtSplit[2]) << 8;
-            adc0 += (int)Convert.ToInt32(txtSplit[3]);
-            adc4 = (int)Convert.ToInt32(txtSplit[4]);
-            v1 = (adc0 * 2048) / 1023;
+            int adc0;
+            adc0 = (int)Convert.ToInt32(data[1]) << 8;
+            adc0 += (int)Convert.ToInt32(data[2]);
 
-            this.Signal = v1;
-            this.Temperature = adc0;
-            this.Current = adc4;
+            this.Signal = (adc0 * 2048) / 1023;
+            this.Temperature = data[3];
+            this.Current = data[5];
         }
     }
 }
