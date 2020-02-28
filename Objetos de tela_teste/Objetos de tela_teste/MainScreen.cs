@@ -331,7 +331,7 @@ namespace Objetos_de_tela_teste
             if(currentLaser >= 0 && currentLaser < experiment.lasers.Count)//Check if it is a valid laser
             {
                 experiment.lasers[currentLaser].reports.Add(report);//Save 
-                experiment.lasers[currentLaser].Current = report.Current + experiment.lasers[currentLaser].InitialRequest.Increment;//set current using last report + increment
+                experiment.lasers[currentLaser].Current += experiment.lasers[currentLaser].InitialRequest.Increment;//set current using last report + increment
 
                 if (experiment.lasers[currentLaser].Current <= experiment.lasers[currentLaser].DesiredCurrent)//check if the program needs resent a new config with incremented value of current
                 {
