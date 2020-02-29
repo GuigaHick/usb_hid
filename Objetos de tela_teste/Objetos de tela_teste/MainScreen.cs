@@ -385,12 +385,12 @@ namespace Objetos_de_tela_teste
 
         private void SairToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            Close();
+            Close();   
         }
 
         private void btnIncrement_Click(object sender, EventArgs e)
-        {
-            OnLaserReportReceived(new byte[] {0x00, 0x00, 0x00, 0x18, 0x00, 0x3a, 0x00, 0x00, 0x00});//Just to test
+        { 
+            OnLaserReportReceived(new byte[] {0x00, 0x00, 0x00, 0x18, 0x05, 0x3a, 0x09, 0x00, 0x00});//Just to test   
         }
     }
 }
