@@ -312,6 +312,8 @@ namespace Objetos_de_tela_teste
                 btnIncrement.Enabled = false;
             }));
 
+            LaserConfigRequest finalConfigRequest = new LaserConfigRequest();
+            SendUSBData(finalConfigRequest.GetByteArray());
             currentLaser = -1;
             MessageBox.Show("Finished All tests");
         }
@@ -319,11 +321,6 @@ namespace Objetos_de_tela_teste
         private void OnLaserReportReceived(byte[] data)
         {
             LaserReport report = new LaserReport();
-
-            //Just to Check, if you are using the real hardware, please comment the following 3 lines
-            //report.Current = experiment.lasers[currentLaser].Current;
-            //report.Temperature = experiment.lasers[currentLaser].DesiredTemperature;
-            //report.Signal = 0;
 
             //Uncomment this line if you are using the real hardware
             report.Parse(data);//fill the properties with received data from USB
