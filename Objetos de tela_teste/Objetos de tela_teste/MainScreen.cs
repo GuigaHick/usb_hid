@@ -367,7 +367,7 @@ namespace Objetos_de_tela_teste
                     {
                         foreach(var report in laser.reports)//getting all reports for each laser
                         {
-                            Arq.WriteLine(laser.ID + "              " + report.Temperature + "         " + report.Current + "           " + report.Signal);
+                            Arq.WriteLine($"{laser.ID}               {report.Temperature:0.0#}         {report.Current:0.0#}             {report.Signal}");
                         }
                         Arq.WriteLine("------------------------------------------------------");
                     }
@@ -390,7 +390,7 @@ namespace Objetos_de_tela_teste
 
         private void btnIncrement_Click(object sender, EventArgs e)
         { 
-            OnLaserReportReceived(new byte[] {0x00, 0x00, 0x00, 0x18, 0x05, 0x3a, 0x09, 0x00, 0x00});//Just to test   
+            OnLaserReportReceived(new byte[] {0x00, 0x00, 0x00, 0x18, 0x00, 0x3a, 0x09, 0x00, 0x00});//Just to test   
         }
     }
 }
