@@ -82,8 +82,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.label7 = new System.Windows.Forms.Label();
-            this.btnIncrement = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -625,33 +623,11 @@
             this.saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
             this.saveFileDialog1.Title = "Salvar Arquivo";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(166, 477);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(146, 13);
-            this.label7.TabIndex = 69;
-            this.label7.Text = "Dados: 000 000 000 000 000";
-            // 
-            // btnIncrement
-            // 
-            this.btnIncrement.Location = new System.Drawing.Point(545, 271);
-            this.btnIncrement.Name = "btnIncrement";
-            this.btnIncrement.Size = new System.Drawing.Size(75, 23);
-            this.btnIncrement.TabIndex = 70;
-            this.btnIncrement.Text = "Increment";
-            this.btnIncrement.UseVisualStyleBackColor = true;
-            this.btnIncrement.Visible = false;
-            this.btnIncrement.Click += new System.EventHandler(this.btnIncrement_Click);
-            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(632, 538);
-            this.Controls.Add(this.btnIncrement);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.Parar);
@@ -767,8 +743,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button btnIncrement;
     }
 }
 

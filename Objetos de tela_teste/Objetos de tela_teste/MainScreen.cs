@@ -185,7 +185,6 @@ namespace Objetos_de_tela_teste
             Task.Factory.StartNew(SendDataToAllLasers);
             Iniciar.Enabled = false;
             Parar.Enabled = true;
-            btnIncrement.Enabled = true;
         }
 
         private void SendDataToAllLasers()
@@ -307,14 +306,9 @@ namespace Objetos_de_tela_teste
                 Parar.Enabled = false;
             }));
 
-            btnIncrement.Invoke(new Action(() =>
-            {
-                btnIncrement.Enabled = false;
-            }));
-
             LaserConfigRequest finalConfigRequest = new LaserConfigRequest();
-            SendUSBData(finalConfigRequest.GetByteArray());
-            currentLaser = -1;
+            SendUSBData(finalConfigRequest.GetByteArray());// sending last and empty message
+            currentLaser = -1;// back to non existent laser
             MessageBox.Show("Finished All tests");
         }
 
@@ -322,12 +316,11 @@ namespace Objetos_de_tela_teste
         {
             LaserReport report = new LaserReport();
 
-            //Uncomment this line if you are using the real hardware
             report.Parse(data);//fill the properties with received data from USB
 
             if(currentLaser >= 0 && currentLaser < experiment.lasers.Count)//Check if it is a valid laser
             {
-                experiment.lasers[currentLaser].reports.Add(report);//Save 
+                experiment.lasers[currentLaser].reports.Add(report);//Save report from usb
                 experiment.lasers[currentLaser].Current += experiment.lasers[currentLaser].InitialRequest.Increment;//set current using last report + increment
 
                 if (experiment.lasers[currentLaser].Current <= experiment.lasers[currentLaser].DesiredCurrent)//check if the program needs resent a new config with incremented value of current
@@ -335,7 +328,6 @@ namespace Objetos_de_tela_teste
                     LaserConfigRequest updateRequest = new LaserConfigRequest();// new config that will be 
 
                     updateRequest = experiment.lasers[currentLaser].InitialRequest;//get all informations from first request
-                    //updateRequest.MinPowerCurrent = Convert.ToByte(experiment.lasers[currentLaser].Current);//update just the min value
                     updateRequest.MinPowerCurrent = Convert.ToByte(experiment.lasers[currentLaser].Current);//update just the min value
                     SendUSBData(updateRequest.GetByteArray());// sending updated config
                 }
