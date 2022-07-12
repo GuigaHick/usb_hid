@@ -54,3 +54,14 @@ C:\Users\ghss\Desktop\Repositório Pessoal\usb_hid\Objetos de tela_teste\Objetos
 C:\Users\ghss\Desktop\Repositório Pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.CopyComplete
 C:\Users\ghss\Desktop\Repositório Pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.exe
 C:\Users\ghss\Desktop\Repositório Pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.pdb
+C:\Users\guilsilv\Desktop\pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.exe.config
+C:\Users\guilsilv\Desktop\pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.exe
+C:\Users\guilsilv\Desktop\pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\bin\Debug\Objetos de tela_teste.pdb
+C:\Users\guilsilv\Desktop\pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.AssemblyReference.cache
+C:\Users\guilsilv\Desktop\pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos_de_tela_teste.MainScreen.resources
+C:\Users\guilsilv\Desktop\pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos_de_tela_teste.Properties.Resources.resources
+C:\Users\guilsilv\Desktop\pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.GenerateResource.cache
+C:\Users\guilsilv\Desktop\pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.CoreCompileInputs.cache
+C:\Users\guilsilv\Desktop\pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.csproj.CopyComplete
+C:\Users\guilsilv\Desktop\pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.exe
+C:\Users\guilsilv\Desktop\pessoal\usb_hid\Objetos de tela_teste\Objetos de tela_teste\obj\Debug\Objetos de tela_teste.pdb

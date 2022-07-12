@@ -6,6 +6,8 @@ namespace Objetos_de_tela_teste.Models
     {
         public float Temperature { get;  set; }
 
+        public float FinalSignal { get; set; }
+
         public int Signal { get;  set; }
 
         public float Current { get;  set; }
@@ -17,6 +19,7 @@ namespace Objetos_de_tela_teste.Models
             adc0 += (int)Convert.ToInt32(data[2]);
 
             this.Signal = (adc0 * 2048) / 1023;
+            this.FinalSignal = 90;
 
             this.Temperature = data[3] + ((float)data[4] / 10);
             this.Current = data[5] + ((float)data[6] / 10);

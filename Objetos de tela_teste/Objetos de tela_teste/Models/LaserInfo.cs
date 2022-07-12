@@ -9,6 +9,8 @@ namespace Objetos_de_tela_teste.Models
 {
     public class LaserInfo
     {
+        public string Name { get; set; }
+
         public int ID { get; set; }
 
         public AutoResetEvent ProcessFinishedEvent { get; set; }
