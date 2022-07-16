@@ -48,23 +48,23 @@
             this.I1min = new System.Windows.Forms.MaskedTextBox();
             this.I1max = new System.Windows.Forms.MaskedTextBox();
             this.Inc1 = new System.Windows.Forms.MaskedTextBox();
-            this.Temp1 = new System.Windows.Forms.MaskedTextBox();
+            this.Ntc1 = new System.Windows.Forms.MaskedTextBox();
             this.I2min = new System.Windows.Forms.MaskedTextBox();
             this.I2max = new System.Windows.Forms.MaskedTextBox();
             this.Inc2 = new System.Windows.Forms.MaskedTextBox();
-            this.Temp2 = new System.Windows.Forms.MaskedTextBox();
+            this.Ntc2 = new System.Windows.Forms.MaskedTextBox();
             this.I3min = new System.Windows.Forms.MaskedTextBox();
             this.I3max = new System.Windows.Forms.MaskedTextBox();
             this.Inc3 = new System.Windows.Forms.MaskedTextBox();
-            this.Temp3 = new System.Windows.Forms.MaskedTextBox();
+            this.Ntc3 = new System.Windows.Forms.MaskedTextBox();
             this.I4min = new System.Windows.Forms.MaskedTextBox();
             this.I4max = new System.Windows.Forms.MaskedTextBox();
             this.Inc4 = new System.Windows.Forms.MaskedTextBox();
-            this.Temp4 = new System.Windows.Forms.MaskedTextBox();
+            this.Ntc4 = new System.Windows.Forms.MaskedTextBox();
             this.I5min = new System.Windows.Forms.MaskedTextBox();
             this.I5max = new System.Windows.Forms.MaskedTextBox();
             this.Inc5 = new System.Windows.Forms.MaskedTextBox();
-            this.Temp5 = new System.Windows.Forms.MaskedTextBox();
+            this.Ntc5 = new System.Windows.Forms.MaskedTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.Iniciar = new System.Windows.Forms.Button();
             this.Parar = new System.Windows.Forms.Button();
@@ -81,8 +81,17 @@
             this.name2txt = new System.Windows.Forms.MaskedTextBox();
             this.name1txt = new System.Windows.Forms.MaskedTextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.txtTempFinal1 = new System.Windows.Forms.TextBox();
+            this.txtTempFinal2 = new System.Windows.Forms.TextBox();
+            this.txtTempFinal3 = new System.Windows.Forms.TextBox();
+            this.txtTempFinal4 = new System.Windows.Forms.TextBox();
+            this.txtTempFinal5 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -93,7 +102,7 @@
             this.arquivoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(948, 33);
+            this.menuStrip1.Size = new System.Drawing.Size(1152, 36);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -106,7 +115,7 @@
             this.toolStripMenuItem1,
             this.SairToolStripMenuItem});
             this.arquivoToolStripMenuItem.Name = "arquivoToolStripMenuItem";
-            this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(91, 29);
+            this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(91, 32);
             this.arquivoToolStripMenuItem.Text = "Arquivo";
             // 
             // conectarToolStripMenuItem
@@ -269,19 +278,21 @@
             this.Inc1.Size = new System.Drawing.Size(76, 26);
             this.Inc1.TabIndex = 37;
             this.Inc1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.Inc1, "Increment Should be");
             this.Inc1.ValidatingType = typeof(int);
             // 
             // Temp1
             // 
-            this.Temp1.HidePromptOnLeave = true;
-            this.Temp1.Location = new System.Drawing.Point(699, 257);
-            this.Temp1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Temp1.Mask = "00000";
-            this.Temp1.Name = "Temp1";
-            this.Temp1.Size = new System.Drawing.Size(78, 26);
-            this.Temp1.TabIndex = 38;
-            this.Temp1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Temp1.ValidatingType = typeof(int);
+            this.Ntc1.HidePromptOnLeave = true;
+            this.Ntc1.Location = new System.Drawing.Point(699, 257);
+            this.Ntc1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Ntc1.Mask = "00000";
+            this.Ntc1.Name = "Temp1";
+            this.Ntc1.Size = new System.Drawing.Size(78, 26);
+            this.Ntc1.TabIndex = 38;
+            this.Ntc1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.Ntc1, "Valores Permitidos de 4000 a 10000");
+            this.Ntc1.ValidatingType = typeof(int);
             // 
             // I2min
             // 
@@ -321,15 +332,15 @@
             // 
             // Temp2
             // 
-            this.Temp2.HidePromptOnLeave = true;
-            this.Temp2.Location = new System.Drawing.Point(699, 297);
-            this.Temp2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Temp2.Mask = "000";
-            this.Temp2.Name = "Temp2";
-            this.Temp2.Size = new System.Drawing.Size(78, 26);
-            this.Temp2.TabIndex = 42;
-            this.Temp2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Temp2.ValidatingType = typeof(int);
+            this.Ntc2.HidePromptOnLeave = true;
+            this.Ntc2.Location = new System.Drawing.Point(699, 297);
+            this.Ntc2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Ntc2.Mask = "000";
+            this.Ntc2.Name = "Temp2";
+            this.Ntc2.Size = new System.Drawing.Size(78, 26);
+            this.Ntc2.TabIndex = 42;
+            this.Ntc2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ntc2.ValidatingType = typeof(int);
             // 
             // I3min
             // 
@@ -369,15 +380,15 @@
             // 
             // Temp3
             // 
-            this.Temp3.HidePromptOnLeave = true;
-            this.Temp3.Location = new System.Drawing.Point(699, 337);
-            this.Temp3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Temp3.Mask = "000";
-            this.Temp3.Name = "Temp3";
-            this.Temp3.Size = new System.Drawing.Size(78, 26);
-            this.Temp3.TabIndex = 46;
-            this.Temp3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Temp3.ValidatingType = typeof(int);
+            this.Ntc3.HidePromptOnLeave = true;
+            this.Ntc3.Location = new System.Drawing.Point(699, 337);
+            this.Ntc3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Ntc3.Mask = "000";
+            this.Ntc3.Name = "Temp3";
+            this.Ntc3.Size = new System.Drawing.Size(78, 26);
+            this.Ntc3.TabIndex = 46;
+            this.Ntc3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ntc3.ValidatingType = typeof(int);
             // 
             // I4min
             // 
@@ -417,15 +428,15 @@
             // 
             // Temp4
             // 
-            this.Temp4.HidePromptOnLeave = true;
-            this.Temp4.Location = new System.Drawing.Point(699, 377);
-            this.Temp4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Temp4.Mask = "000";
-            this.Temp4.Name = "Temp4";
-            this.Temp4.Size = new System.Drawing.Size(78, 26);
-            this.Temp4.TabIndex = 50;
-            this.Temp4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Temp4.ValidatingType = typeof(int);
+            this.Ntc4.HidePromptOnLeave = true;
+            this.Ntc4.Location = new System.Drawing.Point(699, 377);
+            this.Ntc4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Ntc4.Mask = "000";
+            this.Ntc4.Name = "Temp4";
+            this.Ntc4.Size = new System.Drawing.Size(78, 26);
+            this.Ntc4.TabIndex = 50;
+            this.Ntc4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ntc4.ValidatingType = typeof(int);
             // 
             // I5min
             // 
@@ -465,15 +476,15 @@
             // 
             // Temp5
             // 
-            this.Temp5.HidePromptOnLeave = true;
-            this.Temp5.Location = new System.Drawing.Point(699, 417);
-            this.Temp5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Temp5.Mask = "000";
-            this.Temp5.Name = "Temp5";
-            this.Temp5.Size = new System.Drawing.Size(78, 26);
-            this.Temp5.TabIndex = 54;
-            this.Temp5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Temp5.ValidatingType = typeof(int);
+            this.Ntc5.HidePromptOnLeave = true;
+            this.Ntc5.Location = new System.Drawing.Point(699, 417);
+            this.Ntc5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Ntc5.Mask = "000";
+            this.Ntc5.Name = "Temp5";
+            this.Ntc5.Size = new System.Drawing.Size(78, 26);
+            this.Ntc5.TabIndex = 54;
+            this.Ntc5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ntc5.ValidatingType = typeof(int);
             // 
             // label5
             // 
@@ -488,7 +499,7 @@
             // 
             // Iniciar
             // 
-            this.Iniciar.Location = new System.Drawing.Point(818, 257);
+            this.Iniciar.Location = new System.Drawing.Point(957, 257);
             this.Iniciar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Iniciar.Name = "Iniciar";
             this.Iniciar.Size = new System.Drawing.Size(112, 35);
@@ -500,7 +511,7 @@
             // Parar
             // 
             this.Parar.Enabled = false;
-            this.Parar.Location = new System.Drawing.Point(818, 332);
+            this.Parar.Location = new System.Drawing.Point(957, 339);
             this.Parar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Parar.Name = "Parar";
             this.Parar.Size = new System.Drawing.Size(112, 35);
@@ -530,7 +541,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 796);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(2, 0, 21, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(948, 32);
+            this.statusStrip1.Size = new System.Drawing.Size(1152, 32);
             this.statusStrip1.TabIndex = 68;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -626,11 +637,110 @@
             this.name1txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.name1txt.ValidatingType = typeof(int);
             // 
+            // toolTip1
+            // 
+            this.toolTip1.IsBalloon = true;
+            this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.toolTip1.ToolTipTitle = "Range de Valores";
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.SystemColors.MenuText;
+            this.button1.Location = new System.Drawing.Point(784, 228);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(25, 24);
+            this.button1.TabIndex = 77;
+            this.button1.Text = "I";
+            this.toolTip1.SetToolTip(this.button1, "Range de Valores: 4000 Ω-10000Ω");
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(732, 101);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            4000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 26);
+            this.numericUpDown1.TabIndex = 76;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            4000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // txtTempFinal1
+            // 
+            this.txtTempFinal1.Enabled = false;
+            this.txtTempFinal1.Location = new System.Drawing.Point(794, 254);
+            this.txtTempFinal1.Name = "txtTempFinal1";
+            this.txtTempFinal1.Size = new System.Drawing.Size(100, 26);
+            this.txtTempFinal1.TabIndex = 78;
+            // 
+            // txtTempFinal2
+            // 
+            this.txtTempFinal2.Enabled = false;
+            this.txtTempFinal2.Location = new System.Drawing.Point(794, 300);
+            this.txtTempFinal2.Name = "txtTempFinal2";
+            this.txtTempFinal2.Size = new System.Drawing.Size(100, 26);
+            this.txtTempFinal2.TabIndex = 79;
+            // 
+            // txtTempFinal3
+            // 
+            this.txtTempFinal3.Enabled = false;
+            this.txtTempFinal3.Location = new System.Drawing.Point(794, 348);
+            this.txtTempFinal3.Name = "txtTempFinal3";
+            this.txtTempFinal3.Size = new System.Drawing.Size(100, 26);
+            this.txtTempFinal3.TabIndex = 80;
+            // 
+            // txtTempFinal4
+            // 
+            this.txtTempFinal4.Enabled = false;
+            this.txtTempFinal4.Location = new System.Drawing.Point(794, 382);
+            this.txtTempFinal4.Name = "txtTempFinal4";
+            this.txtTempFinal4.Size = new System.Drawing.Size(100, 26);
+            this.txtTempFinal4.TabIndex = 81;
+            // 
+            // txtTempFinal5
+            // 
+            this.txtTempFinal5.Enabled = false;
+            this.txtTempFinal5.Location = new System.Drawing.Point(794, 422);
+            this.txtTempFinal5.Name = "txtTempFinal5";
+            this.txtTempFinal5.Size = new System.Drawing.Size(100, 26);
+            this.txtTempFinal5.TabIndex = 82;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(815, 231);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(75, 20);
+            this.label7.TabIndex = 83;
+            this.label7.Text = "Temp(C°)";
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(948, 828);
+            this.ClientSize = new System.Drawing.Size(1152, 828);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtTempFinal5);
+            this.Controls.Add(this.txtTempFinal4);
+            this.Controls.Add(this.txtTempFinal3);
+            this.Controls.Add(this.txtTempFinal2);
+            this.Controls.Add(this.txtTempFinal1);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.name1txt);
             this.Controls.Add(this.name2txt);
             this.Controls.Add(this.name3txt);
@@ -643,23 +753,23 @@
             this.Controls.Add(this.Parar);
             this.Controls.Add(this.Iniciar);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.Temp5);
+            this.Controls.Add(this.Ntc5);
             this.Controls.Add(this.Inc5);
             this.Controls.Add(this.I5max);
             this.Controls.Add(this.I5min);
-            this.Controls.Add(this.Temp4);
+            this.Controls.Add(this.Ntc4);
             this.Controls.Add(this.Inc4);
             this.Controls.Add(this.I4max);
             this.Controls.Add(this.I4min);
-            this.Controls.Add(this.Temp3);
+            this.Controls.Add(this.Ntc3);
             this.Controls.Add(this.Inc3);
             this.Controls.Add(this.I3max);
             this.Controls.Add(this.I3min);
-            this.Controls.Add(this.Temp2);
+            this.Controls.Add(this.Ntc2);
             this.Controls.Add(this.Inc2);
             this.Controls.Add(this.I2max);
             this.Controls.Add(this.I2min);
-            this.Controls.Add(this.Temp1);
+            this.Controls.Add(this.Ntc1);
             this.Controls.Add(this.Inc1);
             this.Controls.Add(this.I1max);
             this.Controls.Add(this.I1min);
@@ -683,6 +793,7 @@
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -709,23 +820,23 @@
         private System.Windows.Forms.MaskedTextBox I1min;
         private System.Windows.Forms.MaskedTextBox I1max;
         private System.Windows.Forms.MaskedTextBox Inc1;
-        private System.Windows.Forms.MaskedTextBox Temp1;
+        private System.Windows.Forms.MaskedTextBox Ntc1;
         private System.Windows.Forms.MaskedTextBox I2min;
         private System.Windows.Forms.MaskedTextBox I2max;
         private System.Windows.Forms.MaskedTextBox Inc2;
-        private System.Windows.Forms.MaskedTextBox Temp2;
+        private System.Windows.Forms.MaskedTextBox Ntc2;
         private System.Windows.Forms.MaskedTextBox I3min;
         private System.Windows.Forms.MaskedTextBox I3max;
         private System.Windows.Forms.MaskedTextBox Inc3;
-        private System.Windows.Forms.MaskedTextBox Temp3;
+        private System.Windows.Forms.MaskedTextBox Ntc3;
         private System.Windows.Forms.MaskedTextBox I4min;
         private System.Windows.Forms.MaskedTextBox I4max;
         private System.Windows.Forms.MaskedTextBox Inc4;
-        private System.Windows.Forms.MaskedTextBox Temp4;
+        private System.Windows.Forms.MaskedTextBox Ntc4;
         private System.Windows.Forms.MaskedTextBox I5min;
         private System.Windows.Forms.MaskedTextBox I5max;
         private System.Windows.Forms.MaskedTextBox Inc5;
-        private System.Windows.Forms.MaskedTextBox Temp5;
+        private System.Windows.Forms.MaskedTextBox Ntc5;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button Iniciar;
         private System.Windows.Forms.Button Parar;
@@ -744,6 +855,14 @@
         private System.Windows.Forms.MaskedTextBox name2txt;
         private System.Windows.Forms.MaskedTextBox name1txt;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtTempFinal1;
+        private System.Windows.Forms.TextBox txtTempFinal2;
+        private System.Windows.Forms.TextBox txtTempFinal3;
+        private System.Windows.Forms.TextBox txtTempFinal4;
+        private System.Windows.Forms.TextBox txtTempFinal5;
+        private System.Windows.Forms.Label label7;
     }
 }
 

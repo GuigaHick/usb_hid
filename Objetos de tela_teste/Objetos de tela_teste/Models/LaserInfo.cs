@@ -21,7 +21,7 @@ namespace Objetos_de_tela_teste.Models
 
         public int CurrentTemperature { get; set; }
 
-        public int DesiredTemperature { get; set; }
+        public int DesiredNTC { get; set; }
 
         public int DesiredCurrent { get; set; }
 
