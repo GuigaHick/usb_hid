@@ -2,12 +2,9 @@
 using System;
 using System.Globalization;
 using System.IO;
-using System.IO.Ports;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Menu;
 
 namespace Objetos_de_tela_teste
 {
@@ -17,12 +14,10 @@ namespace Objetos_de_tela_teste
 
         private int currentLaser = -1; //means no active laser
 
-        private SerialPort port;
-
         public MainScreen()
         {
             InitializeComponent();
-            ShowSerialPorts();
+
             I1min.Enabled = false;
             I1max.Enabled = false;
             Inc1.Enabled = false;
@@ -44,7 +39,7 @@ namespace Objetos_de_tela_teste
             Inc5.Enabled = false;
             Ntc5.Enabled = false;
 
-            //USBCom.OnDataRecieved += new UsbLibrary.DataRecievedEventHandler(USBCom_OnDataReceived);
+            USBCom.OnDataRecieved += new UsbLibrary.DataRecievedEventHandler(USBCom_OnDataReceived);
         }
 
         private void Port_ErrorReceived(object sender, System.IO.Ports.SerialErrorReceivedEventArgs e)
@@ -55,66 +50,66 @@ namespace Objetos_de_tela_teste
         private void Port_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
         {
             //throw new NotImplementedException();
-            byte[] data = new byte[port.BytesToRead];
-            int readLength = port.Read(data, 0, data.Length);
-            OnLaserReportReceived(data);
+            //byte[] data = new byte[port.BytesToRead];
+            //int readLength = port.Read(data, 0, data.Length);
+            //OnLaserReportReceived(data);
         }
 
-        //public void USBCom_OnDataReceived(object sender, UsbLibrary.DataRecievedEventArgs args)
+        public void USBCom_OnDataReceived(object sender, UsbLibrary.DataRecievedEventArgs args)
+        {
+            OnLaserReportReceived(args.data);
+        }
+
+        //private void ShowSerialPorts()
         //{
-        //    OnLaserReportReceived(args.data);
+        //    serialPortName.Items.Clear();
+        //    foreach (string portName in SerialPort.GetPortNames())
+        //    {
+        //        serialPortName.Items.Add(portName);
+        //    }
         //}
 
-        private void ShowSerialPorts()
-        {
-            serialPortName.Items.Clear();
-            foreach (string portName in SerialPort.GetPortNames())
-            {
-                serialPortName.Items.Add(portName);
-            }
-        }
+        //private void CreateSerialPort()
+        //{
+        //    port = new SerialPort(serialPortName.Text);
+        //    port.Encoding = ASCIIEncoding.ASCII;
+        //    if (!baudRate.Text.Equals(string.Empty))
+        //    {
+        //        port.BaudRate = int.Parse(baudRate.Text);
+        //    }
+        //    else
+        //    {
+        //        baudRate.Text = port.BaudRate.ToString();
+        //    }
 
-        private void CreateSerialPort()
-        {
-            port = new SerialPort(serialPortName.Text);
-            port.Encoding = ASCIIEncoding.ASCII;
-            if (!baudRate.Text.Equals(string.Empty))
-            {
-                port.BaudRate = int.Parse(baudRate.Text);
-            }
-            else
-            {
-                baudRate.Text = port.BaudRate.ToString();
-            }
+        //    try
+        //    {
+        //        port.Open();
+        //        port.DataReceived += Port_DataReceived;
+        //        port.ErrorReceived += Port_ErrorReceived;
+        //    }
+        //    catch
+        //    {
+        //        MessageBox.Show("Invalid port name or unknown error.");
+        //        port = null;
+        //        open.Enabled = true;
+        //        return;
+        //    }
 
-            try
-            {
-                port.Open();
-                port.DataReceived += Port_DataReceived;
-                port.ErrorReceived += Port_ErrorReceived;
-            }
-            catch
-            {
-                MessageBox.Show("Invalid port name or unknown error.");
-                port = null;
-                open.Enabled = true;
-                return;
-            }
-
-            serialPortName.Enabled = false;
-            baudRate.Enabled = false;
-            open.Enabled = false;
-            close.Enabled = true;
-            refresh.Enabled = false;
-        }
+        //    serialPortName.Enabled = false;
+        //    baudRate.Enabled = false;
+        //    open.Enabled = false;
+        //    close.Enabled = true;
+        //    refresh.Enabled = false;
+        //}
 
         private void conectarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                //USBCom.ProductId = 32;
-                //USBCom.VendorId = 1121;
-                //USBCom.CheckDevicePresent();
+                USBCom.ProductId = 32;
+                USBCom.VendorId = 1121;
+                USBCom.CheckDevicePresent();
             }
             catch (Exception ex)
             {
@@ -136,15 +131,15 @@ namespace Objetos_de_tela_teste
         {
             try
             {
-                //if (this.USBCom.SpecifiedDevice != null)
-                //{
-                //    USBCom.SpecifiedDevice.SendData(data);
-                //}
-
-                if(port.IsOpen) 
+                if (this.USBCom.SpecifiedDevice != null)
                 {
-                    port.Write(data, 0, data.Length);
+                    USBCom.SpecifiedDevice.SendData(data);
                 }
+
+                //if(port.IsOpen) 
+                //{
+                //    port.Write(data, 0, data.Length);
+                //}
 
             }
 
@@ -556,50 +551,50 @@ namespace Objetos_de_tela_teste
             OnLaserReportReceived(new byte[] { 0x00, 0x00, 0x18, 0x00, 0x3a, 0x09, 0x01, 0x01 });//Just to test   
         }
 
-        private void open_Click(object sender, EventArgs e)
-        {
-            if (string.Empty.Equals(serialPortName.Text))
-            {
-                MessageBox.Show("Need a port name to Open.");
-                return;
-            }
+        //private void open_Click(object sender, EventArgs e)
+        //{
+        //    if (string.Empty.Equals(serialPortName.Text))
+        //    {
+        //        MessageBox.Show("Need a port name to Open.");
+        //        return;
+        //    }
 
-            if (port == null)
-            {
-                CreateSerialPort();
-            }
-        }
+        //    if (port == null)
+        //    {
+        //        CreateSerialPort();
+        //    }
+        //}
 
-        private void refresh_Click(object sender, EventArgs e)
-        {
-            ShowSerialPorts();
-        }
+        //private void refresh_Click(object sender, EventArgs e)
+        //{
+        //    ShowSerialPorts();
+        //}
 
-        private void CloseSerialPort()
-        {
-            try
-            {
-                if (port != null && port.IsOpen)
-                {
-                    port.Close();
-                }
-                port = null;
-            }
-            catch (IOException)
-            {
-                // don't need user to do anything
-            }
+        //private void CloseSerialPort()
+        //{
+        //    try
+        //    {
+        //        if (port != null && port.IsOpen)
+        //        {
+        //            port.Close();
+        //        }
+        //        port = null;
+        //    }
+        //    catch (IOException)
+        //    {
+        //        // don't need user to do anything
+        //    }
 
-            close.Enabled = false;
-            open.Enabled = true;
-            refresh.Enabled = true;
-            serialPortName.Enabled = true;
-            baudRate.Enabled = true;
-        }
+        //    close.Enabled = false;
+        //    open.Enabled = true;
+        //    refresh.Enabled = true;
+        //    serialPortName.Enabled = true;
+        //    baudRate.Enabled = true;
+        //}
 
-        private void close_Click(object sender, EventArgs e)
-        {
-            CloseSerialPort();
-        }
+        //private void close_Click(object sender, EventArgs e)
+        //{
+        //    CloseSerialPort();
+        //}
     }
 }

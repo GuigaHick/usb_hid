@@ -65,7 +65,6 @@
             this.I5max = new System.Windows.Forms.MaskedTextBox();
             this.Inc5 = new System.Windows.Forms.MaskedTextBox();
             this.Ntc5 = new System.Windows.Forms.MaskedTextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.Iniciar = new System.Windows.Forms.Button();
             this.Parar = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -86,14 +85,10 @@
             this.txtTempFinal4 = new System.Windows.Forms.TextBox();
             this.txtTempFinal5 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.close = new System.Windows.Forms.Button();
-            this.refresh = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
-            this.serialPortName = new System.Windows.Forms.ComboBox();
-            this.baudRate = new System.Windows.Forms.ComboBox();
-            this.open = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
+            this.label5 = new System.Windows.Forms.Label();
+            this.USBCom = new UsbLibrary.UsbHidPort(this.components);
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -461,16 +456,6 @@
             this.Ntc5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Ntc5.ValidatingType = typeof(int);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(212, 115);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(276, 26);
-            this.label5.TabIndex = 55;
-            this.label5.Text = "Configuração dos Lasers";
-            // 
             // Iniciar
             // 
             this.Iniciar.Location = new System.Drawing.Point(638, 167);
@@ -659,87 +644,6 @@
             this.label7.TabIndex = 83;
             this.label7.Text = "Temp(C°)";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 40);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(37, 13);
-            this.label8.TabIndex = 85;
-            this.label8.Text = "Portas";
-            // 
-            // close
-            // 
-            this.close.Enabled = false;
-            this.close.Location = new System.Drawing.Point(261, 79);
-            this.close.Name = "close";
-            this.close.Size = new System.Drawing.Size(75, 23);
-            this.close.TabIndex = 90;
-            this.close.Text = "&Close";
-            this.close.UseVisualStyleBackColor = true;
-            this.close.Click += new System.EventHandler(this.close_Click);
-            // 
-            // refresh
-            // 
-            this.refresh.Location = new System.Drawing.Point(180, 35);
-            this.refresh.Name = "refresh";
-            this.refresh.Size = new System.Drawing.Size(75, 23);
-            this.refresh.TabIndex = 87;
-            this.refresh.Text = "&Refresh";
-            this.refresh.UseVisualStyleBackColor = true;
-            this.refresh.Click += new System.EventHandler(this.refresh_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(51, 66);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(58, 13);
-            this.label9.TabIndex = 91;
-            this.label9.Text = "Baud Rate";
-            // 
-            // serialPortName
-            // 
-            this.serialPortName.FormattingEnabled = true;
-            this.serialPortName.Location = new System.Drawing.Point(55, 37);
-            this.serialPortName.Name = "serialPortName";
-            this.serialPortName.Size = new System.Drawing.Size(119, 21);
-            this.serialPortName.TabIndex = 86;
-            // 
-            // baudRate
-            // 
-            this.baudRate.FormattingEnabled = true;
-            this.baudRate.Items.AddRange(new object[] {
-            "110",
-            "300",
-            "600",
-            "1200",
-            "2400",
-            "4800",
-            "9600",
-            "14400",
-            "19200",
-            "38400",
-            "57600",
-            "115200",
-            "230400",
-            "460800",
-            "921600"});
-            this.baudRate.Location = new System.Drawing.Point(55, 82);
-            this.baudRate.Name = "baudRate";
-            this.baudRate.Size = new System.Drawing.Size(119, 21);
-            this.baudRate.TabIndex = 88;
-            // 
-            // open
-            // 
-            this.open.Location = new System.Drawing.Point(180, 79);
-            this.open.Name = "open";
-            this.open.Size = new System.Drawing.Size(75, 23);
-            this.open.TabIndex = 89;
-            this.open.Text = "&Open";
-            this.open.UseVisualStyleBackColor = true;
-            this.open.Click += new System.EventHandler(this.open_Click);
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(110, 304);
@@ -749,18 +653,27 @@
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(215, 88);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(276, 26);
+            this.label5.TabIndex = 55;
+            this.label5.Text = "Configuração dos Lasers";
+            // 
+            // USBCom
+            // 
+            this.USBCom.ProductId = 0;
+            this.USBCom.VendorId = 0;
+            this.USBCom.OnSpecifiedDeviceArrived += new System.EventHandler(this.USBCom_OnSpecifiedDeviceArrived);
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(768, 487);
-            this.Controls.Add(this.close);
-            this.Controls.Add(this.refresh);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.serialPortName);
-            this.Controls.Add(this.baudRate);
-            this.Controls.Add(this.open);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtTempFinal5);
@@ -862,7 +775,6 @@
         private System.Windows.Forms.MaskedTextBox I5max;
         private System.Windows.Forms.MaskedTextBox Inc5;
         private System.Windows.Forms.MaskedTextBox Ntc5;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button Iniciar;
         private System.Windows.Forms.Button Parar;
         //private UsbLibrary.UsbHidPort USBCom;
@@ -886,14 +798,10 @@
         private System.Windows.Forms.TextBox txtTempFinal4;
         private System.Windows.Forms.TextBox txtTempFinal5;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button close;
-        private System.Windows.Forms.Button refresh;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox serialPortName;
-        private System.Windows.Forms.ComboBox baudRate;
-        private System.Windows.Forms.Button open;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
+        private System.Windows.Forms.Label label5;
+        private UsbLibrary.UsbHidPort USBCom;
     }
 }
 

@@ -32,8 +32,8 @@ namespace Objetos_de_tela_teste.Models
             //this.Signal = (adc0 * 2048) / 1023;
 
 
-            byte[] signOut = new byte[2];
-            Array.Copy(data, 0, signOut, 0, 2);
+            byte[] signOut = new byte[4];
+            Array.Copy(data, 0, signOut, 0, 4);
 
             byte[] signIn = new byte[2];
             Array.Copy(data, 2, signIn, 0, 2);
@@ -44,13 +44,13 @@ namespace Objetos_de_tela_teste.Models
             byte[] ntcIn = new byte[2];
             Array.Copy(data, 6, ntcIn, 0, 2);
 
-            this.FinalSignal = Convert.ToSingle(signOut);
+            this.FinalSignal = BitConverter.ToSingle(signOut, 0);
 
-            this.Signal = Convert.ToSingle(signIn);
+            this.Signal = BitConverter.ToSingle(signIn, 0);
 
-            this.Current = Convert.ToSingle(currentIn);
+            this.Current = BitConverter.ToSingle(currentIn, 0);
 
-            this.NtcReal = Convert.ToSingle(ntcIn);
+            this.NtcReal = BitConverter.ToSingle(ntcIn, 0);
         }
     }
 }
