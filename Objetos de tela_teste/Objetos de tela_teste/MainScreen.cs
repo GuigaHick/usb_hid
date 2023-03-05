@@ -543,12 +543,12 @@ namespace Objetos_de_tela_teste
 
         private void btnIncrement_Click(object sender, EventArgs e)
         { 
-            OnLaserReportReceived(new byte[] {0x00, 0x00, 0x18, 0x00, 0x3a, 0x09, 0x00, 0x00});//Just to test   
+            OnLaserReportReceived(new byte[] {0x00, 0x01, 0x18, 0x01, 0x3a, 0x09, 0x01, 0x01});//Just to test   
         }
 
         private void btnIncrement_Click_1(object sender, EventArgs e)
         {
-            OnLaserReportReceived(new byte[] { 0x00, 0x00, 0x18, 0x00, 0x3a, 0x09, 0x01, 0x01 });//Just to test   
+            OnLaserReportReceived(new byte[] { 0x00, 0x01, 0x18, 0x00, 0x3a, 0x09, 0x01, 0x01 });//Just to test   
         }
 
         //private void open_Click(object sender, EventArgs e)

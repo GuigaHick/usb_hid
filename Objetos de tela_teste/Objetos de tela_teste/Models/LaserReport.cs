@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Reflection;
+using System.Linq;
 
 namespace Objetos_de_tela_teste.Models
 {
     public class LaserReport
     {
-        public float NtcReal { get;  set; } //Ntc
+        public int NtcReal { get;  set; } //Ntc
 
-        public float FinalSignal { get; set; } // Sing Out
+        public int FinalSignal { get; set; } // Sing Out
 
-        public float Signal { get;  set; } // Sign In
+        public int Signal { get;  set; } // Sign In
 
         public float Current { get;  set; } // Corrent Real
 
@@ -32,25 +32,33 @@ namespace Objetos_de_tela_teste.Models
             //this.Signal = (adc0 * 2048) / 1023;
 
 
-            byte[] signOut = new byte[4];
-            Array.Copy(data, 0, signOut, 0, 4);
+            byte[] signOut = new byte[2];
+            Array.Copy(data, 0, signOut, 0, 2);
 
             byte[] signIn = new byte[2];
             Array.Copy(data, 2, signIn, 0, 2);
 
-            byte[] currentIn = new byte[2];
-            Array.Copy(data, 4, currentIn, 0, 2);
-
             byte[] ntcIn = new byte[2];
             Array.Copy(data, 6, ntcIn, 0, 2);
 
-            this.FinalSignal = BitConverter.ToSingle(signOut, 0);
+            if(BitConverter.IsLittleEndian)
+            {
+                signOut.Reverse();
+                signIn.Reverse();
+                ntcIn.Reverse();
+            }
 
-            this.Signal = BitConverter.ToSingle(signIn, 0);
+            this.FinalSignal = BitConverter.ToInt16(signOut, 0);
 
-            this.Current = BitConverter.ToSingle(currentIn, 0);
+            this.Signal = BitConverter.ToInt16(signIn, 0);
 
-            this.NtcReal = BitConverter.ToSingle(ntcIn, 0);
+            this.Current = data[5] + ((float)data[6] / 10);
+
+            this.NtcReal = BitConverter.ToInt16(ntcIn, 0);
+
+            Console.WriteLine($"Sign Out: {signOut[0]} {signOut[1]}");
+            Console.WriteLine($"Sign In: {signIn[0]} {signIn[1]}");
+            Console.WriteLine($"Sign Out: {ntcIn[0]} {ntcIn[1]}");
         }
     }
 }
