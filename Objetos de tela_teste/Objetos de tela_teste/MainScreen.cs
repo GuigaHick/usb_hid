@@ -60,49 +60,6 @@ namespace Objetos_de_tela_teste
             OnLaserReportReceived(args.data);
         }
 
-        //private void ShowSerialPorts()
-        //{
-        //    serialPortName.Items.Clear();
-        //    foreach (string portName in SerialPort.GetPortNames())
-        //    {
-        //        serialPortName.Items.Add(portName);
-        //    }
-        //}
-
-        //private void CreateSerialPort()
-        //{
-        //    port = new SerialPort(serialPortName.Text);
-        //    port.Encoding = ASCIIEncoding.ASCII;
-        //    if (!baudRate.Text.Equals(string.Empty))
-        //    {
-        //        port.BaudRate = int.Parse(baudRate.Text);
-        //    }
-        //    else
-        //    {
-        //        baudRate.Text = port.BaudRate.ToString();
-        //    }
-
-        //    try
-        //    {
-        //        port.Open();
-        //        port.DataReceived += Port_DataReceived;
-        //        port.ErrorReceived += Port_ErrorReceived;
-        //    }
-        //    catch
-        //    {
-        //        MessageBox.Show("Invalid port name or unknown error.");
-        //        port = null;
-        //        open.Enabled = true;
-        //        return;
-        //    }
-
-        //    serialPortName.Enabled = false;
-        //    baudRate.Enabled = false;
-        //    open.Enabled = false;
-        //    close.Enabled = true;
-        //    refresh.Enabled = false;
-        //}
-
         private void conectarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -135,11 +92,6 @@ namespace Objetos_de_tela_teste
                 {
                     USBCom.SpecifiedDevice.SendData(data);
                 }
-
-                //if(port.IsOpen) 
-                //{
-                //    port.Write(data, 0, data.Length);
-                //}
 
             }
 
@@ -264,6 +216,7 @@ namespace Objetos_de_tela_teste
         private void SendDataToAllLasers()
         {
             experiment.EraseData();// Erase Data of last experiment
+            experiment.Run();
             if (checkLaser1.Checked)
             {
                 currentLaser = 0;
@@ -516,7 +469,7 @@ namespace Objetos_de_tela_teste
                             //Arq.WriteLine($"{laser.Name}   {laser.DesiredNTC:0.0#}    {report.Current:0.0#}    {report.Signal} {report.FinalSignal:0.0#}  ", nf);
                             Arq.WriteLine(String.Format("{0,-10} | {1,-6} | {2,6} | {3, 10} | {4, 10}",
                                 laser.Name,
-                                laser.DesiredNTC,
+                                report.NtcReal,
                                 report.Current,
                                 report.Signal,
                                 report.FinalSignal,
@@ -549,6 +502,12 @@ namespace Objetos_de_tela_teste
         private void btnIncrement_Click_1(object sender, EventArgs e)
         {
             OnLaserReportReceived(new byte[] { 0x00, 0x01, 0x18, 0x00, 0x3a, 0x09, 0x01, 0x01 });//Just to test   
+        }
+
+        private void Parar_Click(object sender, EventArgs e)
+        {
+            experiment.EraseData();
+            experiment.Stop();
         }
 
         //private void open_Click(object sender, EventArgs e)
