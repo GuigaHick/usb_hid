@@ -5,11 +5,11 @@ namespace Objetos_de_tela_teste.Models
 {
     public class LaserReport
     {
-        public int NtcReal { get;  set; } //Ntc
+        public uint NtcReal { get;  set; } //Ntc
 
-        public int FinalSignal { get; set; } // Sing Out
+        public uint FinalSignal { get; set; } // Sing Out
 
-        public int Signal { get;  set; } // Sign In
+        public uint Signal { get;  set; } // Sign In
 
         public float Current { get;  set; } // Corrent Real
 
@@ -48,13 +48,13 @@ namespace Objetos_de_tela_teste.Models
                 ntcIn.Reverse();
             }
 
-            this.FinalSignal = BitConverter.ToInt16(signOut, 0);
+            this.FinalSignal = BitConverter.ToUInt16(signOut, 0);
 
-            this.Signal = BitConverter.ToInt16(signIn, 0);
+            this.Signal = BitConverter.ToUInt16(signIn, 0);
 
             this.Current = data[5] + ((float)data[6] / 10);
 
-            this.NtcReal = BitConverter.ToInt16(ntcIn, 0);
+            this.NtcReal = BitConverter.ToUInt16(ntcIn, 0);
 
             Console.WriteLine($"Sign Out: {signOut[0]} {signOut[1]}");
             Console.WriteLine($"Sign In: {signIn[0]} {signIn[1]}");
