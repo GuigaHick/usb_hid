@@ -85,12 +85,22 @@
             this.txtTempFinal4 = new System.Windows.Forms.TextBox();
             this.txtTempFinal5 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
             this.label5 = new System.Windows.Forms.Label();
             this.USBCom = new UsbLibrary.UsbHidPort(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider2 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label8 = new System.Windows.Forms.Label();
+            this.lbl1Index = new System.Windows.Forms.Label();
+            this.lbl2Index = new System.Windows.Forms.Label();
+            this.lbl3Index = new System.Windows.Forms.Label();
+            this.lbl4Index = new System.Windows.Forms.Label();
+            this.lbl5Index = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -151,43 +161,47 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(169, 155);
+            this.label1.Location = new System.Drawing.Point(223, 143);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "I mín. ( mA )";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(248, 155);
+            this.label2.Location = new System.Drawing.Point(299, 143);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "I máx. ( mA )";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(324, 154);
+            this.label3.Location = new System.Drawing.Point(382, 143);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
             this.label3.TabIndex = 8;
             this.label3.Text = "Inc. ( mA )";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(399, 155);
+            this.label4.Location = new System.Drawing.Point(443, 143);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 9;
             this.label4.Text = "NTC. ( Ω )";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // checkLaser1
             // 
             this.checkLaser1.AutoSize = true;
-            this.checkLaser1.Location = new System.Drawing.Point(54, 173);
+            this.checkLaser1.Location = new System.Drawing.Point(117, 178);
             this.checkLaser1.Name = "checkLaser1";
             this.checkLaser1.Size = new System.Drawing.Size(15, 14);
             this.checkLaser1.TabIndex = 30;
@@ -197,7 +211,7 @@
             // checkLaser2
             // 
             this.checkLaser2.AutoSize = true;
-            this.checkLaser2.Location = new System.Drawing.Point(54, 201);
+            this.checkLaser2.Location = new System.Drawing.Point(117, 203);
             this.checkLaser2.Name = "checkLaser2";
             this.checkLaser2.Size = new System.Drawing.Size(15, 14);
             this.checkLaser2.TabIndex = 31;
@@ -207,7 +221,7 @@
             // checkLaser3
             // 
             this.checkLaser3.AutoSize = true;
-            this.checkLaser3.Location = new System.Drawing.Point(54, 228);
+            this.checkLaser3.Location = new System.Drawing.Point(117, 230);
             this.checkLaser3.Name = "checkLaser3";
             this.checkLaser3.Size = new System.Drawing.Size(15, 14);
             this.checkLaser3.TabIndex = 32;
@@ -217,7 +231,7 @@
             // checkLaser4
             // 
             this.checkLaser4.AutoSize = true;
-            this.checkLaser4.Location = new System.Drawing.Point(54, 254);
+            this.checkLaser4.Location = new System.Drawing.Point(117, 256);
             this.checkLaser4.Name = "checkLaser4";
             this.checkLaser4.Size = new System.Drawing.Size(15, 14);
             this.checkLaser4.TabIndex = 33;
@@ -227,7 +241,7 @@
             // checkLaser5
             // 
             this.checkLaser5.AutoSize = true;
-            this.checkLaser5.Location = new System.Drawing.Point(54, 280);
+            this.checkLaser5.Location = new System.Drawing.Point(117, 282);
             this.checkLaser5.Name = "checkLaser5";
             this.checkLaser5.Size = new System.Drawing.Size(15, 14);
             this.checkLaser5.TabIndex = 34;
@@ -237,230 +251,257 @@
             // I1min
             // 
             this.I1min.HidePromptOnLeave = true;
-            this.I1min.Location = new System.Drawing.Point(172, 171);
+            this.I1min.Location = new System.Drawing.Point(230, 175);
             this.I1min.Mask = "000";
             this.I1min.Name = "I1min";
             this.I1min.Size = new System.Drawing.Size(51, 20);
             this.I1min.TabIndex = 35;
             this.I1min.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.I1min.ValidatingType = typeof(int);
+            this.I1min.TextChanged += new System.EventHandler(this.I1min_TextChanged);
             // 
             // I1max
             // 
             this.I1max.HidePromptOnLeave = true;
-            this.I1max.Location = new System.Drawing.Point(251, 171);
+            this.I1max.Location = new System.Drawing.Point(306, 175);
             this.I1max.Mask = "000";
             this.I1max.Name = "I1max";
             this.I1max.Size = new System.Drawing.Size(50, 20);
             this.I1max.TabIndex = 36;
             this.I1max.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.I1max.ValidatingType = typeof(int);
+            this.I1max.TextChanged += new System.EventHandler(this.I1max_TextChanged);
+            this.I1max.Validating += new System.ComponentModel.CancelEventHandler(this.I1max_Validating);
             // 
             // Inc1
             // 
             this.Inc1.HidePromptOnLeave = true;
-            this.Inc1.Location = new System.Drawing.Point(326, 170);
-            this.Inc1.Mask = "000";
+            this.Inc1.Location = new System.Drawing.Point(383, 175);
+            this.Inc1.Mask = "0";
             this.Inc1.Name = "Inc1";
             this.Inc1.Size = new System.Drawing.Size(52, 20);
             this.Inc1.TabIndex = 37;
             this.Inc1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.toolTip1.SetToolTip(this.Inc1, "Increment Should be");
             this.Inc1.ValidatingType = typeof(int);
+            this.Inc1.TextChanged += new System.EventHandler(this.Inc1_TextChanged);
             // 
             // Ntc1
             // 
             this.Ntc1.HidePromptOnLeave = true;
-            this.Ntc1.Location = new System.Drawing.Point(399, 171);
+            this.Ntc1.Location = new System.Drawing.Point(449, 174);
             this.Ntc1.Mask = "00000";
             this.Ntc1.Name = "Ntc1";
-            this.Ntc1.Size = new System.Drawing.Size(53, 20);
+            this.Ntc1.Size = new System.Drawing.Size(45, 20);
             this.Ntc1.TabIndex = 38;
             this.Ntc1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.toolTip1.SetToolTip(this.Ntc1, "Valores Permitidos de 4000 a 10000");
+            this.toolTip1.SetToolTip(this.Ntc1, "Valores Permitidos de 4400 a 20000");
             this.Ntc1.ValidatingType = typeof(int);
+            this.Ntc1.TextChanged += new System.EventHandler(this.Ntc1_TextChanged);
+            this.Ntc1.Validating += new System.ComponentModel.CancelEventHandler(this.Ntc1_Validating);
             // 
             // I2min
             // 
             this.I2min.HidePromptOnLeave = true;
-            this.I2min.Location = new System.Drawing.Point(172, 198);
+            this.I2min.Location = new System.Drawing.Point(230, 202);
             this.I2min.Mask = "000";
             this.I2min.Name = "I2min";
             this.I2min.Size = new System.Drawing.Size(51, 20);
             this.I2min.TabIndex = 39;
             this.I2min.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.I2min.ValidatingType = typeof(int);
+            this.I2min.TextChanged += new System.EventHandler(this.I2min_TextChanged);
             // 
             // I2max
             // 
             this.I2max.HidePromptOnLeave = true;
-            this.I2max.Location = new System.Drawing.Point(251, 197);
+            this.I2max.Location = new System.Drawing.Point(306, 201);
             this.I2max.Mask = "000";
             this.I2max.Name = "I2max";
             this.I2max.Size = new System.Drawing.Size(50, 20);
             this.I2max.TabIndex = 40;
             this.I2max.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.I2max.ValidatingType = typeof(int);
+            this.I2max.TextChanged += new System.EventHandler(this.I2max_TextChanged);
             // 
             // Inc2
             // 
             this.Inc2.HidePromptOnLeave = true;
-            this.Inc2.Location = new System.Drawing.Point(326, 196);
-            this.Inc2.Mask = "000";
+            this.Inc2.Location = new System.Drawing.Point(383, 201);
+            this.Inc2.Mask = "0";
             this.Inc2.Name = "Inc2";
             this.Inc2.Size = new System.Drawing.Size(52, 20);
             this.Inc2.TabIndex = 41;
             this.Inc2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Inc2.ValidatingType = typeof(int);
+            this.Inc2.TextChanged += new System.EventHandler(this.Inc2_TextChanged);
             // 
             // Ntc2
             // 
             this.Ntc2.HidePromptOnLeave = true;
-            this.Ntc2.Location = new System.Drawing.Point(399, 197);
+            this.Ntc2.Location = new System.Drawing.Point(449, 201);
             this.Ntc2.Mask = "00000";
             this.Ntc2.Name = "Ntc2";
-            this.Ntc2.Size = new System.Drawing.Size(53, 20);
+            this.Ntc2.Size = new System.Drawing.Size(45, 20);
             this.Ntc2.TabIndex = 42;
             this.Ntc2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.Ntc2, "Valores Permitidos de 4400 a 20000");
             this.Ntc2.ValidatingType = typeof(int);
+            this.Ntc2.TextChanged += new System.EventHandler(this.Ntc2_TextChanged);
             // 
             // I3min
             // 
             this.I3min.HidePromptOnLeave = true;
-            this.I3min.Location = new System.Drawing.Point(172, 224);
+            this.I3min.Location = new System.Drawing.Point(230, 228);
             this.I3min.Mask = "000";
             this.I3min.Name = "I3min";
             this.I3min.Size = new System.Drawing.Size(51, 20);
             this.I3min.TabIndex = 43;
             this.I3min.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.I3min.ValidatingType = typeof(int);
+            this.I3min.TextChanged += new System.EventHandler(this.I3min_TextChanged);
             // 
             // I3max
             // 
             this.I3max.HidePromptOnLeave = true;
-            this.I3max.Location = new System.Drawing.Point(251, 223);
+            this.I3max.Location = new System.Drawing.Point(306, 227);
             this.I3max.Mask = "000";
             this.I3max.Name = "I3max";
             this.I3max.Size = new System.Drawing.Size(50, 20);
             this.I3max.TabIndex = 44;
             this.I3max.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.I3max.ValidatingType = typeof(int);
+            this.I3max.TextChanged += new System.EventHandler(this.I3max_TextChanged);
             // 
             // Inc3
             // 
             this.Inc3.HidePromptOnLeave = true;
-            this.Inc3.Location = new System.Drawing.Point(326, 222);
-            this.Inc3.Mask = "000";
+            this.Inc3.Location = new System.Drawing.Point(383, 227);
+            this.Inc3.Mask = "0";
             this.Inc3.Name = "Inc3";
             this.Inc3.Size = new System.Drawing.Size(52, 20);
             this.Inc3.TabIndex = 45;
             this.Inc3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Inc3.ValidatingType = typeof(int);
+            this.Inc3.TextChanged += new System.EventHandler(this.Inc3_TextChanged);
             // 
             // Ntc3
             // 
             this.Ntc3.HidePromptOnLeave = true;
-            this.Ntc3.Location = new System.Drawing.Point(399, 223);
+            this.Ntc3.Location = new System.Drawing.Point(449, 227);
             this.Ntc3.Mask = "00000";
             this.Ntc3.Name = "Ntc3";
-            this.Ntc3.Size = new System.Drawing.Size(53, 20);
+            this.Ntc3.Size = new System.Drawing.Size(45, 20);
             this.Ntc3.TabIndex = 46;
             this.Ntc3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.Ntc3, "Valores Permitidos de 4400 a 20000");
             this.Ntc3.ValidatingType = typeof(int);
+            this.Ntc3.TextChanged += new System.EventHandler(this.Ntc3_TextChanged);
             // 
             // I4min
             // 
             this.I4min.HidePromptOnLeave = true;
-            this.I4min.Location = new System.Drawing.Point(172, 250);
+            this.I4min.Location = new System.Drawing.Point(230, 254);
             this.I4min.Mask = "000";
             this.I4min.Name = "I4min";
             this.I4min.Size = new System.Drawing.Size(51, 20);
             this.I4min.TabIndex = 47;
             this.I4min.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.I4min.ValidatingType = typeof(int);
+            this.I4min.TextChanged += new System.EventHandler(this.I4min_TextChanged);
             // 
             // I4max
             // 
             this.I4max.HidePromptOnLeave = true;
-            this.I4max.Location = new System.Drawing.Point(251, 249);
+            this.I4max.Location = new System.Drawing.Point(306, 253);
             this.I4max.Mask = "000";
             this.I4max.Name = "I4max";
             this.I4max.Size = new System.Drawing.Size(50, 20);
             this.I4max.TabIndex = 48;
             this.I4max.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.I4max.ValidatingType = typeof(int);
+            this.I4max.TextChanged += new System.EventHandler(this.I4max_TextChanged);
             // 
             // Inc4
             // 
             this.Inc4.HidePromptOnLeave = true;
-            this.Inc4.Location = new System.Drawing.Point(326, 248);
-            this.Inc4.Mask = "000";
+            this.Inc4.Location = new System.Drawing.Point(383, 253);
+            this.Inc4.Mask = "0";
             this.Inc4.Name = "Inc4";
             this.Inc4.Size = new System.Drawing.Size(52, 20);
             this.Inc4.TabIndex = 49;
             this.Inc4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Inc4.ValidatingType = typeof(int);
+            this.Inc4.TextChanged += new System.EventHandler(this.Inc4_TextChanged);
             // 
             // Ntc4
             // 
             this.Ntc4.HidePromptOnLeave = true;
-            this.Ntc4.Location = new System.Drawing.Point(399, 249);
+            this.Ntc4.Location = new System.Drawing.Point(449, 253);
             this.Ntc4.Mask = "00000";
             this.Ntc4.Name = "Ntc4";
-            this.Ntc4.Size = new System.Drawing.Size(53, 20);
+            this.Ntc4.Size = new System.Drawing.Size(45, 20);
             this.Ntc4.TabIndex = 50;
             this.Ntc4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.Ntc4, "Valores Permitidos de 4400 a 20000");
             this.Ntc4.ValidatingType = typeof(int);
+            this.Ntc4.TextChanged += new System.EventHandler(this.Ntc4_TextChanged);
             // 
             // I5min
             // 
             this.I5min.HidePromptOnLeave = true;
-            this.I5min.Location = new System.Drawing.Point(172, 276);
+            this.I5min.Location = new System.Drawing.Point(230, 280);
             this.I5min.Mask = "000";
             this.I5min.Name = "I5min";
             this.I5min.Size = new System.Drawing.Size(51, 20);
             this.I5min.TabIndex = 51;
             this.I5min.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.I5min.ValidatingType = typeof(int);
+            this.I5min.TextChanged += new System.EventHandler(this.I5min_TextChanged);
             // 
             // I5max
             // 
             this.I5max.HidePromptOnLeave = true;
-            this.I5max.Location = new System.Drawing.Point(251, 275);
+            this.I5max.Location = new System.Drawing.Point(306, 279);
             this.I5max.Mask = "000";
             this.I5max.Name = "I5max";
             this.I5max.Size = new System.Drawing.Size(50, 20);
             this.I5max.TabIndex = 52;
             this.I5max.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.I5max.ValidatingType = typeof(int);
+            this.I5max.TextChanged += new System.EventHandler(this.I5max_TextChanged);
             // 
             // Inc5
             // 
             this.Inc5.HidePromptOnLeave = true;
-            this.Inc5.Location = new System.Drawing.Point(326, 274);
-            this.Inc5.Mask = "000";
+            this.Inc5.Location = new System.Drawing.Point(383, 279);
+            this.Inc5.Mask = "0";
             this.Inc5.Name = "Inc5";
             this.Inc5.Size = new System.Drawing.Size(52, 20);
             this.Inc5.TabIndex = 53;
             this.Inc5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Inc5.ValidatingType = typeof(int);
+            this.Inc5.TextChanged += new System.EventHandler(this.Inc5_TextChanged);
             // 
             // Ntc5
             // 
             this.Ntc5.HidePromptOnLeave = true;
-            this.Ntc5.Location = new System.Drawing.Point(399, 275);
+            this.Ntc5.Location = new System.Drawing.Point(449, 279);
             this.Ntc5.Mask = "00000";
             this.Ntc5.Name = "Ntc5";
-            this.Ntc5.Size = new System.Drawing.Size(53, 20);
+            this.Ntc5.Size = new System.Drawing.Size(45, 20);
             this.Ntc5.TabIndex = 54;
             this.Ntc5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.toolTip1.SetToolTip(this.Ntc5, "Valores Permitidos de 4400 a 20000");
             this.Ntc5.ValidatingType = typeof(int);
+            this.Ntc5.TextChanged += new System.EventHandler(this.Ntc5_TextChanged);
             // 
             // Iniciar
             // 
-            this.Iniciar.Location = new System.Drawing.Point(535, 193);
+            this.Iniciar.Enabled = false;
+            this.Iniciar.Location = new System.Drawing.Point(585, 192);
             this.Iniciar.Name = "Iniciar";
-            this.Iniciar.Size = new System.Drawing.Size(75, 23);
+            this.Iniciar.Size = new System.Drawing.Size(46, 23);
             this.Iniciar.TabIndex = 65;
             this.Iniciar.Text = "Iniciar";
             this.Iniciar.UseVisualStyleBackColor = true;
@@ -469,9 +510,9 @@
             // Parar
             // 
             this.Parar.Enabled = false;
-            this.Parar.Location = new System.Drawing.Point(535, 227);
+            this.Parar.Location = new System.Drawing.Point(585, 224);
             this.Parar.Name = "Parar";
-            this.Parar.Size = new System.Drawing.Size(75, 23);
+            this.Parar.Size = new System.Drawing.Size(46, 23);
             this.Parar.TabIndex = 66;
             this.Parar.Text = "Parar";
             this.Parar.UseVisualStyleBackColor = true;
@@ -509,66 +550,73 @@
             this.btnIncrement.TabIndex = 69;
             this.btnIncrement.Text = "button1";
             this.btnIncrement.UseVisualStyleBackColor = true;
+            this.btnIncrement.Visible = false;
             this.btnIncrement.Click += new System.EventHandler(this.btnIncrement_Click_1);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(94, 155);
+            this.label6.Location = new System.Drawing.Point(162, 143);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(45, 13);
             this.label6.TabIndex = 70;
             this.label6.Text = "Laser Id";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // name5txt
             // 
             this.name5txt.Enabled = false;
-            this.name5txt.Location = new System.Drawing.Point(87, 275);
+            this.name5txt.Location = new System.Drawing.Point(153, 279);
             this.name5txt.MaxLength = 10;
             this.name5txt.Name = "name5txt";
             this.name5txt.Size = new System.Drawing.Size(62, 20);
             this.name5txt.TabIndex = 71;
             this.name5txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.name5txt.TextChanged += new System.EventHandler(this.name5txt_TextChanged);
             // 
             // name4txt
             // 
             this.name4txt.Enabled = false;
-            this.name4txt.Location = new System.Drawing.Point(87, 252);
+            this.name4txt.Location = new System.Drawing.Point(153, 256);
             this.name4txt.MaxLength = 10;
             this.name4txt.Name = "name4txt";
             this.name4txt.Size = new System.Drawing.Size(62, 20);
             this.name4txt.TabIndex = 72;
             this.name4txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.name4txt.TextChanged += new System.EventHandler(this.name4txt_TextChanged);
             // 
             // name3txt
             // 
             this.name3txt.Enabled = false;
-            this.name3txt.Location = new System.Drawing.Point(87, 222);
+            this.name3txt.Location = new System.Drawing.Point(153, 226);
             this.name3txt.MaxLength = 10;
             this.name3txt.Name = "name3txt";
             this.name3txt.Size = new System.Drawing.Size(62, 20);
             this.name3txt.TabIndex = 73;
             this.name3txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.name3txt.TextChanged += new System.EventHandler(this.name3txt_TextChanged);
             // 
             // name2txt
             // 
             this.name2txt.Enabled = false;
-            this.name2txt.Location = new System.Drawing.Point(87, 196);
+            this.name2txt.Location = new System.Drawing.Point(153, 200);
             this.name2txt.MaxLength = 10;
             this.name2txt.Name = "name2txt";
             this.name2txt.Size = new System.Drawing.Size(62, 20);
             this.name2txt.TabIndex = 74;
             this.name2txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.name2txt.TextChanged += new System.EventHandler(this.name2txt_TextChanged);
             // 
             // name1txt
             // 
             this.name1txt.Enabled = false;
-            this.name1txt.Location = new System.Drawing.Point(87, 171);
+            this.name1txt.Location = new System.Drawing.Point(153, 175);
             this.name1txt.MaxLength = 10;
             this.name1txt.Name = "name1txt";
             this.name1txt.Size = new System.Drawing.Size(62, 20);
             this.name1txt.TabIndex = 75;
             this.name1txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.name1txt.TextChanged += new System.EventHandler(this.name1txt_TextChanged);
             // 
             // toolTip1
             // 
@@ -581,19 +629,19 @@
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.button1.Location = new System.Drawing.Point(456, 152);
+            this.button1.Location = new System.Drawing.Point(479, 87);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(17, 16);
             this.button1.TabIndex = 77;
             this.button1.Text = "I";
-            this.toolTip1.SetToolTip(this.button1, "Range de Valores: 4000 Ω-10000Ω");
+            this.toolTip1.SetToolTip(this.button1, "Range de Valores: 4400 Ω-20000Ω");
             this.button1.UseVisualStyleBackColor = false;
             // 
             // txtTempFinal1
             // 
             this.txtTempFinal1.Enabled = false;
-            this.txtTempFinal1.Location = new System.Drawing.Point(462, 169);
+            this.txtTempFinal1.Location = new System.Drawing.Point(508, 174);
             this.txtTempFinal1.Margin = new System.Windows.Forms.Padding(2);
             this.txtTempFinal1.Name = "txtTempFinal1";
             this.txtTempFinal1.Size = new System.Drawing.Size(68, 20);
@@ -602,7 +650,7 @@
             // txtTempFinal2
             // 
             this.txtTempFinal2.Enabled = false;
-            this.txtTempFinal2.Location = new System.Drawing.Point(462, 199);
+            this.txtTempFinal2.Location = new System.Drawing.Point(508, 201);
             this.txtTempFinal2.Margin = new System.Windows.Forms.Padding(2);
             this.txtTempFinal2.Name = "txtTempFinal2";
             this.txtTempFinal2.Size = new System.Drawing.Size(68, 20);
@@ -611,7 +659,7 @@
             // txtTempFinal3
             // 
             this.txtTempFinal3.Enabled = false;
-            this.txtTempFinal3.Location = new System.Drawing.Point(462, 230);
+            this.txtTempFinal3.Location = new System.Drawing.Point(508, 227);
             this.txtTempFinal3.Margin = new System.Windows.Forms.Padding(2);
             this.txtTempFinal3.Name = "txtTempFinal3";
             this.txtTempFinal3.Size = new System.Drawing.Size(68, 20);
@@ -620,7 +668,7 @@
             // txtTempFinal4
             // 
             this.txtTempFinal4.Enabled = false;
-            this.txtTempFinal4.Location = new System.Drawing.Point(462, 252);
+            this.txtTempFinal4.Location = new System.Drawing.Point(508, 253);
             this.txtTempFinal4.Margin = new System.Windows.Forms.Padding(2);
             this.txtTempFinal4.Name = "txtTempFinal4";
             this.txtTempFinal4.Size = new System.Drawing.Size(68, 20);
@@ -629,7 +677,7 @@
             // txtTempFinal5
             // 
             this.txtTempFinal5.Enabled = false;
-            this.txtTempFinal5.Location = new System.Drawing.Point(462, 278);
+            this.txtTempFinal5.Location = new System.Drawing.Point(508, 279);
             this.txtTempFinal5.Margin = new System.Windows.Forms.Padding(2);
             this.txtTempFinal5.Name = "txtTempFinal5";
             this.txtTempFinal5.Size = new System.Drawing.Size(68, 20);
@@ -638,27 +686,19 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(476, 154);
+            this.label7.Location = new System.Drawing.Point(515, 143);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(51, 13);
             this.label7.TabIndex = 83;
             this.label7.Text = "Temp(C°)";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(64, 321);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 84;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(148, 92);
+            this.label5.Location = new System.Drawing.Point(146, 64);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(276, 26);
             this.label5.TabIndex = 55;
@@ -670,12 +710,91 @@
             this.USBCom.VendorId = 0;
             this.USBCom.OnSpecifiedDeviceArrived += new System.EventHandler(this.USBCom_OnSpecifiedDeviceArrived);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // errorProvider2
+            // 
+            this.errorProvider2.ContainerControl = this;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(50, 143);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(62, 13);
+            this.label8.TabIndex = 84;
+            this.label8.Text = "Laser Index";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
+            // 
+            // lbl1Index
+            // 
+            this.lbl1Index.AutoSize = true;
+            this.lbl1Index.Location = new System.Drawing.Point(70, 176);
+            this.lbl1Index.Name = "lbl1Index";
+            this.lbl1Index.Size = new System.Drawing.Size(13, 13);
+            this.lbl1Index.TabIndex = 85;
+            this.lbl1Index.Text = "1";
+            // 
+            // lbl2Index
+            // 
+            this.lbl2Index.AutoSize = true;
+            this.lbl2Index.Location = new System.Drawing.Point(70, 201);
+            this.lbl2Index.Name = "lbl2Index";
+            this.lbl2Index.Size = new System.Drawing.Size(13, 13);
+            this.lbl2Index.TabIndex = 86;
+            this.lbl2Index.Text = "2";
+            // 
+            // lbl3Index
+            // 
+            this.lbl3Index.AutoSize = true;
+            this.lbl3Index.Location = new System.Drawing.Point(70, 233);
+            this.lbl3Index.Name = "lbl3Index";
+            this.lbl3Index.Size = new System.Drawing.Size(13, 13);
+            this.lbl3Index.TabIndex = 87;
+            this.lbl3Index.Text = "3";
+            // 
+            // lbl4Index
+            // 
+            this.lbl4Index.AutoSize = true;
+            this.lbl4Index.Location = new System.Drawing.Point(70, 257);
+            this.lbl4Index.Name = "lbl4Index";
+            this.lbl4Index.Size = new System.Drawing.Size(13, 13);
+            this.lbl4Index.TabIndex = 88;
+            this.lbl4Index.Text = "4";
+            // 
+            // lbl5Index
+            // 
+            this.lbl5Index.AutoSize = true;
+            this.lbl5Index.Location = new System.Drawing.Point(70, 283);
+            this.lbl5Index.Name = "lbl5Index";
+            this.lbl5Index.Size = new System.Drawing.Size(13, 13);
+            this.lbl5Index.TabIndex = 89;
+            this.lbl5Index.Text = "5";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(114, 143);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(34, 13);
+            this.label9.TabIndex = 90;
+            this.label9.Text = "Ativar";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(643, 368);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.lbl5Index);
+            this.Controls.Add(this.lbl4Index);
+            this.Controls.Add(this.lbl3Index);
+            this.Controls.Add(this.lbl2Index);
+            this.Controls.Add(this.lbl1Index);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtTempFinal5);
             this.Controls.Add(this.txtTempFinal4);
@@ -724,15 +843,20 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainScreen";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Text = "MCA Administrador";
+            this.Text = "MCA Configurator";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -799,10 +923,18 @@
         private System.Windows.Forms.TextBox txtTempFinal4;
         private System.Windows.Forms.TextBox txtTempFinal5;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.Windows.Forms.Label label5;
         private UsbLibrary.UsbHidPort USBCom;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ErrorProvider errorProvider2;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lbl3Index;
+        private System.Windows.Forms.Label lbl2Index;
+        private System.Windows.Forms.Label lbl1Index;
+        private System.Windows.Forms.Label lbl5Index;
+        private System.Windows.Forms.Label lbl4Index;
+        private System.Windows.Forms.Label label9;
     }
 }
 

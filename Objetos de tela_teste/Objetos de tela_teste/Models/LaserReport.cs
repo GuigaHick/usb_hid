@@ -5,11 +5,11 @@ namespace Objetos_de_tela_teste.Models
 {
     public class LaserReport
     {
-        public uint NtcReal { get;  set; } //Ntc
+        public uint NTCreal { get;  set; } //Ntc
 
-        public uint FinalSignal { get; set; } // Sing Out
+        public uint SgnOut { get; set; } // Sing Out
 
-        public uint Signal { get;  set; } // Sign In
+        public uint SgnIn { get;  set; } // Sign In
 
         public float Current { get;  set; } // Corrent Real
 
@@ -17,51 +17,32 @@ namespace Objetos_de_tela_teste.Models
         {
             Console.WriteLine($"datacout: {data.Count()}");
             Console.WriteLine($"data8: {data[8]}");
-            //int adc0;
-            //adc0 = (int)Convert.ToInt32(data[1]) << 8;
-            //adc0 += (int)Convert.ToInt32(data[2]);
+          
+            byte[] SgnOut = new byte[2];
+            Array.Copy(data, 1, SgnOut, 0, 2);
 
-            //this.Signal = (adc0 * 2048) / 1023;
-            //this.FinalSignal = ; //Sign Out[0,1]
-            //this.Current = data[5] + ((float)data[6] / 10);
+            byte[] SgnIn = new byte[2];
+            Array.Copy(data, 3, SgnIn, 0, 2);
 
-            //this.Temperature = data[3] + ((float)data[4] / 10);
+            byte[] Current = new byte[2];
+            Array.Copy(data, 5, Current, 0, 2);
 
-            //int adc0;
-            //adc0 = (int)Convert.ToInt32(data[1]) << 8;
-            //adc0 += (int)Convert.ToInt32(data[2]);
-
-            //this.Signal = (adc0 * 2048) / 1023;
+            byte[] NtcReal = new byte[2];
+            Array.Copy(data, 7, NtcReal, 0, 2);
 
 
+            this.SgnOut = BitConverter.ToUInt16(SgnOut, 0);
 
-            byte[] signOut = new byte[2];
-            Array.Copy(data, 1, signOut, 0, 2);
-
-            byte[] signIn = new byte[2];
-            Array.Copy(data, 3, signIn, 0, 2);
-
-            byte[] ntcIn = new byte[2];
-            Array.Copy(data, 7, ntcIn, 0, 2);
-
-            if(BitConverter.IsLittleEndian)
-            {
-                signOut.Reverse();
-                signIn.Reverse();
-                ntcIn.Reverse();
-            }
-
-            this.FinalSignal = BitConverter.ToUInt16(signOut, 0);
-
-            this.Signal = BitConverter.ToUInt16(signIn, 0);
+            this.SgnIn = BitConverter.ToUInt16(SgnIn, 0);
 
             this.Current = data[5] + ((float)data[6] / 10);
 
-            this.NtcReal = BitConverter.ToUInt16(ntcIn, 0);
+            this.NTCreal = BitConverter.ToUInt16(NtcReal, 0);
             
-            Console.WriteLine($"Sign Out: {signOut[0]} {signOut[1]}");
-            Console.WriteLine($"Sign In: {signIn[0]} {signIn[1]}");
-            Console.WriteLine($"tcreal: {ntcIn[0]} {ntcIn[1]}");
+            Console.WriteLine($"Sign Out: {SgnOut[0]} {SgnOut[1]}");
+            Console.WriteLine($"Sign In: {SgnIn[0]} {SgnIn[1]}");
+            Console.WriteLine($"Current: {Current[0]} {Current[1]}");
+            Console.WriteLine($"NTCreal: {NtcReal[0]} {NtcReal[1]}");
         }
     }
 }

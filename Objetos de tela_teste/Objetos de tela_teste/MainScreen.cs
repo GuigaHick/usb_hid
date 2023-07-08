@@ -1,5 +1,6 @@
 ﻿using Objetos_de_tela_teste.Models;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Threading;
@@ -110,6 +111,7 @@ namespace Objetos_de_tela_teste
                 I1max.Enabled = true;
                 Inc1.Enabled = true;
                 Ntc1.Enabled = true;
+                ValidateInputs();
             }
 
             else
@@ -119,6 +121,7 @@ namespace Objetos_de_tela_teste
                 I1max.Enabled = false;
                 Inc1.Enabled = false;
                 Ntc1.Enabled = false;
+                ValidateInputs();
             }
         }
 
@@ -131,6 +134,7 @@ namespace Objetos_de_tela_teste
                 I2max.Enabled = true;
                 Inc2.Enabled = true;
                 Ntc2.Enabled = true;
+                ValidateInputs();
             }
 
             else
@@ -140,6 +144,7 @@ namespace Objetos_de_tela_teste
                 I2max.Enabled = false;
                 Inc2.Enabled = false;
                 Ntc2.Enabled = false;
+                ValidateInputs();
             }
         }
 
@@ -152,6 +157,7 @@ namespace Objetos_de_tela_teste
                 I3max.Enabled = true;
                 Inc3.Enabled = true;
                 Ntc3.Enabled = true;
+                ValidateInputs();
             }
 
             else
@@ -161,6 +167,7 @@ namespace Objetos_de_tela_teste
                 I3max.Enabled = false;
                 Inc3.Enabled = false;
                 Ntc3.Enabled = false;
+                ValidateInputs();
             }
         }
 
@@ -173,6 +180,7 @@ namespace Objetos_de_tela_teste
                 I4max.Enabled = true;
                 Inc4.Enabled = true;
                 Ntc4.Enabled = true;
+                ValidateInputs();
             }
 
             else
@@ -182,6 +190,7 @@ namespace Objetos_de_tela_teste
                 I4max.Enabled = false;
                 Inc4.Enabled = false;
                 Ntc4.Enabled = false;
+                ValidateInputs();
             }
         }
 
@@ -194,6 +203,7 @@ namespace Objetos_de_tela_teste
                 I5max.Enabled = true;
                 Inc5.Enabled = true;
                 Ntc5.Enabled = true;
+                ValidateInputs();
             }
 
             else
@@ -203,6 +213,7 @@ namespace Objetos_de_tela_teste
                 I5max.Enabled = false;
                 Inc5.Enabled = false;
                 Ntc5.Enabled = false;
+                ValidateInputs();
             }
         }
 
@@ -469,10 +480,10 @@ namespace Objetos_de_tela_teste
                             //Arq.WriteLine($"{laser.Name}   {laser.DesiredNTC:0.0#}    {report.Current:0.0#}    {report.Signal} {report.FinalSignal:0.0#}  ", nf);
                             Arq.WriteLine(String.Format("{0,-10} | {1,-6} | {2,6} | {3, 10} | {4, 10}",
                                 laser.Name,
-                                report.NtcReal,
+                                report.NTCreal,
                                 report.Current,
-                                report.Signal,
-                                report.FinalSignal,
+                                report.SgnIn,
+                                report.SgnOut,
                                 nf));
                         }
                         Arq.WriteLine("----------------------------------------------------");
@@ -501,7 +512,7 @@ namespace Objetos_de_tela_teste
 
         private void btnIncrement_Click_1(object sender, EventArgs e)
         {
-            OnLaserReportReceived(new byte[] { 0x00, 0x01, 0x18, 0x00, 0x3a, 0x09, 0x01, 0x01 });//Just to test   
+            OnLaserReportReceived(new byte[] { 0x00, 0x01, 0x18, 0x00, 0x3a, 0x09, 0x01, 0x01, 0x00 });//Just to test   
         }
 
         private void Parar_Click(object sender, EventArgs e)
@@ -510,50 +521,286 @@ namespace Objetos_de_tela_teste
             experiment.Stop();
         }
 
-        //private void open_Click(object sender, EventArgs e)
-        //{
-        //    if (string.Empty.Equals(serialPortName.Text))
-        //    {
-        //        MessageBox.Show("Need a port name to Open.");
-        //        return;
-        //    }
+        private void I1max_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+        }
 
-        //    if (port == null)
-        //    {
-        //        CreateSerialPort();
-        //    }
-        //}
 
-        //private void refresh_Click(object sender, EventArgs e)
-        //{
-        //    ShowSerialPorts();
-        //}
+        private bool ValidateIMax(Control control, int value)
+        {
+            bool result = false;
+            if (value > 110)
+            {
+                errorProvider1.SetError(control, "Corrente máxima permitida: 110mA");
+            }
+            else
+            {
+                errorProvider1.SetError(control, string.Empty);
+                result = true;
+            }
 
-        //private void CloseSerialPort()
-        //{
-        //    try
-        //    {
-        //        if (port != null && port.IsOpen)
-        //        {
-        //            port.Close();
-        //        }
-        //        port = null;
-        //    }
-        //    catch (IOException)
-        //    {
-        //        // don't need user to do anything
-        //    }
+            return result;
+        }
 
-        //    close.Enabled = false;
-        //    open.Enabled = true;
-        //    refresh.Enabled = true;
-        //    serialPortName.Enabled = true;
-        //    baudRate.Enabled = true;
-        //}
+        private bool ValidateNtc(Control control, int value)
+        {
+            bool result = false;
+            if (value < 4400 | value > 20000)
+            {
+                errorProvider1.SetError(control, "Valores de NTC devem estar entre 4400 e 20000");
+            }
+            else
+            {
+                errorProvider1.SetError(control, string.Empty);
+                result = true;
+            }
 
-        //private void close_Click(object sender, EventArgs e)
-        //{
-        //    CloseSerialPort();
-        //}
+            return result;
+        }
+
+        private void Ntc1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+        }
+
+
+        private void ValidateInputs()
+        {
+            List<bool> activeValidations = new List<bool>();
+
+            if (checkLaser1.Checked) 
+            { 
+                var validateResult = ValidateLaserFields(name1txt, I1min, I1max, Inc1, Ntc1);
+                activeValidations.Add(validateResult);
+            }
+            if(checkLaser2.Checked)
+            {
+                var validateResult = ValidateLaserFields(name2txt, I2min, I2max, Inc2, Ntc2);
+                activeValidations.Add(validateResult);
+            }
+            if (checkLaser3.Checked)
+            {
+                var validateResult = ValidateLaserFields(name3txt, I3min, I3max, Inc3, Ntc3);
+                activeValidations.Add(validateResult);
+            }
+            if (checkLaser4.Checked)
+            {
+                var validateResult = ValidateLaserFields(name4txt, I4min, I4max, Inc4, Ntc4);
+                activeValidations.Add(validateResult);
+            }
+            if (checkLaser5.Checked)
+            {
+                var validateResult = ValidateLaserFields(name5txt, I5min, I5max, Inc5, Ntc5);
+                activeValidations.Add(validateResult);
+            }
+
+            var finResult = activeValidations.Contains(false);
+            var result = !finResult;
+
+            Iniciar.Enabled = result;
+        }
+
+        private void I1max_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void Ntc1_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void name1txt_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void I1min_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void Inc1_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private bool ValidateLaserFields(Control name, Control iMin, Control iMax, Control increment, Control Ntc)
+        {
+            bool laserValidationResult = false;
+            bool validateIMax = false;
+            bool validateNtc = false;
+            bool validateLaserName = false;
+            bool validateIncrement = false;
+            bool validateIMin = false;
+            if (!string.IsNullOrEmpty(iMax.Text))
+            {
+                validateIMax = ValidateIMax(iMax, int.Parse(iMax.Text));
+            }
+
+            if (!string.IsNullOrEmpty(Ntc.Text))
+            {
+                validateNtc = ValidateNtc(Ntc, int.Parse(Ntc.Text));
+            }
+
+            validateLaserName = !string.IsNullOrWhiteSpace(name.Text);
+            validateIMin = !string.IsNullOrWhiteSpace(iMin.Text);
+            validateIncrement = !string.IsNullOrWhiteSpace(increment.Text);
+
+            if (validateIMax && validateNtc && validateLaserName && validateIncrement && validateIMin)
+            {
+                laserValidationResult = true;
+            }
+            else
+            {
+                laserValidationResult = false;
+            }
+
+            return laserValidationResult;
+        }
+
+        private void name2txt_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void I2min_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void I2max_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void Inc2_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void Ntc2_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void name3txt_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void I3min_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void I3max_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void Inc3_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void Ntc3_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void name4txt_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void I4min_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void I4max_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void Inc4_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void Ntc4_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void name5txt_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void I5min_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void I5max_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void Inc5_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void Ntc5_TextChanged(object sender, EventArgs e)
+        {
+            ValidateInputs();
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
