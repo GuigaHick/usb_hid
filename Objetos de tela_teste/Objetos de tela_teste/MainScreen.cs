@@ -642,13 +642,17 @@ namespace Objetos_de_tela_teste
                 validateIMax = ValidateIMax(iMax, int.Parse(iMax.Text));
             }
 
+            if (!string.IsNullOrEmpty(iMin.Text))
+            {
+                validateIMin = ValidateIMax(iMin, int.Parse(iMin.Text));
+            }
+
             if (!string.IsNullOrEmpty(Ntc.Text))
             {
                 validateNtc = ValidateNtc(Ntc, int.Parse(Ntc.Text));
             }
 
             validateLaserName = !string.IsNullOrWhiteSpace(name.Text);
-            validateIMin = !string.IsNullOrWhiteSpace(iMin.Text);
             validateIncrement = !string.IsNullOrWhiteSpace(increment.Text);
 
             if (validateIMax && validateNtc && validateLaserName && validateIncrement && validateIMin)

@@ -78,7 +78,6 @@
             this.name2txt = new System.Windows.Forms.TextBox();
             this.name1txt = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.txtTempFinal1 = new System.Windows.Forms.TextBox();
             this.txtTempFinal2 = new System.Windows.Forms.TextBox();
             this.txtTempFinal3 = new System.Windows.Forms.TextBox();
@@ -566,7 +565,7 @@
             // name5txt
             // 
             this.name5txt.Enabled = false;
-            this.name5txt.Location = new System.Drawing.Point(153, 279);
+            this.name5txt.Location = new System.Drawing.Point(153, 280);
             this.name5txt.MaxLength = 10;
             this.name5txt.Name = "name5txt";
             this.name5txt.Size = new System.Drawing.Size(62, 20);
@@ -577,7 +576,7 @@
             // name4txt
             // 
             this.name4txt.Enabled = false;
-            this.name4txt.Location = new System.Drawing.Point(153, 256);
+            this.name4txt.Location = new System.Drawing.Point(153, 255);
             this.name4txt.MaxLength = 10;
             this.name4txt.Name = "name4txt";
             this.name4txt.Size = new System.Drawing.Size(62, 20);
@@ -588,7 +587,7 @@
             // name3txt
             // 
             this.name3txt.Enabled = false;
-            this.name3txt.Location = new System.Drawing.Point(153, 226);
+            this.name3txt.Location = new System.Drawing.Point(153, 227);
             this.name3txt.MaxLength = 10;
             this.name3txt.Name = "name3txt";
             this.name3txt.Size = new System.Drawing.Size(62, 20);
@@ -599,7 +598,7 @@
             // name2txt
             // 
             this.name2txt.Enabled = false;
-            this.name2txt.Location = new System.Drawing.Point(153, 200);
+            this.name2txt.Location = new System.Drawing.Point(153, 201);
             this.name2txt.MaxLength = 10;
             this.name2txt.Name = "name2txt";
             this.name2txt.Size = new System.Drawing.Size(62, 20);
@@ -623,20 +622,6 @@
             this.toolTip1.IsBalloon = true;
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Range de Valores";
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.SystemColors.MenuText;
-            this.button1.Location = new System.Drawing.Point(479, 87);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(17, 16);
-            this.button1.TabIndex = 77;
-            this.button1.Text = "I";
-            this.toolTip1.SetToolTip(this.button1, "Range de Valores: 4400 Ω-20000Ω");
-            this.button1.UseVisualStyleBackColor = false;
             // 
             // txtTempFinal1
             // 
@@ -801,7 +786,6 @@
             this.Controls.Add(this.txtTempFinal3);
             this.Controls.Add(this.txtTempFinal2);
             this.Controls.Add(this.txtTempFinal1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.name1txt);
             this.Controls.Add(this.name2txt);
             this.Controls.Add(this.name3txt);
@@ -916,7 +900,6 @@
         private System.Windows.Forms.TextBox name2txt;
         private System.Windows.Forms.TextBox name1txt;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtTempFinal1;
         private System.Windows.Forms.TextBox txtTempFinal2;
         private System.Windows.Forms.TextBox txtTempFinal3;
