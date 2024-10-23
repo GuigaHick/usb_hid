@@ -21,7 +21,7 @@ namespace Objetos_de_tela_teste
 
             I1min.Enabled = false;
             I1max.Enabled = false;
-            Inc1.Enabled = false;
+            cbInc1.Enabled = false;
             Ntc1.Enabled = false;
             I2min.Enabled = false;
             I2max.Enabled = false;
@@ -41,6 +41,7 @@ namespace Objetos_de_tela_teste
             Ntc5.Enabled = false;
 
             USBCom.OnDataRecieved += new UsbLibrary.DataRecievedEventHandler(USBCom_OnDataReceived);
+            this.cbInc1.DataSource = new float[] { 0.5f, 1, 5 };
         }
 
         private void Port_ErrorReceived(object sender, System.IO.Ports.SerialErrorReceivedEventArgs e)
@@ -109,7 +110,7 @@ namespace Objetos_de_tela_teste
                 name1txt.Enabled = true;
                 I1min.Enabled = true;
                 I1max.Enabled = true;
-                Inc1.Enabled = true;
+                cbInc1.Enabled = true;
                 Ntc1.Enabled = true;
                 ValidateInputs();
             }
@@ -119,7 +120,7 @@ namespace Objetos_de_tela_teste
                 name1txt.Enabled = false;
                 I1min.Enabled = false;
                 I1max.Enabled = false;
-                Inc1.Enabled = false;
+                cbInc1.Enabled = false;
                 Ntc1.Enabled = false;
                 ValidateInputs();
             }
@@ -231,12 +232,18 @@ namespace Objetos_de_tela_teste
             if (checkLaser1.Checked)
             {
                 currentLaser = 0;
+                
                 LaserConfigRequest laser1ConfigRequest = new LaserConfigRequest();
                 laser1ConfigRequest.Name = name1txt.Text;
                 laser1ConfigRequest.ID = 1;
-                laser1ConfigRequest.MinPowerCurrent = Convert.ToByte(I1min.Text);
-                laser1ConfigRequest.MaxPowerCurrent = Convert.ToByte(I1max.Text);
-                laser1ConfigRequest.Increment = Convert.ToByte(Inc1.Text);
+                laser1ConfigRequest.MinPowerCurrent = Convert.ToByte(2 * int.Parse(I1min.Text));
+                laser1ConfigRequest.MaxPowerCurrent = Convert.ToByte(2 * int.Parse(I1max.Text));
+
+                cbInc1.Invoke((Action)delegate
+                {
+                    laser1ConfigRequest.Increment = Convert.ToByte(2 * (float.Parse(cbInc1.SelectedValue.ToString())));
+                });
+
                 laser1ConfigRequest.DesiredNtc = Convert.ToInt16(Ntc1.Text);
                 var temp = laser1ConfigRequest.ConvertedTemperature;
                 txtTempFinal1.Invoke((Action)delegate
@@ -569,7 +576,7 @@ namespace Objetos_de_tela_teste
 
             if (checkLaser1.Checked) 
             { 
-                var validateResult = ValidateLaserFields(name1txt, I1min, I1max, Inc1, Ntc1);
+                var validateResult = ValidateLaserFields(name1txt, I1min, I1max, cbInc1, Ntc1);
                 activeValidations.Add(validateResult);
             }
             if(checkLaser2.Checked)
@@ -807,4 +814,5 @@ namespace Objetos_de_tela_teste
 
         }
     }
+
 }

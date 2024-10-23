@@ -47,7 +47,6 @@
             this.checkLaser5 = new System.Windows.Forms.CheckBox();
             this.I1min = new System.Windows.Forms.MaskedTextBox();
             this.I1max = new System.Windows.Forms.MaskedTextBox();
-            this.Inc1 = new System.Windows.Forms.MaskedTextBox();
             this.Ntc1 = new System.Windows.Forms.MaskedTextBox();
             this.I2min = new System.Windows.Forms.MaskedTextBox();
             this.I2max = new System.Windows.Forms.MaskedTextBox();
@@ -96,6 +95,7 @@
             this.lbl4Index = new System.Windows.Forms.Label();
             this.lbl5Index = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.cbInc1 = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -271,19 +271,6 @@
             this.I1max.ValidatingType = typeof(int);
             this.I1max.TextChanged += new System.EventHandler(this.I1max_TextChanged);
             this.I1max.Validating += new System.ComponentModel.CancelEventHandler(this.I1max_Validating);
-            // 
-            // Inc1
-            // 
-            this.Inc1.HidePromptOnLeave = true;
-            this.Inc1.Location = new System.Drawing.Point(383, 175);
-            this.Inc1.Mask = "0";
-            this.Inc1.Name = "Inc1";
-            this.Inc1.Size = new System.Drawing.Size(52, 20);
-            this.Inc1.TabIndex = 37;
-            this.Inc1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.toolTip1.SetToolTip(this.Inc1, "Increment Should be");
-            this.Inc1.ValidatingType = typeof(int);
-            this.Inc1.TextChanged += new System.EventHandler(this.Inc1_TextChanged);
             // 
             // Ntc1
             // 
@@ -768,11 +755,20 @@
             this.label9.Text = "Ativar";
             this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
+            // cbInc1
+            // 
+            this.cbInc1.FormattingEnabled = true;
+            this.cbInc1.Location = new System.Drawing.Point(383, 173);
+            this.cbInc1.Name = "cbInc1";
+            this.cbInc1.Size = new System.Drawing.Size(52, 21);
+            this.cbInc1.TabIndex = 91;
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(643, 368);
+            this.Controls.Add(this.cbInc1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.lbl5Index);
             this.Controls.Add(this.lbl4Index);
@@ -814,7 +810,6 @@
             this.Controls.Add(this.I2max);
             this.Controls.Add(this.I2min);
             this.Controls.Add(this.Ntc1);
-            this.Controls.Add(this.Inc1);
             this.Controls.Add(this.I1max);
             this.Controls.Add(this.I1min);
             this.Controls.Add(this.checkLaser5);
@@ -866,7 +861,6 @@
         private System.Windows.Forms.CheckBox checkLaser5;
         private System.Windows.Forms.MaskedTextBox I1min;
         private System.Windows.Forms.MaskedTextBox I1max;
-        private System.Windows.Forms.MaskedTextBox Inc1;
         private System.Windows.Forms.MaskedTextBox Ntc1;
         private System.Windows.Forms.MaskedTextBox I2min;
         private System.Windows.Forms.MaskedTextBox I2max;
@@ -918,6 +912,7 @@
         private System.Windows.Forms.Label lbl5Index;
         private System.Windows.Forms.Label lbl4Index;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cbInc1;
     }
 }
 
