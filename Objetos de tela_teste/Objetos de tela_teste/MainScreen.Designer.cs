@@ -50,19 +50,15 @@
             this.Ntc1 = new System.Windows.Forms.MaskedTextBox();
             this.I2min = new System.Windows.Forms.MaskedTextBox();
             this.I2max = new System.Windows.Forms.MaskedTextBox();
-            this.Inc2 = new System.Windows.Forms.MaskedTextBox();
             this.Ntc2 = new System.Windows.Forms.MaskedTextBox();
             this.I3min = new System.Windows.Forms.MaskedTextBox();
             this.I3max = new System.Windows.Forms.MaskedTextBox();
-            this.Inc3 = new System.Windows.Forms.MaskedTextBox();
             this.Ntc3 = new System.Windows.Forms.MaskedTextBox();
             this.I4min = new System.Windows.Forms.MaskedTextBox();
             this.I4max = new System.Windows.Forms.MaskedTextBox();
-            this.Inc4 = new System.Windows.Forms.MaskedTextBox();
             this.Ntc4 = new System.Windows.Forms.MaskedTextBox();
             this.I5min = new System.Windows.Forms.MaskedTextBox();
             this.I5max = new System.Windows.Forms.MaskedTextBox();
-            this.Inc5 = new System.Windows.Forms.MaskedTextBox();
             this.Ntc5 = new System.Windows.Forms.MaskedTextBox();
             this.Iniciar = new System.Windows.Forms.Button();
             this.Parar = new System.Windows.Forms.Button();
@@ -95,7 +91,11 @@
             this.lbl4Index = new System.Windows.Forms.Label();
             this.lbl5Index = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.cbInc1 = new System.Windows.Forms.ComboBox();
+            this.CbInc1 = new System.Windows.Forms.ComboBox();
+            this.CbInc2 = new System.Windows.Forms.ComboBox();
+            this.CbInc3 = new System.Windows.Forms.ComboBox();
+            this.CbInc4 = new System.Windows.Forms.ComboBox();
+            this.CbInc5 = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -310,18 +310,6 @@
             this.I2max.ValidatingType = typeof(int);
             this.I2max.TextChanged += new System.EventHandler(this.I2max_TextChanged);
             // 
-            // Inc2
-            // 
-            this.Inc2.HidePromptOnLeave = true;
-            this.Inc2.Location = new System.Drawing.Point(383, 201);
-            this.Inc2.Mask = "0";
-            this.Inc2.Name = "Inc2";
-            this.Inc2.Size = new System.Drawing.Size(52, 20);
-            this.Inc2.TabIndex = 41;
-            this.Inc2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Inc2.ValidatingType = typeof(int);
-            this.Inc2.TextChanged += new System.EventHandler(this.Inc2_TextChanged);
-            // 
             // Ntc2
             // 
             this.Ntc2.HidePromptOnLeave = true;
@@ -358,18 +346,6 @@
             this.I3max.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.I3max.ValidatingType = typeof(int);
             this.I3max.TextChanged += new System.EventHandler(this.I3max_TextChanged);
-            // 
-            // Inc3
-            // 
-            this.Inc3.HidePromptOnLeave = true;
-            this.Inc3.Location = new System.Drawing.Point(383, 227);
-            this.Inc3.Mask = "0";
-            this.Inc3.Name = "Inc3";
-            this.Inc3.Size = new System.Drawing.Size(52, 20);
-            this.Inc3.TabIndex = 45;
-            this.Inc3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Inc3.ValidatingType = typeof(int);
-            this.Inc3.TextChanged += new System.EventHandler(this.Inc3_TextChanged);
             // 
             // Ntc3
             // 
@@ -408,18 +384,6 @@
             this.I4max.ValidatingType = typeof(int);
             this.I4max.TextChanged += new System.EventHandler(this.I4max_TextChanged);
             // 
-            // Inc4
-            // 
-            this.Inc4.HidePromptOnLeave = true;
-            this.Inc4.Location = new System.Drawing.Point(383, 253);
-            this.Inc4.Mask = "0";
-            this.Inc4.Name = "Inc4";
-            this.Inc4.Size = new System.Drawing.Size(52, 20);
-            this.Inc4.TabIndex = 49;
-            this.Inc4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Inc4.ValidatingType = typeof(int);
-            this.Inc4.TextChanged += new System.EventHandler(this.Inc4_TextChanged);
-            // 
             // Ntc4
             // 
             this.Ntc4.HidePromptOnLeave = true;
@@ -456,18 +420,6 @@
             this.I5max.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.I5max.ValidatingType = typeof(int);
             this.I5max.TextChanged += new System.EventHandler(this.I5max_TextChanged);
-            // 
-            // Inc5
-            // 
-            this.Inc5.HidePromptOnLeave = true;
-            this.Inc5.Location = new System.Drawing.Point(383, 279);
-            this.Inc5.Mask = "0";
-            this.Inc5.Name = "Inc5";
-            this.Inc5.Size = new System.Drawing.Size(52, 20);
-            this.Inc5.TabIndex = 53;
-            this.Inc5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Inc5.ValidatingType = typeof(int);
-            this.Inc5.TextChanged += new System.EventHandler(this.Inc5_TextChanged);
             // 
             // Ntc5
             // 
@@ -757,18 +709,54 @@
             // 
             // cbInc1
             // 
-            this.cbInc1.FormattingEnabled = true;
-            this.cbInc1.Location = new System.Drawing.Point(383, 173);
-            this.cbInc1.Name = "cbInc1";
-            this.cbInc1.Size = new System.Drawing.Size(52, 21);
-            this.cbInc1.TabIndex = 91;
+            this.CbInc1.FormattingEnabled = true;
+            this.CbInc1.Location = new System.Drawing.Point(383, 178);
+            this.CbInc1.Name = "cbInc1";
+            this.CbInc1.Size = new System.Drawing.Size(52, 21);
+            this.CbInc1.TabIndex = 91;
+            // 
+            // cbInc2
+            // 
+            this.CbInc2.FormattingEnabled = true;
+            this.CbInc2.Location = new System.Drawing.Point(383, 202);
+            this.CbInc2.Name = "cbInc2";
+            this.CbInc2.Size = new System.Drawing.Size(52, 21);
+            this.CbInc2.TabIndex = 92;
+            // 
+            // cbInc3
+            // 
+            this.CbInc3.FormattingEnabled = true;
+            this.CbInc3.Location = new System.Drawing.Point(383, 229);
+            this.CbInc3.Name = "cbInc3";
+            this.CbInc3.Size = new System.Drawing.Size(52, 21);
+            this.CbInc3.TabIndex = 93;
+            // 
+            // cbInc4
+            // 
+            this.CbInc4.FormattingEnabled = true;
+            this.CbInc4.Location = new System.Drawing.Point(383, 253);
+            this.CbInc4.Name = "cbInc4";
+            this.CbInc4.Size = new System.Drawing.Size(52, 21);
+            this.CbInc4.TabIndex = 94;
+            // 
+            // cbInc5
+            // 
+            this.CbInc5.FormattingEnabled = true;
+            this.CbInc5.Location = new System.Drawing.Point(383, 280);
+            this.CbInc5.Name = "cbInc5";
+            this.CbInc5.Size = new System.Drawing.Size(52, 21);
+            this.CbInc5.TabIndex = 95;
             // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(643, 368);
-            this.Controls.Add(this.cbInc1);
+            this.Controls.Add(this.CbInc5);
+            this.Controls.Add(this.CbInc4);
+            this.Controls.Add(this.CbInc3);
+            this.Controls.Add(this.CbInc2);
+            this.Controls.Add(this.CbInc1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.lbl5Index);
             this.Controls.Add(this.lbl4Index);
@@ -794,19 +782,15 @@
             this.Controls.Add(this.Iniciar);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.Ntc5);
-            this.Controls.Add(this.Inc5);
             this.Controls.Add(this.I5max);
             this.Controls.Add(this.I5min);
             this.Controls.Add(this.Ntc4);
-            this.Controls.Add(this.Inc4);
             this.Controls.Add(this.I4max);
             this.Controls.Add(this.I4min);
             this.Controls.Add(this.Ntc3);
-            this.Controls.Add(this.Inc3);
             this.Controls.Add(this.I3max);
             this.Controls.Add(this.I3min);
             this.Controls.Add(this.Ntc2);
-            this.Controls.Add(this.Inc2);
             this.Controls.Add(this.I2max);
             this.Controls.Add(this.I2min);
             this.Controls.Add(this.Ntc1);
@@ -864,19 +848,15 @@
         private System.Windows.Forms.MaskedTextBox Ntc1;
         private System.Windows.Forms.MaskedTextBox I2min;
         private System.Windows.Forms.MaskedTextBox I2max;
-        private System.Windows.Forms.MaskedTextBox Inc2;
         private System.Windows.Forms.MaskedTextBox Ntc2;
         private System.Windows.Forms.MaskedTextBox I3min;
         private System.Windows.Forms.MaskedTextBox I3max;
-        private System.Windows.Forms.MaskedTextBox Inc3;
         private System.Windows.Forms.MaskedTextBox Ntc3;
         private System.Windows.Forms.MaskedTextBox I4min;
         private System.Windows.Forms.MaskedTextBox I4max;
-        private System.Windows.Forms.MaskedTextBox Inc4;
         private System.Windows.Forms.MaskedTextBox Ntc4;
         private System.Windows.Forms.MaskedTextBox I5min;
         private System.Windows.Forms.MaskedTextBox I5max;
-        private System.Windows.Forms.MaskedTextBox Inc5;
         private System.Windows.Forms.MaskedTextBox Ntc5;
         private System.Windows.Forms.Button Iniciar;
         private System.Windows.Forms.Button Parar;
@@ -912,7 +892,11 @@
         private System.Windows.Forms.Label lbl5Index;
         private System.Windows.Forms.Label lbl4Index;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox cbInc1;
+        private System.Windows.Forms.ComboBox CbInc1;
+        private System.Windows.Forms.ComboBox CbInc5;
+        private System.Windows.Forms.ComboBox CbInc4;
+        private System.Windows.Forms.ComboBox CbInc3;
+        private System.Windows.Forms.ComboBox CbInc2;
     }
 }
 

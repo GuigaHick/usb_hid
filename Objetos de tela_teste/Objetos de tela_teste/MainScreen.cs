@@ -21,27 +21,32 @@ namespace Objetos_de_tela_teste
 
             I1min.Enabled = false;
             I1max.Enabled = false;
-            cbInc1.Enabled = false;
+            CbInc1.Enabled = false;
             Ntc1.Enabled = false;
             I2min.Enabled = false;
             I2max.Enabled = false;
-            Inc2.Enabled = false;
+            CbInc2.Enabled = false;
             Ntc2.Enabled = false;
             I3min.Enabled = false;
             I3max.Enabled = false;
-            Inc3.Enabled = false;
+            CbInc3.Enabled = false;
             Ntc3.Enabled = false;
             I4min.Enabled = false;
             I4max.Enabled = false;
-            Inc4.Enabled = false;
+            CbInc4.Enabled = false;
             Ntc4.Enabled = false;
             I5min.Enabled = false;
             I5max.Enabled = false;
-            Inc5.Enabled = false;
+            CbInc5.Enabled = false;
             Ntc5.Enabled = false;
 
             USBCom.OnDataRecieved += new UsbLibrary.DataRecievedEventHandler(USBCom_OnDataReceived);
-            this.cbInc1.DataSource = new float[] { 0.5f, 1, 5 };
+            var currentIncrementOptions = new float[] { 0.5f, 1, 5 };
+            this.CbInc1.DataSource = currentIncrementOptions;
+            this.CbInc2.DataSource = currentIncrementOptions;
+            this.CbInc3.DataSource = currentIncrementOptions;
+            this.CbInc4.DataSource = currentIncrementOptions;
+            this.CbInc5.DataSource = currentIncrementOptions;
         }
 
         private void Port_ErrorReceived(object sender, System.IO.Ports.SerialErrorReceivedEventArgs e)
@@ -110,7 +115,7 @@ namespace Objetos_de_tela_teste
                 name1txt.Enabled = true;
                 I1min.Enabled = true;
                 I1max.Enabled = true;
-                cbInc1.Enabled = true;
+                CbInc1.Enabled = true;
                 Ntc1.Enabled = true;
                 ValidateInputs();
             }
@@ -120,7 +125,7 @@ namespace Objetos_de_tela_teste
                 name1txt.Enabled = false;
                 I1min.Enabled = false;
                 I1max.Enabled = false;
-                cbInc1.Enabled = false;
+                CbInc1.Enabled = false;
                 Ntc1.Enabled = false;
                 ValidateInputs();
             }
@@ -133,7 +138,7 @@ namespace Objetos_de_tela_teste
                 name2txt.Enabled = true;
                 I2min.Enabled = true;
                 I2max.Enabled = true;
-                Inc2.Enabled = true;
+                CbInc2.Enabled = true;
                 Ntc2.Enabled = true;
                 ValidateInputs();
             }
@@ -143,7 +148,7 @@ namespace Objetos_de_tela_teste
                 name2txt.Enabled = false;
                 I2min.Enabled = false;
                 I2max.Enabled = false;
-                Inc2.Enabled = false;
+                CbInc2.Enabled = false;
                 Ntc2.Enabled = false;
                 ValidateInputs();
             }
@@ -156,7 +161,7 @@ namespace Objetos_de_tela_teste
                 name3txt.Enabled = true;
                 I3min.Enabled = true;
                 I3max.Enabled = true;
-                Inc3.Enabled = true;
+                CbInc3.Enabled = true;
                 Ntc3.Enabled = true;
                 ValidateInputs();
             }
@@ -166,7 +171,7 @@ namespace Objetos_de_tela_teste
                 name3txt.Enabled = false;
                 I3min.Enabled = false;
                 I3max.Enabled = false;
-                Inc3.Enabled = false;
+                CbInc3.Enabled = false;
                 Ntc3.Enabled = false;
                 ValidateInputs();
             }
@@ -179,7 +184,7 @@ namespace Objetos_de_tela_teste
                 name4txt.Enabled = true;
                 I4min.Enabled = true;
                 I4max.Enabled = true;
-                Inc4.Enabled = true;
+                CbInc4.Enabled = true;
                 Ntc4.Enabled = true;
                 ValidateInputs();
             }
@@ -189,7 +194,7 @@ namespace Objetos_de_tela_teste
                 name4txt.Enabled = false;
                 I4min.Enabled = false;
                 I4max.Enabled = false;
-                Inc4.Enabled = false;
+                CbInc4.Enabled = false;   
                 Ntc4.Enabled = false;
                 ValidateInputs();
             }
@@ -202,7 +207,7 @@ namespace Objetos_de_tela_teste
                 name5txt.Enabled = true;
                 I5min.Enabled = true;
                 I5max.Enabled = true;
-                Inc5.Enabled = true;
+                CbInc5.Enabled = true;
                 Ntc5.Enabled = true;
                 ValidateInputs();
             }
@@ -212,7 +217,7 @@ namespace Objetos_de_tela_teste
                 name5txt.Enabled = false;
                 I5min.Enabled = false;
                 I5max.Enabled = false;
-                Inc5.Enabled = false;
+                CbInc5.Enabled = false;
                 Ntc5.Enabled = false;
                 ValidateInputs();
             }
@@ -236,12 +241,12 @@ namespace Objetos_de_tela_teste
                 LaserConfigRequest laser1ConfigRequest = new LaserConfigRequest();
                 laser1ConfigRequest.Name = name1txt.Text;
                 laser1ConfigRequest.ID = 1;
-                laser1ConfigRequest.MinPowerCurrent = Convert.ToByte(2 * int.Parse(I1min.Text));
-                laser1ConfigRequest.MaxPowerCurrent = Convert.ToByte(2 * int.Parse(I1max.Text));
+                laser1ConfigRequest.MinPowerCurrent = GetConvertedTemperatureFromString(I1min.Text);
+                laser1ConfigRequest.MaxPowerCurrent = GetConvertedTemperatureFromString(I1max.Text);
 
-                cbInc1.Invoke((Action)delegate
+                CbInc1.Invoke((Action)delegate
                 {
-                    laser1ConfigRequest.Increment = Convert.ToByte(2 * (float.Parse(cbInc1.SelectedValue.ToString())));
+                    laser1ConfigRequest.Increment = GetConvertedTemperatureFromFloatString(CbInc1.SelectedValue.ToString());
                 });
 
                 laser1ConfigRequest.DesiredNtc = Convert.ToInt16(Ntc1.Text);
@@ -271,11 +276,16 @@ namespace Objetos_de_tela_teste
                 LaserConfigRequest laser2ConfigRequest = new LaserConfigRequest();
                 laser2ConfigRequest.Name = name2txt.Text;
                 laser2ConfigRequest.ID = 2;
-                laser2ConfigRequest.MinPowerCurrent = Convert.ToByte(I2min.Text);
-                laser2ConfigRequest.MaxPowerCurrent = Convert.ToByte(I2max.Text);
-                laser2ConfigRequest.Increment = Convert.ToByte(Inc2.Text);
+                laser2ConfigRequest.MinPowerCurrent = GetConvertedTemperatureFromString(I2min.Text);
+                laser2ConfigRequest.MaxPowerCurrent = GetConvertedTemperatureFromString(I2max.Text);
                 laser2ConfigRequest.DesiredNtc = Convert.ToInt16(Ntc2.Text);
                 var temp = laser2ConfigRequest.ConvertedTemperature;
+
+                CbInc2.Invoke((Action)delegate
+                {
+                    laser2ConfigRequest.Increment = GetConvertedTemperatureFromFloatString(CbInc2.SelectedValue.ToString());
+                });
+
                 txtTempFinal2.Invoke((Action)delegate
                 {
 
@@ -301,11 +311,15 @@ namespace Objetos_de_tela_teste
                 LaserConfigRequest laser3ConfigRequest = new LaserConfigRequest();
                 laser3ConfigRequest.Name = name3txt.Text;
                 laser3ConfigRequest.ID = 3;
-                laser3ConfigRequest.MinPowerCurrent = Convert.ToByte(I3min.Text);
-                laser3ConfigRequest.MaxPowerCurrent = Convert.ToByte(I3max.Text);
-                laser3ConfigRequest.Increment = Convert.ToByte(Inc3.Text);
+                laser3ConfigRequest.MinPowerCurrent = GetConvertedTemperatureFromString(I3min.Text);
+                laser3ConfigRequest.MaxPowerCurrent = GetConvertedTemperatureFromString(I3max.Text);
                 laser3ConfigRequest.DesiredNtc = Convert.ToInt16(Ntc3.Text);
                 var temp = laser3ConfigRequest.ConvertedTemperature;
+
+                CbInc3.Invoke((Action)delegate
+                {
+                    laser3ConfigRequest.Increment = GetConvertedTemperatureFromFloatString(CbInc3.SelectedValue.ToString());
+                });
                 txtTempFinal3.Invoke((Action)delegate
                 {
 
@@ -331,11 +345,15 @@ namespace Objetos_de_tela_teste
                 LaserConfigRequest laser4ConfigRequest = new LaserConfigRequest();
                 laser4ConfigRequest.Name = name4txt.Text;
                 laser4ConfigRequest.ID = 4;
-                laser4ConfigRequest.MinPowerCurrent = Convert.ToByte(I4min.Text);
-                laser4ConfigRequest.MaxPowerCurrent = Convert.ToByte(I4max.Text);
-                laser4ConfigRequest.Increment = Convert.ToByte(Inc4.Text);
+                laser4ConfigRequest.MinPowerCurrent = GetConvertedTemperatureFromString(I4min.Text);
+                laser4ConfigRequest.MaxPowerCurrent = GetConvertedTemperatureFromString(I4max.Text);
                 laser4ConfigRequest.DesiredNtc = Convert.ToInt16(Ntc4.Text);
                 var temp = laser4ConfigRequest.ConvertedTemperature;
+
+                CbInc4.Invoke((Action)delegate
+                {
+                    laser4ConfigRequest.Increment = GetConvertedTemperatureFromFloatString(CbInc4.SelectedValue.ToString());
+                });
                 txtTempFinal4.Invoke((Action)delegate
                 {
 
@@ -361,11 +379,16 @@ namespace Objetos_de_tela_teste
                 LaserConfigRequest laser5ConfigRequest = new LaserConfigRequest();
                 laser5ConfigRequest.Name = name5txt.Text;
                 laser5ConfigRequest.ID = 5;
-                laser5ConfigRequest.MinPowerCurrent = Convert.ToByte(I5min.Text);
-                laser5ConfigRequest.MaxPowerCurrent = Convert.ToByte(I5max.Text);
-                laser5ConfigRequest.Increment = Convert.ToByte(Inc5.Text);
+                laser5ConfigRequest.MinPowerCurrent = GetConvertedTemperatureFromString(I5min.Text);
+                laser5ConfigRequest.MaxPowerCurrent = GetConvertedTemperatureFromString(I5max.Text);
                 laser5ConfigRequest.DesiredNtc = Convert.ToInt16(Ntc5.Text);
                 var temp = laser5ConfigRequest.ConvertedTemperature;
+
+                CbInc5.Invoke((Action)delegate
+                {
+                    laser5ConfigRequest.Increment = GetConvertedTemperatureFromFloatString(CbInc5.SelectedValue.ToString());
+                });
+
                 txtTempFinal5.Invoke((Action)delegate
                 {
                     txtTempFinal5.Text = temp.ToString("0.0#");
@@ -576,27 +599,27 @@ namespace Objetos_de_tela_teste
 
             if (checkLaser1.Checked) 
             { 
-                var validateResult = ValidateLaserFields(name1txt, I1min, I1max, cbInc1, Ntc1);
+                var validateResult = ValidateLaserFields(name1txt, I1min, I1max, CbInc1, Ntc1);
                 activeValidations.Add(validateResult);
             }
             if(checkLaser2.Checked)
             {
-                var validateResult = ValidateLaserFields(name2txt, I2min, I2max, Inc2, Ntc2);
+                var validateResult = ValidateLaserFields(name2txt, I2min, I2max, CbInc2, Ntc2);
                 activeValidations.Add(validateResult);
             }
             if (checkLaser3.Checked)
             {
-                var validateResult = ValidateLaserFields(name3txt, I3min, I3max, Inc3, Ntc3);
+                var validateResult = ValidateLaserFields(name3txt, I3min, I3max, CbInc3, Ntc3);
                 activeValidations.Add(validateResult);
             }
             if (checkLaser4.Checked)
             {
-                var validateResult = ValidateLaserFields(name4txt, I4min, I4max, Inc4, Ntc4);
+                var validateResult = ValidateLaserFields(name4txt, I4min, I4max, CbInc4, Ntc4);
                 activeValidations.Add(validateResult);
             }
             if (checkLaser5.Checked)
             {
-                var validateResult = ValidateLaserFields(name5txt, I5min, I5max, Inc5, Ntc5);
+                var validateResult = ValidateLaserFields(name5txt, I5min, I5max, CbInc5, Ntc5);
                 activeValidations.Add(validateResult);
             }
 
@@ -812,6 +835,16 @@ namespace Objetos_de_tela_teste
         private void label7_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private byte GetConvertedTemperatureFromString(string value)
+        {
+            return Convert.ToByte(2 * int.Parse(value));
+        }
+
+        private byte GetConvertedTemperatureFromFloatString(string value)
+        {
+            return Convert.ToByte(2 * float.Parse(value));
         }
     }
 
