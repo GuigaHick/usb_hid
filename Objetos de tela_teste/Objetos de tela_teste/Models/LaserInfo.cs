@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.IO.Ports;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Objetos_de_tela_teste.Models
 {
@@ -27,10 +24,30 @@ namespace Objetos_de_tela_teste.Models
 
         public List<LaserReport> reports { get; set; }
 
+        public LaserProcessState ProcessState { get; set; } = LaserProcessState.Idle;
+
         public LaserInfo()
         {
             this.ProcessFinishedEvent = new AutoResetEvent(false);
             this.reports = new List<LaserReport>();
         }
+
+        public void StopProcess()
+        {
+            this.ProcessState = LaserProcessState.Stopped; this.ProcessFinishedEvent.Set();
+        }
+
+        public void RunProcess()
+        {
+            this.ProcessState = LaserProcessState.Running;
+        }
+    }
+
+    public enum LaserProcessState
+    {
+        Running,
+        Stopped,
+        Finished,
+        Idle
     }
 }

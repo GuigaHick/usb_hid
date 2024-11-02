@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Objetos_de_tela_teste.Models
 {
@@ -23,7 +20,24 @@ namespace Objetos_de_tela_teste.Models
         {
             foreach (var laser in lasers)
             {
+                
                 laser.reports.Clear();
+            }
+        }
+
+        internal void Run()
+        {
+            foreach (var laser in lasers)
+            {
+                laser.RunProcess();
+            }
+        }
+
+        internal void Stop()
+        {
+            foreach (var laser in lasers)
+            {
+                laser.StopProcess();
             }
         }
     }
