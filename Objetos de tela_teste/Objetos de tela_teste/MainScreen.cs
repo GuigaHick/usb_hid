@@ -1,4 +1,5 @@
 ﻿using Objetos_de_tela_teste.Models;
+using Objetos_de_tela_teste.Utils;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -15,10 +16,13 @@ namespace Objetos_de_tela_teste
 
         private int currentLaser = -1; //means no active laser
 
+        OperationMode operationMode = OperationMode.Current;
+
         public MainScreen()
         {
             InitializeComponent();
 
+            #region Current Componentes Initialization
             I1min.Enabled = false;
             I1max.Enabled = false;
             CbInc1.Enabled = false;
@@ -40,26 +44,51 @@ namespace Objetos_de_tela_teste
             CbInc5.Enabled = false;
             Ntc5.Enabled = false;
 
-            USBCom.OnDataRecieved += new UsbLibrary.DataRecievedEventHandler(USBCom_OnDataReceived);
             var currentIncrementOptions = new float[] { 0.5f, 1, 5 };
+
             this.CbInc1.DataSource = currentIncrementOptions;
             this.CbInc2.DataSource = currentIncrementOptions;
             this.CbInc3.DataSource = currentIncrementOptions;
             this.CbInc4.DataSource = currentIncrementOptions;
             this.CbInc5.DataSource = currentIncrementOptions;
-        }
 
-        private void Port_ErrorReceived(object sender, System.IO.Ports.SerialErrorReceivedEventArgs e)
-        {
-            MessageBox.Show(e.ToString());
-        }
+            #endregion
 
-        private void Port_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
-        {
-            //throw new NotImplementedException();
-            //byte[] data = new byte[port.BytesToRead];
-            //int readLength = port.Read(data, 0, data.Length);
-            //OnLaserReportReceived(data);
+            #region Tempeature Components Initialization
+            Ntc1Min.Enabled = false;
+            Ntc1max.Enabled = false;
+            cbNtc1Inc.Enabled = false;
+            Iop1.Enabled = false;
+            Ntc2min.Enabled = false;
+            Ntc2max.Enabled = false;
+            cbNtc2Inc.Enabled = false;
+            Iop2.Enabled = false;
+            Ntc3min.Enabled = false;
+            Ntc3max.Enabled = false;
+            cbNtc3Inc.Enabled = false;
+            Iop3.Enabled = false;
+            Ntc4min.Enabled = false;
+            Ntc4max.Enabled = false;
+            cbNtc4Inc.Enabled = false;
+            Iop4.Enabled = false;
+            Ntc5min.Enabled = false;
+            Ntc5max.Enabled = false;
+            cbNtc5Inc.Enabled = false;
+
+            Iop5.Enabled = false;
+            var ntcIncrementOptions = new int[] { 20, 40, 100 };
+            this.cbNtc1Inc.DataSource = ntcIncrementOptions;
+            this.cbNtc2Inc.DataSource = ntcIncrementOptions;
+            this.cbNtc3Inc.DataSource = ntcIncrementOptions;
+            this.cbNtc4Inc.DataSource = ntcIncrementOptions;
+            this.cbNtc5Inc.DataSource = ntcIncrementOptions;
+
+            gbTemperatura.Enabled = false;
+
+            #endregion
+
+
+            USBCom.OnDataRecieved += new UsbLibrary.DataRecievedEventHandler(USBCom_OnDataReceived);
         }
 
         public void USBCom_OnDataReceived(object sender, UsbLibrary.DataRecievedEventArgs args)
@@ -234,224 +263,265 @@ namespace Objetos_de_tela_teste
         {
             experiment.EraseData();// Erase Data of last experiment
             experiment.Run();
-            if (checkLaser1.Checked)
-            {
-                currentLaser = 0;
-                
-                LaserConfigRequest laser1ConfigRequest = new LaserConfigRequest();
-                laser1ConfigRequest.Name = name1txt.Text;
-                laser1ConfigRequest.ID = 1;
-                laser1ConfigRequest.MinPowerCurrent = GetConvertedTemperatureFromString(I1min.Text);
-                laser1ConfigRequest.MaxPowerCurrent = GetConvertedTemperatureFromString(I1max.Text);
-
-                CbInc1.Invoke((Action)delegate
+            if (this.operationMode == OperationMode.Current)
+            { 
+                if (checkLaser1.Checked)
                 {
-                    laser1ConfigRequest.Increment = GetConvertedTemperatureFromFloatString(CbInc1.SelectedValue.ToString());
-                });
+                    currentLaser = 0;
 
-                laser1ConfigRequest.DesiredNtc = Convert.ToInt16(Ntc1.Text);
-                var temp = laser1ConfigRequest.ConvertedTemperature;
+                    LaserConfigRequest laser1ConfigRequest = new LaserConfigRequest();
+                    laser1ConfigRequest.Name = name1txt.Text;
+                    laser1ConfigRequest.ID = 1;
+                    laser1ConfigRequest.MinPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(I1min.Text);
+                    laser1ConfigRequest.MaxPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(I1max.Text);
+
+                    CbInc1.Invoke((Action)delegate
+                    {
+                        laser1ConfigRequest.Increment = ConversionUtils.GetConvertedTemperatureFromFloatString(CbInc1.SelectedValue.ToString());
+                    });
+
+                    laser1ConfigRequest.NTC = Convert.ToInt16(Ntc1.Text);
+                    var temp = laser1ConfigRequest.ConvertedTemperature;
+                    txtTempFinal1.Invoke((Action)delegate
+                    {
+
+                        txtTempFinal1.Text = temp.ToString("0.0#");
+
+                    });
+
+                    experiment.lasers[0].Name = laser1ConfigRequest.Name;
+                    experiment.lasers[0].ID = 1; //It is the laser ID
+                    experiment.lasers[0].Current = laser1ConfigRequest.MinPowerCurrent; //min value of current
+                    experiment.lasers[0].DesiredCurrent = laser1ConfigRequest.MaxPowerCurrent;//max value of current
+                    experiment.lasers[0].NTC = laser1ConfigRequest.NTC; //target temperature
+                    experiment.lasers[0].InitialRequest = laser1ConfigRequest;//Saving first request to storage on specified laser
+
+                    byte[] dataToSend = laser1ConfigRequest.GetByteArray();//Get byte array that represents config request that will be sent to laser
+                    SendUSBData(dataToSend);//Sending data to laser1
+                    experiment.lasers[0].ProcessFinishedEvent.WaitOne();//Lock program and wait for "singal" to continue
+                }
+
+                if (checkLaser2.Checked)
+                {
+                    currentLaser = 1;
+                    LaserConfigRequest laser2ConfigRequest = new LaserConfigRequest();
+                    laser2ConfigRequest.Name = name2txt.Text;
+                    laser2ConfigRequest.ID = 2;
+                    laser2ConfigRequest.MinPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(I2min.Text);
+                    laser2ConfigRequest.MaxPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(I2max.Text);
+                    laser2ConfigRequest.NTC = Convert.ToInt16(Ntc2.Text);
+                    var temp = laser2ConfigRequest.ConvertedTemperature;
+
+                    CbInc2.Invoke((Action)delegate
+                    {
+                        laser2ConfigRequest.Increment = ConversionUtils.GetConvertedTemperatureFromFloatString(CbInc2.SelectedValue.ToString());
+                    });
+
+                    txtTempFinal2.Invoke((Action)delegate
+                    {
+
+                        txtTempFinal2.Text = temp.ToString("0.0#");
+
+                    });
+
+                    experiment.lasers[1].Name = laser2ConfigRequest.Name;
+                    experiment.lasers[1].ID = 2;
+                    experiment.lasers[1].Current = laser2ConfigRequest.MinPowerCurrent;
+                    experiment.lasers[1].DesiredCurrent = laser2ConfigRequest.MaxPowerCurrent;
+                    experiment.lasers[1].NTC = laser2ConfigRequest.NTC;
+                    experiment.lasers[1].InitialRequest = laser2ConfigRequest;
+
+                    byte[] dataToSend = laser2ConfigRequest.GetByteArray();
+                    SendUSBData(dataToSend);
+                    experiment.lasers[1].ProcessFinishedEvent.WaitOne();
+                }
+
+                if (checkLaser3.Checked)
+                {
+                    currentLaser = 2;
+                    LaserConfigRequest laser3ConfigRequest = new LaserConfigRequest();
+                    laser3ConfigRequest.Name = name3txt.Text;
+                    laser3ConfigRequest.ID = 3;
+                    laser3ConfigRequest.MinPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(I3min.Text);
+                    laser3ConfigRequest.MaxPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(I3max.Text);
+                    laser3ConfigRequest.NTC = Convert.ToInt16(Ntc3.Text);
+                    var temp = laser3ConfigRequest.ConvertedTemperature;
+
+                    CbInc3.Invoke((Action)delegate
+                    {
+                        laser3ConfigRequest.Increment = ConversionUtils.GetConvertedTemperatureFromFloatString(CbInc3.SelectedValue.ToString());
+                    });
+                    txtTempFinal3.Invoke((Action)delegate
+                    {
+
+                        txtTempFinal3.Text = temp.ToString("0.0#");
+
+                    });
+
+                    experiment.lasers[2].Name = laser3ConfigRequest.Name;
+                    experiment.lasers[2].ID = 3;
+                    experiment.lasers[2].Current = laser3ConfigRequest.MinPowerCurrent;
+                    experiment.lasers[2].DesiredCurrent = laser3ConfigRequest.MaxPowerCurrent;
+                    experiment.lasers[2].NTC = laser3ConfigRequest.NTC;
+                    experiment.lasers[2].InitialRequest = laser3ConfigRequest;
+
+                    byte[] dataToSend = laser3ConfigRequest.GetByteArray();
+                    SendUSBData(dataToSend);
+                    experiment.lasers[2].ProcessFinishedEvent.WaitOne();
+                }
+
+                if (checkLaser4.Checked)
+                {
+                    currentLaser = 3;
+                    LaserConfigRequest laser4ConfigRequest = new LaserConfigRequest();
+                    laser4ConfigRequest.Name = name4txt.Text;
+                    laser4ConfigRequest.ID = 4;
+                    laser4ConfigRequest.MinPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(I4min.Text);
+                    laser4ConfigRequest.MaxPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(I4max.Text);
+                    laser4ConfigRequest.NTC = Convert.ToInt16(Ntc4.Text);
+                    var temp = laser4ConfigRequest.ConvertedTemperature;
+
+                    CbInc4.Invoke((Action)delegate
+                    {
+                        laser4ConfigRequest.Increment = ConversionUtils.GetConvertedTemperatureFromFloatString(CbInc4.SelectedValue.ToString());
+                    });
+                    txtTempFinal4.Invoke((Action)delegate
+                    {
+
+                        txtTempFinal4.Text = temp.ToString("0.0#");
+
+                    });
+
+                    experiment.lasers[3].Name = laser4ConfigRequest.Name;
+                    experiment.lasers[3].ID = 4;
+                    experiment.lasers[3].Current = laser4ConfigRequest.MinPowerCurrent;
+                    experiment.lasers[3].DesiredCurrent = laser4ConfigRequest.MaxPowerCurrent;
+                    experiment.lasers[3].NTC = laser4ConfigRequest.NTC;
+                    experiment.lasers[3].InitialRequest = laser4ConfigRequest;
+
+                    byte[] dataToSend = laser4ConfigRequest.GetByteArray();
+                    SendUSBData(dataToSend);
+                    experiment.lasers[3].ProcessFinishedEvent.WaitOne();
+                }
+
+                if (checkLaser5.Checked)
+                {
+                    currentLaser = 4;
+                    LaserConfigRequest laser5ConfigRequest = new LaserConfigRequest();
+                    laser5ConfigRequest.Name = name5txt.Text;
+                    laser5ConfigRequest.ID = 5;
+                    laser5ConfigRequest.MinPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(I5min.Text);
+                    laser5ConfigRequest.MaxPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(I5max.Text);
+                    laser5ConfigRequest.NTC = Convert.ToInt16(Ntc5.Text);
+                    var temp = laser5ConfigRequest.ConvertedTemperature;
+
+                    CbInc5.Invoke((Action)delegate
+                    {
+                        laser5ConfigRequest.Increment = ConversionUtils.GetConvertedTemperatureFromFloatString(CbInc5.SelectedValue.ToString());
+                    });
+
+                    txtTempFinal5.Invoke((Action)delegate
+                    {
+                        txtTempFinal5.Text = temp.ToString("0.0#");
+
+                    });
+
+                    experiment.lasers[4].Name = laser5ConfigRequest.Name;
+                    experiment.lasers[4].ID = 5;
+                    experiment.lasers[4].Current = laser5ConfigRequest.MinPowerCurrent;
+                    experiment.lasers[4].DesiredCurrent = laser5ConfigRequest.MaxPowerCurrent;
+                    experiment.lasers[4].NTC = laser5ConfigRequest.NTC;
+                    experiment.lasers[4].InitialRequest = laser5ConfigRequest;
+
+                    byte[] dataToSend = laser5ConfigRequest.GetByteArray();
+                    SendUSBData(dataToSend);
+                    experiment.lasers[4].ProcessFinishedEvent.WaitOne();
+                }
+
+
+                Iniciar.Invoke(new Action(() =>
+                {
+                    Iniciar.Enabled = true;
+                }));
+
+                Parar.Invoke(new Action(() =>
+                {
+                    Parar.Enabled = false;
+                }));
+
+                LaserConfigRequest finalConfigRequest = new LaserConfigRequest();
+                SendUSBData(finalConfigRequest.GetByteArray());// sending last and empty message
+                currentLaser = -1;// back to non existent laser
+                MessageBox.Show("Finished All tests");
                 txtTempFinal1.Invoke((Action)delegate
                 {
-
-                    txtTempFinal1.Text = temp.ToString("0.0#");
+                    txtTempFinal1.Text = string.Empty;
 
                 });
-
-                experiment.lasers[0].Name = laser1ConfigRequest.Name;
-                experiment.lasers[0].ID = 1; //It is the laser ID
-                experiment.lasers[0].Current = laser1ConfigRequest.MinPowerCurrent; //min value of current
-                experiment.lasers[0].DesiredCurrent = laser1ConfigRequest.MaxPowerCurrent;//max value of current
-                experiment.lasers[0].DesiredNTC = laser1ConfigRequest.DesiredNtc; //target temperature
-                experiment.lasers[0].InitialRequest = laser1ConfigRequest;//Saving first request to storage on specified laser
-
-                byte[] dataToSend = laser1ConfigRequest.GetByteArray();//Get byte array that represents config request that will be sent to laser
-                SendUSBData(dataToSend);//Sending data to laser1
-                experiment.lasers[0].ProcessFinishedEvent.WaitOne();//Lock program and wait for "singal" to continue
-            }
-
-            if (checkLaser2.Checked)
-            {
-                currentLaser = 1;
-                LaserConfigRequest laser2ConfigRequest = new LaserConfigRequest();
-                laser2ConfigRequest.Name = name2txt.Text;
-                laser2ConfigRequest.ID = 2;
-                laser2ConfigRequest.MinPowerCurrent = GetConvertedTemperatureFromString(I2min.Text);
-                laser2ConfigRequest.MaxPowerCurrent = GetConvertedTemperatureFromString(I2max.Text);
-                laser2ConfigRequest.DesiredNtc = Convert.ToInt16(Ntc2.Text);
-                var temp = laser2ConfigRequest.ConvertedTemperature;
-
-                CbInc2.Invoke((Action)delegate
-                {
-                    laser2ConfigRequest.Increment = GetConvertedTemperatureFromFloatString(CbInc2.SelectedValue.ToString());
-                });
-
                 txtTempFinal2.Invoke((Action)delegate
                 {
 
-                    txtTempFinal2.Text = temp.ToString("0.0#");
+                    txtTempFinal2.Text = string.Empty;
 
-                });
-
-                experiment.lasers[1].Name = laser2ConfigRequest.Name;
-                experiment.lasers[1].ID = 2;
-                experiment.lasers[1].Current = laser2ConfigRequest.MinPowerCurrent;
-                experiment.lasers[1].DesiredCurrent = laser2ConfigRequest.MaxPowerCurrent;
-                experiment.lasers[1].DesiredNTC = laser2ConfigRequest.DesiredNtc;
-                experiment.lasers[1].InitialRequest = laser2ConfigRequest;
-
-                byte[] dataToSend = laser2ConfigRequest.GetByteArray();
-                SendUSBData(dataToSend);
-                experiment.lasers[1].ProcessFinishedEvent.WaitOne();
-            }
-
-            if (checkLaser3.Checked)
-            {
-                currentLaser = 2;
-                LaserConfigRequest laser3ConfigRequest = new LaserConfigRequest();
-                laser3ConfigRequest.Name = name3txt.Text;
-                laser3ConfigRequest.ID = 3;
-                laser3ConfigRequest.MinPowerCurrent = GetConvertedTemperatureFromString(I3min.Text);
-                laser3ConfigRequest.MaxPowerCurrent = GetConvertedTemperatureFromString(I3max.Text);
-                laser3ConfigRequest.DesiredNtc = Convert.ToInt16(Ntc3.Text);
-                var temp = laser3ConfigRequest.ConvertedTemperature;
-
-                CbInc3.Invoke((Action)delegate
-                {
-                    laser3ConfigRequest.Increment = GetConvertedTemperatureFromFloatString(CbInc3.SelectedValue.ToString());
                 });
                 txtTempFinal3.Invoke((Action)delegate
                 {
 
-                    txtTempFinal3.Text = temp.ToString("0.0#");
+                    txtTempFinal3.Text = string.Empty;
 
-                });
-
-                experiment.lasers[2].Name = laser3ConfigRequest.Name;
-                experiment.lasers[2].ID = 3;
-                experiment.lasers[2].Current = laser3ConfigRequest.MinPowerCurrent;
-                experiment.lasers[2].DesiredCurrent = laser3ConfigRequest.MaxPowerCurrent;
-                experiment.lasers[2].DesiredNTC = laser3ConfigRequest.DesiredNtc;
-                experiment.lasers[2].InitialRequest = laser3ConfigRequest;
-
-                byte[] dataToSend = laser3ConfigRequest.GetByteArray();
-                SendUSBData(dataToSend);
-                experiment.lasers[2].ProcessFinishedEvent.WaitOne();
-            }
-
-            if (checkLaser4.Checked)
-            {
-                currentLaser = 3;
-                LaserConfigRequest laser4ConfigRequest = new LaserConfigRequest();
-                laser4ConfigRequest.Name = name4txt.Text;
-                laser4ConfigRequest.ID = 4;
-                laser4ConfigRequest.MinPowerCurrent = GetConvertedTemperatureFromString(I4min.Text);
-                laser4ConfigRequest.MaxPowerCurrent = GetConvertedTemperatureFromString(I4max.Text);
-                laser4ConfigRequest.DesiredNtc = Convert.ToInt16(Ntc4.Text);
-                var temp = laser4ConfigRequest.ConvertedTemperature;
-
-                CbInc4.Invoke((Action)delegate
-                {
-                    laser4ConfigRequest.Increment = GetConvertedTemperatureFromFloatString(CbInc4.SelectedValue.ToString());
                 });
                 txtTempFinal4.Invoke((Action)delegate
                 {
 
-                    txtTempFinal4.Text = temp.ToString("0.0#");
+                    txtTempFinal4.Text = string.Empty;
 
                 });
-
-                experiment.lasers[3].Name = laser4ConfigRequest.Name;
-                experiment.lasers[3].ID = 4;
-                experiment.lasers[3].Current = laser4ConfigRequest.MinPowerCurrent;
-                experiment.lasers[3].DesiredCurrent = laser4ConfigRequest.MaxPowerCurrent;
-                experiment.lasers[3].DesiredNTC = laser4ConfigRequest.DesiredNtc;
-                experiment.lasers[3].InitialRequest = laser4ConfigRequest;
-
-                byte[] dataToSend = laser4ConfigRequest.GetByteArray();
-                SendUSBData(dataToSend);
-                experiment.lasers[3].ProcessFinishedEvent.WaitOne();
-            }
-
-            if (checkLaser5.Checked)
-            {
-                currentLaser = 4;
-                LaserConfigRequest laser5ConfigRequest = new LaserConfigRequest();
-                laser5ConfigRequest.Name = name5txt.Text;
-                laser5ConfigRequest.ID = 5;
-                laser5ConfigRequest.MinPowerCurrent = GetConvertedTemperatureFromString(I5min.Text);
-                laser5ConfigRequest.MaxPowerCurrent = GetConvertedTemperatureFromString(I5max.Text);
-                laser5ConfigRequest.DesiredNtc = Convert.ToInt16(Ntc5.Text);
-                var temp = laser5ConfigRequest.ConvertedTemperature;
-
-                CbInc5.Invoke((Action)delegate
-                {
-                    laser5ConfigRequest.Increment = GetConvertedTemperatureFromFloatString(CbInc5.SelectedValue.ToString());
-                });
-
                 txtTempFinal5.Invoke((Action)delegate
                 {
-                    txtTempFinal5.Text = temp.ToString("0.0#");
-
+                    txtTempFinal5.Text = string.Empty;
                 });
-
-                experiment.lasers[4].Name = laser5ConfigRequest.Name;
-                experiment.lasers[4].ID = 5;
-                experiment.lasers[4].Current = laser5ConfigRequest.MinPowerCurrent;
-                experiment.lasers[4].DesiredCurrent = laser5ConfigRequest.MaxPowerCurrent;
-                experiment.lasers[4].DesiredNTC = laser5ConfigRequest.DesiredNtc;
-                experiment.lasers[4].InitialRequest = laser5ConfigRequest;
-
-                byte[] dataToSend = laser5ConfigRequest.GetByteArray();
-                SendUSBData(dataToSend);
-                experiment.lasers[4].ProcessFinishedEvent.WaitOne();
             }
-
-
-            Iniciar.Invoke(new Action(() =>
+            else
             {
-                Iniciar.Enabled = true;
-            }));
+                //TO BE TESTED!! DO NOT MIX OPERATION MODE!!!!!!
+                if (checkLaser1Temp.Checked)
+                {
+                    currentLaser = 0;
 
-            Parar.Invoke(new Action(() =>
-            {
-                Parar.Enabled = false;
-            }));
+                    LaserConfigRequest laser1ConfigRequest = new LaserConfigRequest();
+                    laser1ConfigRequest.Name = tname1txt.Text;
+                    laser1ConfigRequest.ID = 1;
+                    laser1ConfigRequest.MinNtc = Convert.ToInt16(Ntc1Min.Text);
+                    laser1ConfigRequest.MaxNtc = Convert.ToInt16(Ntc1max.Text);
+                    laser1ConfigRequest.NTC = Convert.ToInt16(Ntc1Min.Text);
+                    laser1ConfigRequest.MinPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(Iop1.Text);
+                    laser1ConfigRequest.MaxPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(Iop1.Text);
 
-            LaserConfigRequest finalConfigRequest = new LaserConfigRequest();
-            SendUSBData(finalConfigRequest.GetByteArray());// sending last and empty message
-            currentLaser = -1;// back to non existent laser
-            MessageBox.Show("Finished All tests");
-            txtTempFinal1.Invoke((Action)delegate
-            {
+                    cbNtc1Inc.Invoke((Action)delegate
+                    {
+                        laser1ConfigRequest.NtcIncrement = Convert.ToInt16(cbNtc1Inc.SelectedValue.ToString());
+                    });
 
-                txtTempFinal1.Text = string.Empty;
+                    var temp = laser1ConfigRequest.ConvertedTemperature;
+                    //txtTempFinal1.Invoke((Action)delegate
+                    //{
 
-            });
-            txtTempFinal2.Invoke((Action)delegate
-            {
+                    //    txtTempFinal1.Text = temp.ToString("0.0#");
 
-                txtTempFinal2.Text = string.Empty;
+                    //});
 
-            });
-            txtTempFinal3.Invoke((Action)delegate
-            {
+                    experiment.lasers[0].Name = laser1ConfigRequest.Name;
+                    experiment.lasers[0].ID = 1; //It is the laser ID
+                    experiment.lasers[0].Current = laser1ConfigRequest.MinPowerCurrent; //min value of current
+                    experiment.lasers[0].DesiredCurrent = laser1ConfigRequest.MaxPowerCurrent;//max value of current
+                    experiment.lasers[0].NTC = laser1ConfigRequest.NTC; //target temperature
+                    experiment.lasers[0].InitialRequest = laser1ConfigRequest;//Saving first request to storage on specified laser
 
-                txtTempFinal3.Text = string.Empty;
-
-            });
-            txtTempFinal4.Invoke((Action)delegate
-            {
-
-                txtTempFinal4.Text = string.Empty;
-
-            });
-            txtTempFinal5.Invoke((Action)delegate
-            {
-
-                txtTempFinal5.Text = string.Empty;
-
-            });
+                    byte[] dataToSend = laser1ConfigRequest.GetByteArray();//Get byte array that represents config request that will be sent to laser
+                    SendUSBData(dataToSend);//Sending data to laser1
+                    experiment.lasers[0].ProcessFinishedEvent.WaitOne();//Lock program and wait for "singal" to continue
+                }
+            }
         }
 
         private void OnLaserReportReceived(byte[] data)
@@ -459,23 +529,46 @@ namespace Objetos_de_tela_teste
             LaserReport report = new LaserReport();
 
             report.Parse(data);//fill the properties with received data from USB
-
-            if(currentLaser >= 0 && currentLaser < experiment.lasers.Count)//Check if it is a valid laser
+            if (operationMode == OperationMode.Current)
             {
-                experiment.lasers[currentLaser].reports.Add(report);//Save report from usb
-                experiment.lasers[currentLaser].Current += experiment.lasers[currentLaser].InitialRequest.Increment;//set current using last report + increment
-
-                if (experiment.lasers[currentLaser].Current <= experiment.lasers[currentLaser].DesiredCurrent)//check if the program needs resent a new config with incremented value of current
+                if (currentLaser >= 0 && currentLaser < experiment.lasers.Count)//Check if it is a valid laser
                 {
-                    LaserConfigRequest updateRequest = new LaserConfigRequest();// new config that will be 
+                    experiment.lasers[currentLaser].reports.Add(report);//Save report from usb
+                    experiment.lasers[currentLaser].Current += experiment.lasers[currentLaser].InitialRequest.Increment;//set current using last report + increment
 
-                    updateRequest = experiment.lasers[currentLaser].InitialRequest;//get all informations from first request
-                    updateRequest.MinPowerCurrent = Convert.ToByte(experiment.lasers[currentLaser].Current);//update just the min value
-                    SendUSBData(updateRequest.GetByteArray());// sending updated config
+                    if (experiment.lasers[currentLaser].Current <= experiment.lasers[currentLaser].DesiredCurrent)//check if the program needs resent a new config with incremented value of current
+                    {
+                        LaserConfigRequest updateRequest = new LaserConfigRequest();// new config that will be 
+
+                        updateRequest = experiment.lasers[currentLaser].InitialRequest;//get all informations from first request
+                        updateRequest.MinPowerCurrent = Convert.ToByte(experiment.lasers[currentLaser].Current);//update just the min value
+                        SendUSBData(updateRequest.GetByteArray());// sending updated config
+                    }
+                    else
+                    {
+                        experiment.lasers[currentLaser].ProcessFinishedEvent.Set();// Unlock the current laser process
+                    }
                 }
-                else
+            }
+            else
+            {
+                if (currentLaser >= 0 && currentLaser < experiment.lasers.Count)//Check if it is a valid laser
                 {
-                    experiment.lasers[currentLaser].ProcessFinishedEvent.Set();// Unlock the current laser process
+                    experiment.lasers[currentLaser].reports.Add(report);//Save report from usb
+                    experiment.lasers[currentLaser].NTC += experiment.lasers[currentLaser].InitialRequest.NtcIncrement;//set current using last report + Ntc increment
+
+                    if (experiment.lasers[currentLaser].NTC <= experiment.lasers[currentLaser].InitialRequest.MaxNtc)//check if the program needs resent a new config with incremented value of Ntc current
+                    {
+                        LaserConfigRequest updateRequest = new LaserConfigRequest();// new config that will be 
+
+                        updateRequest = experiment.lasers[currentLaser].InitialRequest;//get all informations from first request
+                        updateRequest.NTC = Convert.ToByte(experiment.lasers[currentLaser].NTC);//update just the NTC value
+                        SendUSBData(updateRequest.GetByteArray());// sending updated config
+                    }
+                    else
+                    {
+                        experiment.lasers[currentLaser].ProcessFinishedEvent.Set();// Unlock the current laser process
+                    }
                 }
             }
         }
@@ -551,301 +644,161 @@ namespace Objetos_de_tela_teste
             experiment.Stop();
         }
 
-        private void I1max_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-        }
-
-
-        private bool ValidateIMax(Control control, int value)
-        {
-            bool result = false;
-            if (value > 110)
-            {
-                errorProvider1.SetError(control, "Corrente máxima permitida: 110mA");
-            }
-            else
-            {
-                errorProvider1.SetError(control, string.Empty);
-                result = true;
-            }
-
-            return result;
-        }
-
-        private bool ValidateNtc(Control control, int value)
-        {
-            bool result = false;
-            if (value < 4400 | value > 20000)
-            {
-                errorProvider1.SetError(control, "Valores de NTC devem estar entre 4400 e 20000");
-            }
-            else
-            {
-                errorProvider1.SetError(control, string.Empty);
-                result = true;
-            }
-
-            return result;
-        }
-
-        private void Ntc1_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-        }
-
-
         private void ValidateInputs()
         {
             List<bool> activeValidations = new List<bool>();
 
-            if (checkLaser1.Checked) 
-            { 
-                var validateResult = ValidateLaserFields(name1txt, I1min, I1max, CbInc1, Ntc1);
-                activeValidations.Add(validateResult);
-            }
-            if(checkLaser2.Checked)
+            if(operationMode == OperationMode.Current)
             {
-                var validateResult = ValidateLaserFields(name2txt, I2min, I2max, CbInc2, Ntc2);
-                activeValidations.Add(validateResult);
+                if (checkLaser1.Checked) 
+                { 
+                    var validateResult = FieldsValidationUtils.ValidateLaserFields(name1txt, I1min, I1max, CbInc1, Ntc1, errorProvider1);
+                    activeValidations.Add(validateResult);
+                }
+                if(checkLaser2.Checked)
+                {
+                    var validateResult = FieldsValidationUtils.ValidateLaserFields(name2txt, I2min, I2max, CbInc2, Ntc2, errorProvider1);
+                    activeValidations.Add(validateResult);
+                }
+                if (checkLaser3.Checked)
+                {
+                    var validateResult = FieldsValidationUtils.ValidateLaserFields(name3txt, I3min, I3max, CbInc3, Ntc3, errorProvider1);
+                    activeValidations.Add(validateResult);
+                }
+                if (checkLaser4.Checked)
+                {
+                    var validateResult = FieldsValidationUtils.ValidateLaserFields(name4txt, I4min, I4max, CbInc4, Ntc4, errorProvider1);
+                    activeValidations.Add(validateResult);
+                }
+                if (checkLaser5.Checked)
+                {
+                    var validateResult = FieldsValidationUtils.ValidateLaserFields(name5txt, I5min, I5max, CbInc5, Ntc5, errorProvider1);
+                    activeValidations.Add(validateResult);
+                }
             }
-            if (checkLaser3.Checked)
+            else
             {
-                var validateResult = ValidateLaserFields(name3txt, I3min, I3max, CbInc3, Ntc3);
-                activeValidations.Add(validateResult);
-            }
-            if (checkLaser4.Checked)
-            {
-                var validateResult = ValidateLaserFields(name4txt, I4min, I4max, CbInc4, Ntc4);
-                activeValidations.Add(validateResult);
-            }
-            if (checkLaser5.Checked)
-            {
-                var validateResult = ValidateLaserFields(name5txt, I5min, I5max, CbInc5, Ntc5);
-                activeValidations.Add(validateResult);
+                if (checkLaser1Temp.Checked)
+                {
+                    var validateResult = FieldsValidationUtils.ValidateTempeatureLaserFields(tname1txt, Ntc1Min, Ntc1max, cbNtc1Inc, Iop1, errorProvider1);
+                    activeValidations.Add(validateResult);
+                }
+                if (checkLaser2Temp.Checked)
+                {
+                    var validateResult = FieldsValidationUtils.ValidateTempeatureLaserFields(tname2txt, Ntc2min, Ntc2max, cbNtc2Inc, Iop2, errorProvider1);
+                    activeValidations.Add(validateResult);
+                }
+                if (checkLaser3Temp.Checked)
+                {
+                    var validateResult = FieldsValidationUtils.ValidateTempeatureLaserFields(tname3txt, Ntc3min, Ntc3max, cbNtc3Inc, Iop3, errorProvider1);
+                    activeValidations.Add(validateResult);
+                }
+                if (checkLaser4Temp.Checked)
+                {
+                    var validateResult = FieldsValidationUtils.ValidateTempeatureLaserFields(tname4txt, Ntc4min, Ntc4max, cbNtc4Inc, Iop4, errorProvider1);
+                    activeValidations.Add(validateResult);
+                }
+                if (checkLaser5Temp.Checked)
+                {
+                    var validateResult = FieldsValidationUtils.ValidateTempeatureLaserFields(tname5txt, Ntc5min, Ntc5max, cbNtc5Inc, Iop5, errorProvider1);
+                    activeValidations.Add(validateResult);
+                }
             }
 
             var finResult = activeValidations.Contains(false);
-            var result = !finResult;
+            var result = !finResult && activeValidations.Count > 0;
 
             Iniciar.Enabled = result;
         }
 
-        private void I1max_TextChanged(object sender, EventArgs e)
+        private void SwitchOperationMode()
         {
-            ValidateInputs();
-        }
-
-        private void Ntc1_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void name1txt_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void I1min_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void Inc1_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private bool ValidateLaserFields(Control name, Control iMin, Control iMax, Control increment, Control Ntc)
-        {
-            bool laserValidationResult = false;
-            bool validateIMax = false;
-            bool validateNtc = false;
-            bool validateLaserName = false;
-            bool validateIncrement = false;
-            bool validateIMin = false;
-            if (!string.IsNullOrEmpty(iMax.Text))
+            this.operationMode = rbCorrente.Checked ? OperationMode.Current : OperationMode.Temperature;
+            if (this.operationMode == OperationMode.Temperature)
             {
-                validateIMax = ValidateIMax(iMax, int.Parse(iMax.Text));
-            }
-
-            if (!string.IsNullOrEmpty(iMin.Text))
-            {
-                validateIMin = ValidateIMax(iMin, int.Parse(iMin.Text));
-            }
-
-            if (!string.IsNullOrEmpty(Ntc.Text))
-            {
-                validateNtc = ValidateNtc(Ntc, int.Parse(Ntc.Text));
-            }
-
-            validateLaserName = !string.IsNullOrWhiteSpace(name.Text);
-            validateIncrement = !string.IsNullOrWhiteSpace(increment.Text);
-
-            if (validateIMax && validateNtc && validateLaserName && validateIncrement && validateIMin)
-            {
-                laserValidationResult = true;
+                checkLaser1.Checked = false;
+                checkLaser2.Checked = false;
+                checkLaser3.Checked = false;
+                checkLaser4.Checked = false;
+                checkLaser5.Checked = false;
             }
             else
             {
-                laserValidationResult = false;
+                checkLaser1Temp.Checked = false;
+                checkLaser2Temp.Checked = false;
+                checkLaser3Temp.Checked = false;
+                checkLaser4Temp.Checked = false;
+                checkLaser5Temp.Checked = false;
             }
-
-            return laserValidationResult;
         }
 
-        private void name2txt_TextChanged(object sender, EventArgs e)
+        private void rbTemperatura_CheckedChanged(object sender, EventArgs e)
         {
+            this.gbTemperatura.Enabled = rbTemperatura.Checked;
+            this.gbCorrente.Enabled = rbCorrente.Checked;
+            SwitchOperationMode();
+        }
+
+        private void rbCorrente_CheckedChanged(object sender, EventArgs e)
+        {
+            this.gbCorrente.Enabled = rbCorrente.Checked;
+            this.gbTemperatura.Enabled = rbTemperatura.Checked;
+            SwitchOperationMode();
+        }
+
+        private void checkLaser1Temp_CheckedChanged(object sender, EventArgs e)
+        {
+            tname1txt.Enabled = checkLaser1Temp.Checked;
+            Ntc1Min.Enabled = checkLaser1Temp.Checked;
+            Ntc1max.Enabled = checkLaser1Temp.Checked;
+            cbNtc1Inc.Enabled = checkLaser1Temp.Checked;
+            Iop1.Enabled = checkLaser1Temp.Checked;
             ValidateInputs();
         }
 
-        private void I2min_TextChanged(object sender, EventArgs e)
+        private void checkLaser2Temp_CheckedChanged(object sender, EventArgs e)
         {
+            tname2txt.Enabled = checkLaser2Temp.Checked;
+            Ntc2min.Enabled = checkLaser2Temp.Checked;
+            Ntc2max.Enabled = checkLaser2Temp.Checked;
+            cbNtc2Inc.Enabled = checkLaser2Temp.Checked;
+            Iop2.Enabled = checkLaser2Temp.Checked;
             ValidateInputs();
         }
 
-        private void I2max_TextChanged(object sender, EventArgs e)
+        private void checkLaser3Temp_CheckedChanged(object sender, EventArgs e)
         {
+            tname3txt.Enabled = checkLaser3Temp.Checked;
+            Ntc3min.Enabled = checkLaser3Temp.Checked;
+            Ntc3max.Enabled = checkLaser3Temp.Checked;
+            cbNtc3Inc.Enabled = checkLaser3Temp.Checked;
+            Iop3.Enabled = checkLaser3Temp.Checked;
             ValidateInputs();
         }
 
-        private void Inc2_TextChanged(object sender, EventArgs e)
+        private void checkLaser4Temp_CheckedChanged(object sender, EventArgs e)
         {
+            tname4txt.Enabled = checkLaser4Temp.Checked;
+            Ntc4min.Enabled = checkLaser4Temp.Checked;
+            Ntc4max.Enabled = checkLaser4Temp.Checked;
+            cbNtc4Inc.Enabled = checkLaser4Temp.Checked;
+            Iop4.Enabled = checkLaser4Temp.Checked;
             ValidateInputs();
         }
 
-        private void Ntc2_TextChanged(object sender, EventArgs e)
+        private void checkLaser5Temp_CheckedChanged(object sender, EventArgs e)
         {
+            tname5txt.Enabled = checkLaser5Temp.Checked;
+            Ntc5min.Enabled = checkLaser5Temp.Checked;
+            Ntc5max.Enabled = checkLaser5Temp.Checked;
+            cbNtc5Inc.Enabled = checkLaser5Temp.Checked;
+            Iop5.Enabled = checkLaser5Temp.Checked;
             ValidateInputs();
         }
 
-        private void name3txt_TextChanged(object sender, EventArgs e)
+        private void Input_ValueChanged(object sender, EventArgs e)
         {
             ValidateInputs();
-        }
-
-        private void I3min_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void I3max_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void Inc3_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void Ntc3_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void name4txt_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void I4min_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void I4max_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void Inc4_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void Ntc4_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void name5txt_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void I5min_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void I5max_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void Inc5_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void Ntc5_TextChanged(object sender, EventArgs e)
-        {
-            ValidateInputs();
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private byte GetConvertedTemperatureFromString(string value)
-        {
-            return Convert.ToByte(2 * int.Parse(value));
-        }
-
-        private byte GetConvertedTemperatureFromFloatString(string value)
-        {
-            return Convert.ToByte(2 * float.Parse(value));
         }
     }
-
 }

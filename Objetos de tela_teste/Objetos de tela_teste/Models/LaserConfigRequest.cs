@@ -14,24 +14,23 @@ namespace Objetos_de_tela_teste.Models
 
         public byte Increment { get; set; }
 
-        public short DesiredNtc { get; set; }
+        public short NTC { get; set; }
+
+        public short MinNtc {get;set;}
+
+        public short MaxNtc { get;set;}
+
+        public short NtcIncrement { get; set; }
 
         public float ConvertedTemperature 
         {
             get {return this.ConvertValue(); }
         }
 
-    //private int myVar;
-
-    //public int MyProperty
-    //{
-    //    get { return myVar; }
-    //    set { myVar = value; }
-    //}
 
     public byte[] GetByteArray()
         {
-            byte[] desiredNtcBytes = BitConverter.GetBytes(DesiredNtc);
+            byte[] desiredNtcBytes = BitConverter.GetBytes(NTC);
             byte[] result = new byte[32];
             result[0] = 0x00;
             result[1] = (byte)'L';
@@ -49,7 +48,7 @@ namespace Objetos_de_tela_teste.Models
         public float ConvertValue()
         {
             var upPart = (float) 3900 * 298.15F;
-            var divisionResult = (double)((double)this.DesiredNtc / (double)10000);
+            var divisionResult = (double)((double)this.NTC / (double)10000);
             var lnR = Math.Log(divisionResult);
             var downPart = (float)((298.15F * lnR) + 3900);
             var firstEquation = (upPart / downPart);
