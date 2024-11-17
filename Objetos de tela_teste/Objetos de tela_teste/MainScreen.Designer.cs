@@ -61,11 +61,11 @@
             this.gbGeneral = new System.Windows.Forms.GroupBox();
             this.gbTemperatura = new System.Windows.Forms.GroupBox();
             this.label23 = new System.Windows.Forms.Label();
-            this.txtTemp5min = new System.Windows.Forms.TextBox();
-            this.txtTemp4min = new System.Windows.Forms.TextBox();
-            this.txtTemp3min = new System.Windows.Forms.TextBox();
-            this.txtTemp2min = new System.Windows.Forms.TextBox();
-            this.txtTemp1min = new System.Windows.Forms.TextBox();
+            this.txtTemp5Min = new System.Windows.Forms.TextBox();
+            this.txtTemp4Min = new System.Windows.Forms.TextBox();
+            this.txtTemp3Min = new System.Windows.Forms.TextBox();
+            this.txtTemp2Min = new System.Windows.Forms.TextBox();
+            this.txtTemp1Min = new System.Windows.Forms.TextBox();
             this.cbNtc5Inc = new System.Windows.Forms.ComboBox();
             this.cbNtc4Inc = new System.Windows.Forms.ComboBox();
             this.cbNtc3Inc = new System.Windows.Forms.ComboBox();
@@ -79,10 +79,10 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.txtTemp5max = new System.Windows.Forms.TextBox();
-            this.txtTemp4max = new System.Windows.Forms.TextBox();
-            this.txtTemp3max = new System.Windows.Forms.TextBox();
-            this.txtTemp2max = new System.Windows.Forms.TextBox();
+            this.txtTemp5Max = new System.Windows.Forms.TextBox();
+            this.txtTemp4Max = new System.Windows.Forms.TextBox();
+            this.txtTemp3Max = new System.Windows.Forms.TextBox();
+            this.txtTemp2Max = new System.Windows.Forms.TextBox();
             this.txtTemp1Max = new System.Windows.Forms.TextBox();
             this.tname1txt = new System.Windows.Forms.TextBox();
             this.tname2txt = new System.Windows.Forms.TextBox();
@@ -91,13 +91,13 @@
             this.tname5txt = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.Ntc5max = new System.Windows.Forms.MaskedTextBox();
-            this.Ntc5min = new System.Windows.Forms.MaskedTextBox();
+            this.Ntc5Min = new System.Windows.Forms.MaskedTextBox();
             this.Ntc4max = new System.Windows.Forms.MaskedTextBox();
-            this.Ntc4min = new System.Windows.Forms.MaskedTextBox();
+            this.Ntc4Min = new System.Windows.Forms.MaskedTextBox();
             this.Ntc3max = new System.Windows.Forms.MaskedTextBox();
-            this.Ntc3min = new System.Windows.Forms.MaskedTextBox();
+            this.Ntc3Min = new System.Windows.Forms.MaskedTextBox();
             this.Ntc2max = new System.Windows.Forms.MaskedTextBox();
-            this.Ntc2min = new System.Windows.Forms.MaskedTextBox();
+            this.Ntc2Min = new System.Windows.Forms.MaskedTextBox();
             this.Ntc1max = new System.Windows.Forms.MaskedTextBox();
             this.Ntc1Min = new System.Windows.Forms.MaskedTextBox();
             this.checkLaser5Temp = new System.Windows.Forms.CheckBox();
@@ -452,11 +452,11 @@
             // gbTemperatura
             // 
             this.gbTemperatura.Controls.Add(this.label23);
-            this.gbTemperatura.Controls.Add(this.txtTemp5min);
-            this.gbTemperatura.Controls.Add(this.txtTemp4min);
-            this.gbTemperatura.Controls.Add(this.txtTemp3min);
-            this.gbTemperatura.Controls.Add(this.txtTemp2min);
-            this.gbTemperatura.Controls.Add(this.txtTemp1min);
+            this.gbTemperatura.Controls.Add(this.txtTemp5Min);
+            this.gbTemperatura.Controls.Add(this.txtTemp4Min);
+            this.gbTemperatura.Controls.Add(this.txtTemp3Min);
+            this.gbTemperatura.Controls.Add(this.txtTemp2Min);
+            this.gbTemperatura.Controls.Add(this.txtTemp1Min);
             this.gbTemperatura.Controls.Add(this.cbNtc5Inc);
             this.gbTemperatura.Controls.Add(this.cbNtc4Inc);
             this.gbTemperatura.Controls.Add(this.cbNtc3Inc);
@@ -470,10 +470,10 @@
             this.gbTemperatura.Controls.Add(this.label15);
             this.gbTemperatura.Controls.Add(this.label16);
             this.gbTemperatura.Controls.Add(this.label17);
-            this.gbTemperatura.Controls.Add(this.txtTemp5max);
-            this.gbTemperatura.Controls.Add(this.txtTemp4max);
-            this.gbTemperatura.Controls.Add(this.txtTemp3max);
-            this.gbTemperatura.Controls.Add(this.txtTemp2max);
+            this.gbTemperatura.Controls.Add(this.txtTemp5Max);
+            this.gbTemperatura.Controls.Add(this.txtTemp4Max);
+            this.gbTemperatura.Controls.Add(this.txtTemp3Max);
+            this.gbTemperatura.Controls.Add(this.txtTemp2Max);
             this.gbTemperatura.Controls.Add(this.txtTemp1Max);
             this.gbTemperatura.Controls.Add(this.tname1txt);
             this.gbTemperatura.Controls.Add(this.tname2txt);
@@ -483,16 +483,16 @@
             this.gbTemperatura.Controls.Add(this.label18);
             this.gbTemperatura.Controls.Add(this.Iop5);
             this.gbTemperatura.Controls.Add(this.Ntc5max);
-            this.gbTemperatura.Controls.Add(this.Ntc5min);
+            this.gbTemperatura.Controls.Add(this.Ntc5Min);
             this.gbTemperatura.Controls.Add(this.Iop4);
             this.gbTemperatura.Controls.Add(this.Ntc4max);
-            this.gbTemperatura.Controls.Add(this.Ntc4min);
+            this.gbTemperatura.Controls.Add(this.Ntc4Min);
             this.gbTemperatura.Controls.Add(this.Iop3);
             this.gbTemperatura.Controls.Add(this.Ntc3max);
-            this.gbTemperatura.Controls.Add(this.Ntc3min);
+            this.gbTemperatura.Controls.Add(this.Ntc3Min);
             this.gbTemperatura.Controls.Add(this.Iop2);
             this.gbTemperatura.Controls.Add(this.Ntc2max);
-            this.gbTemperatura.Controls.Add(this.Ntc2min);
+            this.gbTemperatura.Controls.Add(this.Ntc2Min);
             this.gbTemperatura.Controls.Add(this.Iop1);
             this.gbTemperatura.Controls.Add(this.Ntc1max);
             this.gbTemperatura.Controls.Add(this.Ntc1Min);
@@ -521,50 +521,50 @@
             this.label23.TabIndex = 205;
             this.label23.Text = "Tmin(C°)";
             // 
-            // txtTemp5min
+            // txtTemp5Min
             // 
-            this.txtTemp5min.Enabled = false;
-            this.txtTemp5min.Location = new System.Drawing.Point(645, 171);
-            this.txtTemp5min.Margin = new System.Windows.Forms.Padding(2);
-            this.txtTemp5min.Name = "txtTemp5min";
-            this.txtTemp5min.Size = new System.Drawing.Size(68, 20);
-            this.txtTemp5min.TabIndex = 204;
+            this.txtTemp5Min.Enabled = false;
+            this.txtTemp5Min.Location = new System.Drawing.Point(561, 171);
+            this.txtTemp5Min.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTemp5Min.Name = "txtTemp5Min";
+            this.txtTemp5Min.Size = new System.Drawing.Size(68, 20);
+            this.txtTemp5Min.TabIndex = 204;
             // 
-            // txtTemp4min
+            // txtTemp4Min
             // 
-            this.txtTemp4min.Enabled = false;
-            this.txtTemp4min.Location = new System.Drawing.Point(645, 145);
-            this.txtTemp4min.Margin = new System.Windows.Forms.Padding(2);
-            this.txtTemp4min.Name = "txtTemp4min";
-            this.txtTemp4min.Size = new System.Drawing.Size(68, 20);
-            this.txtTemp4min.TabIndex = 203;
+            this.txtTemp4Min.Enabled = false;
+            this.txtTemp4Min.Location = new System.Drawing.Point(561, 146);
+            this.txtTemp4Min.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTemp4Min.Name = "txtTemp4Min";
+            this.txtTemp4Min.Size = new System.Drawing.Size(68, 20);
+            this.txtTemp4Min.TabIndex = 203;
             // 
-            // txtTemp3min
+            // txtTemp3Min
             // 
-            this.txtTemp3min.Enabled = false;
-            this.txtTemp3min.Location = new System.Drawing.Point(645, 119);
-            this.txtTemp3min.Margin = new System.Windows.Forms.Padding(2);
-            this.txtTemp3min.Name = "txtTemp3min";
-            this.txtTemp3min.Size = new System.Drawing.Size(68, 20);
-            this.txtTemp3min.TabIndex = 202;
+            this.txtTemp3Min.Enabled = false;
+            this.txtTemp3Min.Location = new System.Drawing.Point(561, 119);
+            this.txtTemp3Min.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTemp3Min.Name = "txtTemp3Min";
+            this.txtTemp3Min.Size = new System.Drawing.Size(68, 20);
+            this.txtTemp3Min.TabIndex = 202;
             // 
-            // txtTemp2min
+            // txtTemp2Min
             // 
-            this.txtTemp2min.Enabled = false;
-            this.txtTemp2min.Location = new System.Drawing.Point(645, 93);
-            this.txtTemp2min.Margin = new System.Windows.Forms.Padding(2);
-            this.txtTemp2min.Name = "txtTemp2min";
-            this.txtTemp2min.Size = new System.Drawing.Size(68, 20);
-            this.txtTemp2min.TabIndex = 201;
+            this.txtTemp2Min.Enabled = false;
+            this.txtTemp2Min.Location = new System.Drawing.Point(561, 90);
+            this.txtTemp2Min.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTemp2Min.Name = "txtTemp2Min";
+            this.txtTemp2Min.Size = new System.Drawing.Size(68, 20);
+            this.txtTemp2Min.TabIndex = 201;
             // 
-            // txtTemp1min
+            // txtTemp1Min
             // 
-            this.txtTemp1min.Enabled = false;
-            this.txtTemp1min.Location = new System.Drawing.Point(645, 66);
-            this.txtTemp1min.Margin = new System.Windows.Forms.Padding(2);
-            this.txtTemp1min.Name = "txtTemp1min";
-            this.txtTemp1min.Size = new System.Drawing.Size(68, 20);
-            this.txtTemp1min.TabIndex = 200;
+            this.txtTemp1Min.Enabled = false;
+            this.txtTemp1Min.Location = new System.Drawing.Point(561, 64);
+            this.txtTemp1Min.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTemp1Min.Name = "txtTemp1Min";
+            this.txtTemp1Min.Size = new System.Drawing.Size(68, 20);
+            this.txtTemp1Min.TabIndex = 200;
             // 
             // cbNtc5Inc
             // 
@@ -605,6 +605,7 @@
             this.cbNtc1Inc.Name = "cbNtc1Inc";
             this.cbNtc1Inc.Size = new System.Drawing.Size(52, 21);
             this.cbNtc1Inc.TabIndex = 195;
+            this.cbNtc1Inc.SelectedIndexChanged += new System.EventHandler(this.cbNtc1Inc_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -677,48 +678,48 @@
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(50, 13);
             this.label17.TabIndex = 187;
-            this.label17.Text = "Tmáx(C°)";
+            this.label17.Text = "Tmax(C°)";
             // 
-            // txtTemp5max
+            // txtTemp5Max
             // 
-            this.txtTemp5max.Enabled = false;
-            this.txtTemp5max.Location = new System.Drawing.Point(561, 173);
-            this.txtTemp5max.Margin = new System.Windows.Forms.Padding(2);
-            this.txtTemp5max.Name = "txtTemp5max";
-            this.txtTemp5max.Size = new System.Drawing.Size(68, 20);
-            this.txtTemp5max.TabIndex = 186;
+            this.txtTemp5Max.Enabled = false;
+            this.txtTemp5Max.Location = new System.Drawing.Point(645, 171);
+            this.txtTemp5Max.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTemp5Max.Name = "txtTemp5Max";
+            this.txtTemp5Max.Size = new System.Drawing.Size(68, 20);
+            this.txtTemp5Max.TabIndex = 186;
             // 
-            // txtTemp4max
+            // txtTemp4Max
             // 
-            this.txtTemp4max.Enabled = false;
-            this.txtTemp4max.Location = new System.Drawing.Point(561, 147);
-            this.txtTemp4max.Margin = new System.Windows.Forms.Padding(2);
-            this.txtTemp4max.Name = "txtTemp4max";
-            this.txtTemp4max.Size = new System.Drawing.Size(68, 20);
-            this.txtTemp4max.TabIndex = 185;
+            this.txtTemp4Max.Enabled = false;
+            this.txtTemp4Max.Location = new System.Drawing.Point(645, 145);
+            this.txtTemp4Max.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTemp4Max.Name = "txtTemp4Max";
+            this.txtTemp4Max.Size = new System.Drawing.Size(68, 20);
+            this.txtTemp4Max.TabIndex = 185;
             // 
-            // txtTemp3max
+            // txtTemp3Max
             // 
-            this.txtTemp3max.Enabled = false;
-            this.txtTemp3max.Location = new System.Drawing.Point(561, 121);
-            this.txtTemp3max.Margin = new System.Windows.Forms.Padding(2);
-            this.txtTemp3max.Name = "txtTemp3max";
-            this.txtTemp3max.Size = new System.Drawing.Size(68, 20);
-            this.txtTemp3max.TabIndex = 184;
+            this.txtTemp3Max.Enabled = false;
+            this.txtTemp3Max.Location = new System.Drawing.Point(645, 119);
+            this.txtTemp3Max.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTemp3Max.Name = "txtTemp3Max";
+            this.txtTemp3Max.Size = new System.Drawing.Size(68, 20);
+            this.txtTemp3Max.TabIndex = 184;
             // 
-            // txtTemp2max
+            // txtTemp2Max
             // 
-            this.txtTemp2max.Enabled = false;
-            this.txtTemp2max.Location = new System.Drawing.Point(561, 95);
-            this.txtTemp2max.Margin = new System.Windows.Forms.Padding(2);
-            this.txtTemp2max.Name = "txtTemp2max";
-            this.txtTemp2max.Size = new System.Drawing.Size(68, 20);
-            this.txtTemp2max.TabIndex = 183;
+            this.txtTemp2Max.Enabled = false;
+            this.txtTemp2Max.Location = new System.Drawing.Point(645, 90);
+            this.txtTemp2Max.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTemp2Max.Name = "txtTemp2Max";
+            this.txtTemp2Max.Size = new System.Drawing.Size(68, 20);
+            this.txtTemp2Max.TabIndex = 183;
             // 
             // txtTemp1Max
             // 
             this.txtTemp1Max.Enabled = false;
-            this.txtTemp1Max.Location = new System.Drawing.Point(561, 68);
+            this.txtTemp1Max.Location = new System.Drawing.Point(645, 65);
             this.txtTemp1Max.Margin = new System.Windows.Forms.Padding(2);
             this.txtTemp1Max.Name = "txtTemp1Max";
             this.txtTemp1Max.Size = new System.Drawing.Size(68, 20);
@@ -800,17 +801,17 @@
             this.Ntc5max.ValidatingType = typeof(int);
             this.Ntc5max.TextChanged += new System.EventHandler(this.Input_ValueChanged);
             // 
-            // Ntc5min
+            // Ntc5Min
             // 
-            this.Ntc5min.HidePromptOnLeave = true;
-            this.Ntc5min.Location = new System.Drawing.Point(260, 172);
-            this.Ntc5min.Mask = "00000";
-            this.Ntc5min.Name = "Ntc5min";
-            this.Ntc5min.Size = new System.Drawing.Size(51, 20);
-            this.Ntc5min.TabIndex = 173;
-            this.Ntc5min.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Ntc5min.ValidatingType = typeof(int);
-            this.Ntc5min.TextChanged += new System.EventHandler(this.Input_ValueChanged);
+            this.Ntc5Min.HidePromptOnLeave = true;
+            this.Ntc5Min.Location = new System.Drawing.Point(260, 172);
+            this.Ntc5Min.Mask = "00000";
+            this.Ntc5Min.Name = "Ntc5Min";
+            this.Ntc5Min.Size = new System.Drawing.Size(51, 20);
+            this.Ntc5Min.TabIndex = 173;
+            this.Ntc5Min.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ntc5Min.ValidatingType = typeof(int);
+            this.Ntc5Min.TextChanged += new System.EventHandler(this.Input_ValueChanged);
             // 
             // Ntc4max
             // 
@@ -824,17 +825,17 @@
             this.Ntc4max.ValidatingType = typeof(int);
             this.Ntc4max.TextChanged += new System.EventHandler(this.Input_ValueChanged);
             // 
-            // Ntc4min
+            // Ntc4Min
             // 
-            this.Ntc4min.HidePromptOnLeave = true;
-            this.Ntc4min.Location = new System.Drawing.Point(260, 146);
-            this.Ntc4min.Mask = "00000";
-            this.Ntc4min.Name = "Ntc4min";
-            this.Ntc4min.Size = new System.Drawing.Size(51, 20);
-            this.Ntc4min.TabIndex = 170;
-            this.Ntc4min.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Ntc4min.ValidatingType = typeof(int);
-            this.Ntc4min.TextChanged += new System.EventHandler(this.Input_ValueChanged);
+            this.Ntc4Min.HidePromptOnLeave = true;
+            this.Ntc4Min.Location = new System.Drawing.Point(260, 146);
+            this.Ntc4Min.Mask = "00000";
+            this.Ntc4Min.Name = "Ntc4Min";
+            this.Ntc4Min.Size = new System.Drawing.Size(51, 20);
+            this.Ntc4Min.TabIndex = 170;
+            this.Ntc4Min.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ntc4Min.ValidatingType = typeof(int);
+            this.Ntc4Min.TextChanged += new System.EventHandler(this.Input_ValueChanged);
             // 
             // Ntc3max
             // 
@@ -848,17 +849,17 @@
             this.Ntc3max.ValidatingType = typeof(int);
             this.Ntc3max.TextChanged += new System.EventHandler(this.Input_ValueChanged);
             // 
-            // Ntc3min
+            // Ntc3Min
             // 
-            this.Ntc3min.HidePromptOnLeave = true;
-            this.Ntc3min.Location = new System.Drawing.Point(260, 120);
-            this.Ntc3min.Mask = "00000";
-            this.Ntc3min.Name = "Ntc3min";
-            this.Ntc3min.Size = new System.Drawing.Size(51, 20);
-            this.Ntc3min.TabIndex = 167;
-            this.Ntc3min.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Ntc3min.ValidatingType = typeof(int);
-            this.Ntc3min.TextChanged += new System.EventHandler(this.Input_ValueChanged);
+            this.Ntc3Min.HidePromptOnLeave = true;
+            this.Ntc3Min.Location = new System.Drawing.Point(260, 120);
+            this.Ntc3Min.Mask = "00000";
+            this.Ntc3Min.Name = "Ntc3Min";
+            this.Ntc3Min.Size = new System.Drawing.Size(51, 20);
+            this.Ntc3Min.TabIndex = 167;
+            this.Ntc3Min.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ntc3Min.ValidatingType = typeof(int);
+            this.Ntc3Min.TextChanged += new System.EventHandler(this.Input_ValueChanged);
             // 
             // Ntc2max
             // 
@@ -872,17 +873,17 @@
             this.Ntc2max.ValidatingType = typeof(int);
             this.Ntc2max.TextChanged += new System.EventHandler(this.Input_ValueChanged);
             // 
-            // Ntc2min
+            // Ntc2Min
             // 
-            this.Ntc2min.HidePromptOnLeave = true;
-            this.Ntc2min.Location = new System.Drawing.Point(260, 94);
-            this.Ntc2min.Mask = "00000";
-            this.Ntc2min.Name = "Ntc2min";
-            this.Ntc2min.Size = new System.Drawing.Size(51, 20);
-            this.Ntc2min.TabIndex = 164;
-            this.Ntc2min.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Ntc2min.ValidatingType = typeof(int);
-            this.Ntc2min.TextChanged += new System.EventHandler(this.Input_ValueChanged);
+            this.Ntc2Min.HidePromptOnLeave = true;
+            this.Ntc2Min.Location = new System.Drawing.Point(260, 94);
+            this.Ntc2Min.Mask = "00000";
+            this.Ntc2Min.Name = "Ntc2Min";
+            this.Ntc2Min.Size = new System.Drawing.Size(51, 20);
+            this.Ntc2Min.TabIndex = 164;
+            this.Ntc2Min.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ntc2Min.ValidatingType = typeof(int);
+            this.Ntc2Min.TextChanged += new System.EventHandler(this.Input_ValueChanged);
             // 
             // Ntc1max
             // 
@@ -1552,11 +1553,11 @@
         private System.Windows.Forms.GroupBox gbCorrente;
         private System.Windows.Forms.GroupBox gbTemperatura;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox txtTemp5min;
-        private System.Windows.Forms.TextBox txtTemp4min;
-        private System.Windows.Forms.TextBox txtTemp3min;
-        private System.Windows.Forms.TextBox txtTemp2min;
-        private System.Windows.Forms.TextBox txtTemp1min;
+        private System.Windows.Forms.TextBox txtTemp5Min;
+        private System.Windows.Forms.TextBox txtTemp4Min;
+        private System.Windows.Forms.TextBox txtTemp3Min;
+        private System.Windows.Forms.TextBox txtTemp2Min;
+        private System.Windows.Forms.TextBox txtTemp1Min;
         private System.Windows.Forms.ComboBox cbNtc5Inc;
         private System.Windows.Forms.ComboBox cbNtc4Inc;
         private System.Windows.Forms.ComboBox cbNtc3Inc;
@@ -1570,10 +1571,10 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox txtTemp5max;
-        private System.Windows.Forms.TextBox txtTemp4max;
-        private System.Windows.Forms.TextBox txtTemp3max;
-        private System.Windows.Forms.TextBox txtTemp2max;
+        private System.Windows.Forms.TextBox txtTemp5Max;
+        private System.Windows.Forms.TextBox txtTemp4Max;
+        private System.Windows.Forms.TextBox txtTemp3Max;
+        private System.Windows.Forms.TextBox txtTemp2Max;
         private System.Windows.Forms.TextBox txtTemp1Max;
         private System.Windows.Forms.TextBox tname1txt;
         private System.Windows.Forms.TextBox tname2txt;
@@ -1583,16 +1584,16 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.MaskedTextBox Iop5;
         private System.Windows.Forms.MaskedTextBox Ntc5max;
-        private System.Windows.Forms.MaskedTextBox Ntc5min;
+        private System.Windows.Forms.MaskedTextBox Ntc5Min;
         private System.Windows.Forms.MaskedTextBox Iop4;
         private System.Windows.Forms.MaskedTextBox Ntc4max;
-        private System.Windows.Forms.MaskedTextBox Ntc4min;
+        private System.Windows.Forms.MaskedTextBox Ntc4Min;
         private System.Windows.Forms.MaskedTextBox Iop3;
         private System.Windows.Forms.MaskedTextBox Ntc3max;
-        private System.Windows.Forms.MaskedTextBox Ntc3min;
+        private System.Windows.Forms.MaskedTextBox Ntc3Min;
         private System.Windows.Forms.MaskedTextBox Iop2;
         private System.Windows.Forms.MaskedTextBox Ntc2max;
-        private System.Windows.Forms.MaskedTextBox Ntc2min;
+        private System.Windows.Forms.MaskedTextBox Ntc2Min;
         private System.Windows.Forms.MaskedTextBox Iop1;
         private System.Windows.Forms.MaskedTextBox Ntc1max;
         private System.Windows.Forms.MaskedTextBox Ntc1Min;

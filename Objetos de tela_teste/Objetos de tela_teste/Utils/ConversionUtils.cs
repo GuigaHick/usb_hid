@@ -18,7 +18,8 @@ namespace Objetos_de_tela_teste.Utils
             return Convert.ToByte(2 * float.Parse(value));
         }
 
-        public static float ConvertNtcToTemperatureValue(short NtcValue)
+        //public static float ConvertNtcToTemperatureValue(short NtcValue)
+        public static float ConvertNtcToTemperatureValue(double NtcValue)
         {
             var upPart = (float)3900 * 298.15F;
             var divisionResult = (double)((double)NtcValue / (double)10000);
