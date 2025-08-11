@@ -65,8 +65,12 @@ namespace Objetos_de_tela_teste.Utils
                 validateIop = ValidateIMax(Iop, int.Parse(Iop.Text), errorProvider);
             }
 
+            if(!string.IsNullOrEmpty(increment.Text))
+            {
+                validateIncrement = ValidateNtcIncrement(increment, int.Parse(increment.Text), errorProvider);
+            }
+
             validateLaserName = !string.IsNullOrWhiteSpace(name.Text);
-            validateIncrement = !string.IsNullOrWhiteSpace(increment.Text);
 
             if (validateNtcMax && validateIop && validateLaserName && validateIncrement && validateNtcMin)
             {
@@ -102,6 +106,22 @@ namespace Objetos_de_tela_teste.Utils
             if (value < 4400 | value > 20000)
             {
                 errorProvider.SetError(control, "Valores de NTC devem estar entre 4400 e 20000");
+            }
+            else
+            {
+                errorProvider.SetError(control, string.Empty);
+                result = true;
+            }
+
+            return result;
+        }
+
+        private static bool ValidateNtcIncrement(Control control, int value, ErrorProvider errorProvider)
+        {
+            bool result = false;
+            if (value % 20 != 0 || (value < 1 || value > 400))
+            {
+                errorProvider.SetError(control, "Incrementos devem ser multiplos de 20(max 400)");
             }
             else
             {

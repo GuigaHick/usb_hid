@@ -70,7 +70,6 @@
             this.cbNtc4Inc = new System.Windows.Forms.ComboBox();
             this.cbNtc3Inc = new System.Windows.Forms.ComboBox();
             this.cbNtc2Inc = new System.Windows.Forms.ComboBox();
-            this.cbNtc1Inc = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -154,6 +153,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.Ntc1Inc = new System.Windows.Forms.MaskedTextBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -451,6 +451,7 @@
             // 
             // gbTemperatura
             // 
+            this.gbTemperatura.Controls.Add(this.Ntc1Inc);
             this.gbTemperatura.Controls.Add(this.label23);
             this.gbTemperatura.Controls.Add(this.txtTemp5Min);
             this.gbTemperatura.Controls.Add(this.txtTemp4Min);
@@ -461,7 +462,6 @@
             this.gbTemperatura.Controls.Add(this.cbNtc4Inc);
             this.gbTemperatura.Controls.Add(this.cbNtc3Inc);
             this.gbTemperatura.Controls.Add(this.cbNtc2Inc);
-            this.gbTemperatura.Controls.Add(this.cbNtc1Inc);
             this.gbTemperatura.Controls.Add(this.label10);
             this.gbTemperatura.Controls.Add(this.label11);
             this.gbTemperatura.Controls.Add(this.label12);
@@ -597,15 +597,6 @@
             this.cbNtc2Inc.Name = "cbNtc2Inc";
             this.cbNtc2Inc.Size = new System.Drawing.Size(52, 21);
             this.cbNtc2Inc.TabIndex = 196;
-            // 
-            // cbNtc1Inc
-            // 
-            this.cbNtc1Inc.FormattingEnabled = true;
-            this.cbNtc1Inc.Location = new System.Drawing.Point(413, 70);
-            this.cbNtc1Inc.Name = "cbNtc1Inc";
-            this.cbNtc1Inc.Size = new System.Drawing.Size(52, 21);
-            this.cbNtc1Inc.TabIndex = 195;
-            this.cbNtc1Inc.SelectedIndexChanged += new System.EventHandler(this.cbNtc1Inc_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -1489,6 +1480,18 @@
             this.label5.TabIndex = 120;
             this.label5.Text = "Configuração dos Lasers";
             // 
+            // Ntc1Inc
+            // 
+            this.Ntc1Inc.HidePromptOnLeave = true;
+            this.Ntc1Inc.Location = new System.Drawing.Point(413, 66);
+            this.Ntc1Inc.Mask = "00000";
+            this.Ntc1Inc.Name = "Ntc1Inc";
+            this.Ntc1Inc.Size = new System.Drawing.Size(50, 20);
+            this.Ntc1Inc.TabIndex = 206;
+            this.Ntc1Inc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ntc1Inc.ValidatingType = typeof(int);
+            this.Ntc1Inc.TextChanged += new System.EventHandler(this.Input_ValueChanged);
+            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1506,7 +1509,7 @@
             this.MinimizeBox = false;
             this.Name = "MainScreen";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Text = "MCA Configurator";
+            this.Text = "Fontana 01 - Controle Experimental";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -1562,7 +1565,6 @@
         private System.Windows.Forms.ComboBox cbNtc4Inc;
         private System.Windows.Forms.ComboBox cbNtc3Inc;
         private System.Windows.Forms.ComboBox cbNtc2Inc;
-        private System.Windows.Forms.ComboBox cbNtc1Inc;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
@@ -1655,6 +1657,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.MaskedTextBox Ntc1Inc;
     }
 }
 

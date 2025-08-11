@@ -57,7 +57,7 @@ namespace Objetos_de_tela_teste
             #region Tempeature Components Initialization
             Ntc1Min.Enabled = false;
             Ntc1max.Enabled = false;
-            cbNtc1Inc.Enabled = false;
+            Ntc1Inc.Enabled = false;
             Iop1.Enabled = false;
             Ntc2Min.Enabled = false;
             Ntc2max.Enabled = false;
@@ -77,7 +77,6 @@ namespace Objetos_de_tela_teste
 
             Iop5.Enabled = false;
             var ntcIncrementOptions = new int[] { 20, 40, 60, 80, 100, 180, 380, 600,800, 1000 };
-            this.cbNtc1Inc.DataSource = ntcIncrementOptions.Clone();
             this.cbNtc2Inc.DataSource = ntcIncrementOptions.Clone();
             this.cbNtc3Inc.DataSource = ntcIncrementOptions.Clone();
             this.cbNtc4Inc.DataSource = ntcIncrementOptions.Clone();
@@ -475,36 +474,7 @@ namespace Objetos_de_tela_teste
                 if (checkLaser1Temp.Checked)
                 {
                     currentLaser = 0;
-                    #region Uncomment if needed
-                    //LaserConfigRequest laser1ConfigRequest = new LaserConfigRequest();
-                    //laser1ConfigRequest.Name = tname1txt.Text;
-                    //laser1ConfigRequest.ID = 1;
-                    //laser1ConfigRequest.MinNtc = Convert.ToInt16(Ntc1Min.Text);
-                    //laser1ConfigRequest.MaxNtc = Convert.ToInt16(Ntc1max.Text);
-                    //laser1ConfigRequest.NTC = Convert.ToInt16(Ntc1Min.Text);
-                    //laser1ConfigRequest.MinPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(Iop1.Text);
-                    //laser1ConfigRequest.MaxPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(Iop1.Text);
-
-                    //cbNtc1Inc.Invoke((Action)delegate
-                    //{
-                    //    laser1ConfigRequest.NtcIncrement = Convert.ToInt16(cbNtc1Inc.SelectedValue.ToString());
-                    //});
-
-                    //var temp = laser1ConfigRequest.ConvertedTemperature;
-
-                    //experiment.lasers[0].Name = laser1ConfigRequest.Name;
-                    //experiment.lasers[0].ID = 1; //It is the laser ID
-                    //experiment.lasers[0].Current = laser1ConfigRequest.MinPowerCurrent; //min value of current
-                    //experiment.lasers[0].DesiredCurrent = laser1ConfigRequest.MaxPowerCurrent;//max value of current
-                    //experiment.lasers[0].NTC = laser1ConfigRequest.NTC; //target temperature
-                    //experiment.lasers[0].InitialRequest = laser1ConfigRequest;//Saving first request to storage on specified laser
-
-                    //byte[] dataToSend = laser1ConfigRequest.GetByteArray();//Get byte array that represents config request that will be sent to laser
-                    //SendUSBData(dataToSend);//Sending data to laser1
-                    //experiment.lasers[0].ProcessFinishedEvent.WaitOne();//Lock program and wait for "singal" to continue
-                    #endregion
-
-                    SendInitialDataToLaser(currentLaser, tname1txt, Ntc1Min, Ntc1max, Iop1, cbNtc1Inc);
+                    SendInitialDataToLaser(currentLaser, tname1txt, Ntc1Min, Ntc1max, Iop1, Ntc1Inc);
                 }
                 if (checkLaser2Temp.Checked)
                 {
@@ -567,7 +537,7 @@ namespace Objetos_de_tela_teste
                 if (currentLaser >= 0 && currentLaser < experiment.lasers.Count)//Check if it is a valid laser
                 {
                     experiment.lasers[currentLaser].reports.Add(report);//Save report from usb
-                    experiment.lasers[currentLaser].NTC += experiment.lasers[currentLaser].InitialRequest.NtcIncrement;//set current using last report + Ntc increment
+                    experiment.lasers[currentLaser].NTC += experiment.lasers[currentLaser].InitialRequest.NextNTCIncrement(experiment.lasers[currentLaser].NTC);//set current using last report + Ntc increment
 
                     if (experiment.lasers[currentLaser].NTC <= experiment.lasers[currentLaser].InitialRequest.MaxNtc)//check if the program needs resent a new config with incremented value of Ntc current
                     {
@@ -692,7 +662,7 @@ namespace Objetos_de_tela_teste
             {
                 if (checkLaser1Temp.Checked)
                 {
-                    var validateResult = FieldsValidationUtils.ValidateTempeatureLaserFields(tname1txt, Ntc1Min, Ntc1max, cbNtc1Inc, Iop1, errorProvider1);
+                    var validateResult = FieldsValidationUtils.ValidateTempeatureLaserFields(tname1txt, Ntc1Min, Ntc1max, Ntc1Inc, Iop1, errorProvider1);
                     activeValidations.Add(validateResult);
                 }
                 if (checkLaser2Temp.Checked)
@@ -764,7 +734,7 @@ namespace Objetos_de_tela_teste
             tname1txt.Enabled = checkLaser1Temp.Checked;
             Ntc1Min.Enabled = checkLaser1Temp.Checked;
             Ntc1max.Enabled = checkLaser1Temp.Checked;
-            cbNtc1Inc.Enabled = checkLaser1Temp.Checked;
+            Ntc1Inc.Enabled = checkLaser1Temp.Checked;
             Iop1.Enabled = checkLaser1Temp.Checked;
             ValidateInputs();
         }
@@ -878,7 +848,7 @@ namespace Objetos_de_tela_teste
         }
 
         //Attempt to parametrize
-        private void SendInitialDataToLaser(int laserIndex, Control laserName, Control ntcMin, Control ntcMax, Control Iop, ComboBox ntcIncrement)
+        private void SendInitialDataToLaser(int laserIndex, Control laserName, Control ntcMin, Control ntcMax, Control Iop, Control ntcIncrement)
         {
             LaserConfigRequest laser1ConfigRequest = new LaserConfigRequest();
             laser1ConfigRequest.Name = laserName.Text;
@@ -888,11 +858,12 @@ namespace Objetos_de_tela_teste
             laser1ConfigRequest.NTC = Convert.ToInt16(ntcMin.Text);
             laser1ConfigRequest.MinPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(Iop.Text);
             laser1ConfigRequest.MaxPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(Iop.Text);
+            laser1ConfigRequest.NtcIncrement = Convert.ToInt16(ntcIncrement.Text);
+            //cbNtc1Inc.Invoke((Action)delegate
+            //{
+            //    laser1ConfigRequest.NtcIncrement = Convert.ToInt16(ntcIncrement.SelectedValue.ToString());
+            //});
 
-            cbNtc1Inc.Invoke((Action)delegate
-            {
-                laser1ConfigRequest.NtcIncrement = Convert.ToInt16(ntcIncrement.SelectedValue.ToString());
-            });
 
             var temp = laser1ConfigRequest.ConvertedTemperature;
 
