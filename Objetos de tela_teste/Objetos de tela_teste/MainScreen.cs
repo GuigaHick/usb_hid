@@ -61,27 +61,20 @@ namespace Objetos_de_tela_teste
             Iop1.Enabled = false;
             Ntc2Min.Enabled = false;
             Ntc2max.Enabled = false;
-            cbNtc2Inc.Enabled = false;
+            Ntc2Inc.Enabled = false;
             Iop2.Enabled = false;
             Ntc3Min.Enabled = false;
             Ntc3max.Enabled = false;
-            cbNtc3Inc.Enabled = false;
+            Ntc3Inc.Enabled = false;
             Iop3.Enabled = false;
             Ntc4Min.Enabled = false;
             Ntc4max.Enabled = false;
-            cbNtc4Inc.Enabled = false;
+            Ntc4Inc.Enabled = false;
             Iop4.Enabled = false;
             Ntc5Min.Enabled = false;
             Ntc5max.Enabled = false;
-            cbNtc5Inc.Enabled = false;
-
+            Ntc5Inc.Enabled = false;
             Iop5.Enabled = false;
-            var ntcIncrementOptions = new int[] { 20, 40, 60, 80, 100, 180, 380, 600,800, 1000 };
-            this.cbNtc2Inc.DataSource = ntcIncrementOptions.Clone();
-            this.cbNtc3Inc.DataSource = ntcIncrementOptions.Clone();
-            this.cbNtc4Inc.DataSource = ntcIncrementOptions.Clone();
-            this.cbNtc5Inc.DataSource = ntcIncrementOptions.Clone();
-
             gbTemperatura.Enabled = false;
 
             #endregion
@@ -480,25 +473,25 @@ namespace Objetos_de_tela_teste
                 {
                     currentLaser = 1;
                  
-                    SendInitialDataToLaser(currentLaser, tname2txt, Ntc2Min, Ntc2max, Iop2, cbNtc2Inc);
+                    SendInitialDataToLaser(currentLaser, tname2txt, Ntc2Min, Ntc2max, Iop2, Ntc2Inc);
                 }
                 if (checkLaser3Temp.Checked)
                 {
                     currentLaser = 2;
 
-                    SendInitialDataToLaser(currentLaser, tname3txt, Ntc3Min, Ntc3max, Iop3, cbNtc3Inc);
+                    SendInitialDataToLaser(currentLaser, tname3txt, Ntc3Min, Ntc3max, Iop3, Ntc3Inc);
                 }
                 if (checkLaser4Temp.Checked)
                 {
                     currentLaser = 3;
 
-                    SendInitialDataToLaser(currentLaser, tname4txt, Ntc4Min, Ntc4max, Iop4, cbNtc4Inc);
+                    SendInitialDataToLaser(currentLaser, tname4txt, Ntc4Min, Ntc4max, Iop4, Ntc4Inc);
                 }
                 if (checkLaser5Temp.Checked)
                 {
                     currentLaser = 4;
 
-                    SendInitialDataToLaser(currentLaser, tname5txt, Ntc5Min, Ntc5max, Iop5, cbNtc5Inc);
+                    SendInitialDataToLaser(currentLaser, tname5txt, Ntc5Min, Ntc5max, Iop5, Ntc5Inc);
                 }
             }
 
@@ -667,22 +660,22 @@ namespace Objetos_de_tela_teste
                 }
                 if (checkLaser2Temp.Checked)
                 {
-                    var validateResult = FieldsValidationUtils.ValidateTempeatureLaserFields(tname2txt, Ntc2Min, Ntc2max, cbNtc2Inc, Iop2, errorProvider1);
+                    var validateResult = FieldsValidationUtils.ValidateTempeatureLaserFields(tname2txt, Ntc2Min, Ntc2max, Ntc2Inc, Iop2, errorProvider1);
                     activeValidations.Add(validateResult);
                 }
                 if (checkLaser3Temp.Checked)
                 {
-                    var validateResult = FieldsValidationUtils.ValidateTempeatureLaserFields(tname3txt, Ntc3Min, Ntc3max, cbNtc3Inc, Iop3, errorProvider1);
+                    var validateResult = FieldsValidationUtils.ValidateTempeatureLaserFields(tname3txt, Ntc3Min, Ntc3max, Ntc3Inc, Iop3, errorProvider1);
                     activeValidations.Add(validateResult);
                 }
                 if (checkLaser4Temp.Checked)
                 {
-                    var validateResult = FieldsValidationUtils.ValidateTempeatureLaserFields(tname4txt, Ntc4Min, Ntc4max, cbNtc4Inc, Iop4, errorProvider1);
+                    var validateResult = FieldsValidationUtils.ValidateTempeatureLaserFields(tname4txt, Ntc4Min, Ntc4max, Ntc4Inc, Iop4, errorProvider1);
                     activeValidations.Add(validateResult);
                 }
                 if (checkLaser5Temp.Checked)
                 {
-                    var validateResult = FieldsValidationUtils.ValidateTempeatureLaserFields(tname5txt, Ntc5Min, Ntc5max, cbNtc5Inc, Iop5, errorProvider1);
+                    var validateResult = FieldsValidationUtils.ValidateTempeatureLaserFields(tname5txt, Ntc5Min, Ntc5max, Ntc5Inc, Iop5, errorProvider1);
                     activeValidations.Add(validateResult);
                 }
             }
@@ -744,7 +737,7 @@ namespace Objetos_de_tela_teste
             tname2txt.Enabled = checkLaser2Temp.Checked;
             Ntc2Min.Enabled = checkLaser2Temp.Checked;
             Ntc2max.Enabled = checkLaser2Temp.Checked;
-            cbNtc2Inc.Enabled = checkLaser2Temp.Checked;
+            Ntc2Inc.Enabled = checkLaser2Temp.Checked;
             Iop2.Enabled = checkLaser2Temp.Checked;
             ValidateInputs();
         }
@@ -754,7 +747,7 @@ namespace Objetos_de_tela_teste
             tname3txt.Enabled = checkLaser3Temp.Checked;
             Ntc3Min.Enabled = checkLaser3Temp.Checked;
             Ntc3max.Enabled = checkLaser3Temp.Checked;
-            cbNtc3Inc.Enabled = checkLaser3Temp.Checked;
+            Ntc3Inc.Enabled = checkLaser3Temp.Checked;
             Iop3.Enabled = checkLaser3Temp.Checked;
             ValidateInputs();
         }
@@ -764,7 +757,7 @@ namespace Objetos_de_tela_teste
             tname4txt.Enabled = checkLaser4Temp.Checked;
             Ntc4Min.Enabled = checkLaser4Temp.Checked;
             Ntc4max.Enabled = checkLaser4Temp.Checked;
-            cbNtc4Inc.Enabled = checkLaser4Temp.Checked;
+            Ntc4Inc.Enabled = checkLaser4Temp.Checked;
             Iop4.Enabled = checkLaser4Temp.Checked;
             ValidateInputs();
         }
@@ -774,7 +767,7 @@ namespace Objetos_de_tela_teste
             tname5txt.Enabled = checkLaser5Temp.Checked;
             Ntc5Min.Enabled = checkLaser5Temp.Checked;
             Ntc5max.Enabled = checkLaser5Temp.Checked;
-            cbNtc5Inc.Enabled = checkLaser5Temp.Checked;
+            Ntc5Inc.Enabled = checkLaser5Temp.Checked;
             Iop5.Enabled = checkLaser5Temp.Checked;
             ValidateInputs();
         }
@@ -788,19 +781,19 @@ namespace Objetos_de_tela_teste
             }
         }
 
-        private void cbNtc1Inc_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(!string.IsNullOrEmpty(Ntc1max.Text))
-            {
-                var ntcTemperature = Convert.ToInt16(Ntc1max.Text);
-                var temperatureValue = ConversionUtils.ConvertNtcToTemperatureValue(ntcTemperature);
-                this.txtTemp1Max.Text = temperatureValue.ToString();
-            }
-            else
-            {
-                txtTemp1Max.Text = string.Empty;
-            }
-        }
+        //private void cbNtc1Inc_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    if(!string.IsNullOrEmpty(Ntc1max.Text))
+        //    {
+        //        var ntcTemperature = Convert.ToInt16(Ntc1max.Text);
+        //        var temperatureValue = ConversionUtils.ConvertNtcToTemperatureValue(ntcTemperature);
+        //        this.txtTemp1Max.Text = temperatureValue.ToString();
+        //    }
+        //    else
+        //    {
+        //        txtTemp1Max.Text = string.Empty;
+        //    }
+        //}
 
         private void UpdateDependetFields()
         {
@@ -859,11 +852,6 @@ namespace Objetos_de_tela_teste
             laser1ConfigRequest.MinPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(Iop.Text);
             laser1ConfigRequest.MaxPowerCurrent = ConversionUtils.GetConvertedTemperatureFromString(Iop.Text);
             laser1ConfigRequest.NtcIncrement = Convert.ToInt16(ntcIncrement.Text);
-            //cbNtc1Inc.Invoke((Action)delegate
-            //{
-            //    laser1ConfigRequest.NtcIncrement = Convert.ToInt16(ntcIncrement.SelectedValue.ToString());
-            //});
-
 
             var temp = laser1ConfigRequest.ConvertedTemperature;
 

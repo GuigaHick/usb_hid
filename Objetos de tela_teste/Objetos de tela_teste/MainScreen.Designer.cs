@@ -60,16 +60,13 @@
             this.rbTemperatura = new System.Windows.Forms.RadioButton();
             this.gbGeneral = new System.Windows.Forms.GroupBox();
             this.gbTemperatura = new System.Windows.Forms.GroupBox();
+            this.Ntc1Inc = new System.Windows.Forms.MaskedTextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.txtTemp5Min = new System.Windows.Forms.TextBox();
             this.txtTemp4Min = new System.Windows.Forms.TextBox();
             this.txtTemp3Min = new System.Windows.Forms.TextBox();
             this.txtTemp2Min = new System.Windows.Forms.TextBox();
             this.txtTemp1Min = new System.Windows.Forms.TextBox();
-            this.cbNtc5Inc = new System.Windows.Forms.ComboBox();
-            this.cbNtc4Inc = new System.Windows.Forms.ComboBox();
-            this.cbNtc3Inc = new System.Windows.Forms.ComboBox();
-            this.cbNtc2Inc = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -153,7 +150,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.Ntc1Inc = new System.Windows.Forms.MaskedTextBox();
+            this.Ntc2Inc = new System.Windows.Forms.MaskedTextBox();
+            this.Ntc3Inc = new System.Windows.Forms.MaskedTextBox();
+            this.Ntc4Inc = new System.Windows.Forms.MaskedTextBox();
+            this.Ntc5Inc = new System.Windows.Forms.MaskedTextBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -451,6 +451,10 @@
             // 
             // gbTemperatura
             // 
+            this.gbTemperatura.Controls.Add(this.Ntc5Inc);
+            this.gbTemperatura.Controls.Add(this.Ntc4Inc);
+            this.gbTemperatura.Controls.Add(this.Ntc3Inc);
+            this.gbTemperatura.Controls.Add(this.Ntc2Inc);
             this.gbTemperatura.Controls.Add(this.Ntc1Inc);
             this.gbTemperatura.Controls.Add(this.label23);
             this.gbTemperatura.Controls.Add(this.txtTemp5Min);
@@ -458,10 +462,6 @@
             this.gbTemperatura.Controls.Add(this.txtTemp3Min);
             this.gbTemperatura.Controls.Add(this.txtTemp2Min);
             this.gbTemperatura.Controls.Add(this.txtTemp1Min);
-            this.gbTemperatura.Controls.Add(this.cbNtc5Inc);
-            this.gbTemperatura.Controls.Add(this.cbNtc4Inc);
-            this.gbTemperatura.Controls.Add(this.cbNtc3Inc);
-            this.gbTemperatura.Controls.Add(this.cbNtc2Inc);
             this.gbTemperatura.Controls.Add(this.label10);
             this.gbTemperatura.Controls.Add(this.label11);
             this.gbTemperatura.Controls.Add(this.label12);
@@ -510,6 +510,18 @@
             this.gbTemperatura.Size = new System.Drawing.Size(788, 227);
             this.gbTemperatura.TabIndex = 98;
             this.gbTemperatura.TabStop = false;
+            // 
+            // Ntc1Inc
+            // 
+            this.Ntc1Inc.HidePromptOnLeave = true;
+            this.Ntc1Inc.Location = new System.Drawing.Point(413, 70);
+            this.Ntc1Inc.Mask = "00000";
+            this.Ntc1Inc.Name = "Ntc1Inc";
+            this.Ntc1Inc.Size = new System.Drawing.Size(50, 20);
+            this.Ntc1Inc.TabIndex = 206;
+            this.Ntc1Inc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ntc1Inc.ValidatingType = typeof(int);
+            this.Ntc1Inc.TextChanged += new System.EventHandler(this.Input_ValueChanged);
             // 
             // label23
             // 
@@ -565,38 +577,6 @@
             this.txtTemp1Min.Name = "txtTemp1Min";
             this.txtTemp1Min.Size = new System.Drawing.Size(68, 20);
             this.txtTemp1Min.TabIndex = 200;
-            // 
-            // cbNtc5Inc
-            // 
-            this.cbNtc5Inc.FormattingEnabled = true;
-            this.cbNtc5Inc.Location = new System.Drawing.Point(413, 172);
-            this.cbNtc5Inc.Name = "cbNtc5Inc";
-            this.cbNtc5Inc.Size = new System.Drawing.Size(52, 21);
-            this.cbNtc5Inc.TabIndex = 199;
-            // 
-            // cbNtc4Inc
-            // 
-            this.cbNtc4Inc.FormattingEnabled = true;
-            this.cbNtc4Inc.Location = new System.Drawing.Point(413, 145);
-            this.cbNtc4Inc.Name = "cbNtc4Inc";
-            this.cbNtc4Inc.Size = new System.Drawing.Size(52, 21);
-            this.cbNtc4Inc.TabIndex = 198;
-            // 
-            // cbNtc3Inc
-            // 
-            this.cbNtc3Inc.FormattingEnabled = true;
-            this.cbNtc3Inc.Location = new System.Drawing.Point(413, 121);
-            this.cbNtc3Inc.Name = "cbNtc3Inc";
-            this.cbNtc3Inc.Size = new System.Drawing.Size(52, 21);
-            this.cbNtc3Inc.TabIndex = 197;
-            // 
-            // cbNtc2Inc
-            // 
-            this.cbNtc2Inc.FormattingEnabled = true;
-            this.cbNtc2Inc.Location = new System.Drawing.Point(413, 94);
-            this.cbNtc2Inc.Name = "cbNtc2Inc";
-            this.cbNtc2Inc.Size = new System.Drawing.Size(52, 21);
-            this.cbNtc2Inc.TabIndex = 196;
             // 
             // label10
             // 
@@ -1480,17 +1460,53 @@
             this.label5.TabIndex = 120;
             this.label5.Text = "Configuração dos Lasers";
             // 
-            // Ntc1Inc
+            // Ntc2Inc
             // 
-            this.Ntc1Inc.HidePromptOnLeave = true;
-            this.Ntc1Inc.Location = new System.Drawing.Point(413, 66);
-            this.Ntc1Inc.Mask = "00000";
-            this.Ntc1Inc.Name = "Ntc1Inc";
-            this.Ntc1Inc.Size = new System.Drawing.Size(50, 20);
-            this.Ntc1Inc.TabIndex = 206;
-            this.Ntc1Inc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Ntc1Inc.ValidatingType = typeof(int);
-            this.Ntc1Inc.TextChanged += new System.EventHandler(this.Input_ValueChanged);
+            this.Ntc2Inc.HidePromptOnLeave = true;
+            this.Ntc2Inc.Location = new System.Drawing.Point(413, 96);
+            this.Ntc2Inc.Mask = "00000";
+            this.Ntc2Inc.Name = "Ntc2Inc";
+            this.Ntc2Inc.Size = new System.Drawing.Size(50, 20);
+            this.Ntc2Inc.TabIndex = 207;
+            this.Ntc2Inc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ntc2Inc.ValidatingType = typeof(int);
+            this.Ntc2Inc.TextChanged += new System.EventHandler(this.Input_ValueChanged);
+            // 
+            // Ntc3Inc
+            // 
+            this.Ntc3Inc.HidePromptOnLeave = true;
+            this.Ntc3Inc.Location = new System.Drawing.Point(413, 122);
+            this.Ntc3Inc.Mask = "00000";
+            this.Ntc3Inc.Name = "Ntc3Inc";
+            this.Ntc3Inc.Size = new System.Drawing.Size(50, 20);
+            this.Ntc3Inc.TabIndex = 208;
+            this.Ntc3Inc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ntc3Inc.ValidatingType = typeof(int);
+            this.Ntc3Inc.TextChanged += new System.EventHandler(this.Input_ValueChanged);
+            // 
+            // Ntc4Inc
+            // 
+            this.Ntc4Inc.HidePromptOnLeave = true;
+            this.Ntc4Inc.Location = new System.Drawing.Point(415, 146);
+            this.Ntc4Inc.Mask = "00000";
+            this.Ntc4Inc.Name = "Ntc4Inc";
+            this.Ntc4Inc.Size = new System.Drawing.Size(50, 20);
+            this.Ntc4Inc.TabIndex = 209;
+            this.Ntc4Inc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ntc4Inc.ValidatingType = typeof(int);
+            this.Ntc4Inc.TextChanged += new System.EventHandler(this.Input_ValueChanged);
+            // 
+            // Ntc5Inc
+            // 
+            this.Ntc5Inc.HidePromptOnLeave = true;
+            this.Ntc5Inc.Location = new System.Drawing.Point(413, 171);
+            this.Ntc5Inc.Mask = "00000";
+            this.Ntc5Inc.Name = "Ntc5Inc";
+            this.Ntc5Inc.Size = new System.Drawing.Size(50, 20);
+            this.Ntc5Inc.TabIndex = 210;
+            this.Ntc5Inc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Ntc5Inc.ValidatingType = typeof(int);
+            this.Ntc5Inc.TextChanged += new System.EventHandler(this.Input_ValueChanged);
             // 
             // MainScreen
             // 
@@ -1561,10 +1577,6 @@
         private System.Windows.Forms.TextBox txtTemp3Min;
         private System.Windows.Forms.TextBox txtTemp2Min;
         private System.Windows.Forms.TextBox txtTemp1Min;
-        private System.Windows.Forms.ComboBox cbNtc5Inc;
-        private System.Windows.Forms.ComboBox cbNtc4Inc;
-        private System.Windows.Forms.ComboBox cbNtc3Inc;
-        private System.Windows.Forms.ComboBox cbNtc2Inc;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
@@ -1658,6 +1670,10 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.MaskedTextBox Ntc1Inc;
+        private System.Windows.Forms.MaskedTextBox Ntc2Inc;
+        private System.Windows.Forms.MaskedTextBox Ntc5Inc;
+        private System.Windows.Forms.MaskedTextBox Ntc4Inc;
+        private System.Windows.Forms.MaskedTextBox Ntc3Inc;
     }
 }
 
