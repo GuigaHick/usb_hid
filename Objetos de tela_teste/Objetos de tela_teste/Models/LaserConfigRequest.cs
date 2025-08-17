@@ -4,6 +4,11 @@ namespace Objetos_de_tela_teste.Models
 {
     public class LaserConfigRequest
     {
+        private const int THRESHOLD1 = 7520;
+        private const int THRESHOLD2 = 10640;
+        private const int THRESHOLD3 = 13760;
+        private const int THRESHOLD4 = 16880;
+
         public string Name { get; set; }
 
         public int ID { get; set; }
@@ -14,24 +19,23 @@ namespace Objetos_de_tela_teste.Models
 
         public byte Increment { get; set; }
 
-        public short DesiredNtc { get; set; }
+        public short NTC { get; set; }
+
+        public short MinNtc {get;set;}
+
+        public short MaxNtc { get;set;}
+
+        public short NtcIncrement { get; set; }
 
         public float ConvertedTemperature 
         {
             get {return this.ConvertValue(); }
         }
 
-    //private int myVar;
-
-    //public int MyProperty
-    //{
-    //    get { return myVar; }
-    //    set { myVar = value; }
-    //}
 
     public byte[] GetByteArray()
         {
-            byte[] desiredNtcBytes = BitConverter.GetBytes(DesiredNtc);
+            byte[] desiredNtcBytes = BitConverter.GetBytes(NTC);
             byte[] result = new byte[32];
             result[0] = 0x00;
             result[1] = (byte)'L';
@@ -46,16 +50,35 @@ namespace Objetos_de_tela_teste.Models
             return result;
         }
 
-        public float ConvertValue()
-        {
-            var upPart = (float) 3900 * 298.15F;
-            var divisionResult = (double)((double)this.DesiredNtc / (double)10000);
-            var lnR = Math.Log(divisionResult);
-            var downPart = (float)((298.15F * lnR) + 3900);
-            var firstEquation = (upPart / downPart);
-            var finalTemp = firstEquation - 273.15F;
+    public float ConvertValue()
+    {
+        var upPart = (float) 3900 * 298.15F;
+        var divisionResult = (double)((double)this.NTC / (double)10000);
+        var lnR = Math.Log(divisionResult);
+        var downPart = (float)((298.15F * lnR) + 3900);
+        var firstEquation = (upPart / downPart);
+        var finalTemp = firstEquation - 273.15F;
 
-            return finalTemp;
+        return finalTemp;
+    }
+
+        public int NextNTCIncrement(int currentNTC)
+        {
+            int result;
+
+            if (currentNTC < THRESHOLD1)
+                result = this.NtcIncrement;
+            else if (currentNTC < THRESHOLD2)
+                result = this.NtcIncrement * 2;
+            else if (currentNTC < THRESHOLD3)
+                result = this.NtcIncrement * 3;
+            else if (currentNTC < THRESHOLD4)
+                result = this.NtcIncrement * 4;
+            else
+                result = 2000; // valor default
+
+            return Math.Min(result, 2000);
         }
+
     }
 }
